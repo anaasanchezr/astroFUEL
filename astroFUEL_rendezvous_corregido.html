@@ -1,0 +1,2257 @@
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>astroFUEL | Mission Lázaro</title>
+
+    <style>
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background-color: #0B1628;
+            color: #F5F7FA;
+        }
+
+        /* PORTADA */
+
+        .portada {
+            min-height: 100vh;
+            background-color: #FFFFFF;
+            color: #142C4D;
+
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+
+            text-align: center;
+            padding: 40px 24px;
+            box-sizing: border-box;
+        }
+        
+        .logo-portada {
+            display: block;
+            width: 420px;
+            max-width: 85%;
+            height: auto;
+            margin: 0 auto 25px;
+        }
+
+        .portada p {
+            font-size: clamp(18px, 3vw, 24px);
+            color: #516479;
+            max-width: 650px;
+            line-height: 1.5;
+            margin-bottom: 40px;
+        }
+
+        /* BOTÓN */
+
+        .boton {
+            display: inline-block;
+            background-color: #142C4D;
+            color: white;
+            padding: 16px 30px;
+
+            text-decoration: none;
+            font-size: 14px;
+            font-weight: bold;
+            letter-spacing: 1px;
+
+            border-radius: 5px;
+            transition: background-color 0.3s;
+        }
+
+        .boton:hover {
+            background-color: #C9A764;
+            color: #142C4D;
+        }
+
+        /* NUESTRA MISIÓN */
+
+        .mision {
+            min-height: 80vh;
+            background-color: #0B1628;
+
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+
+            text-align: center;
+            padding: 80px 24px;
+            box-sizing: border-box;
+        }
+
+        .etiqueta {
+            color: #C9A764;
+            font-size: 13px;
+            font-weight: bold;
+            letter-spacing: 3px;
+        }
+
+        .mision h2 {
+            font-size: clamp(32px, 5vw, 56px);
+            max-width: 850px;
+            margin: 25px 0;
+            line-height: 1.15;
+        }
+
+        .mision p {
+            color: #B5C5D7;
+            font-size: 18px;
+            line-height: 1.8;
+            max-width: 750px;
+        }
+
+        
+        /* OUR SPACECRAFT */
+
+        .spacecraft {
+            background-color: #F5F7FA;
+            color: #142C4D;
+            padding: 100px 24px;
+            text-align: center;
+        }
+
+        .spacecraft h2 {
+            font-size: clamp(32px, 5vw, 56px);
+            max-width: 850px;
+            margin: 25px auto;
+        }
+
+        .spacecraft-descripcion {
+            color: #516479;
+            font-size: 18px;
+            line-height: 1.8;
+            max-width: 750px;
+            margin: 0 auto 50px;
+        }
+
+        .datos {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 20px;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .dato {
+            background-color: white;
+            padding: 30px 15px;
+            border-radius: 8px;
+        }
+
+        .dato span {
+            color: #6B7888;
+            font-size: 12px;
+            font-weight: bold;
+            letter-spacing: 2px;
+        }
+
+        .dato h3 {
+            color: #142C4D;
+            font-size: clamp(20px, 3vw, 30px);
+            margin-bottom: 0;
+        }
+
+        @media (max-width: 600px) {
+            .datos {
+                grid-template-columns: 1fr;
+            }
+        }
+
+                /* ORBITAL OVERVIEW — displayed inside MISSION PROFILE */
+
+        .orbital {
+            color: #F5F7FA;
+            padding: 85px 0 15px;
+            text-align: center;
+        }
+        .orbital h2 {
+            font-size: clamp(28px, 4.5vw, 46px);
+            max-width: 850px;
+            margin: 25px auto;
+            line-height: 1.15;
+        }
+        .orbital p {
+            color: #B5C5D7;
+            font-size: 17px;
+            line-height: 1.8;
+            max-width: 720px;
+            margin: 0 auto 25px;
+        }
+        .orbital-scene {
+            position: relative;
+            width: min(100%, 850px);
+            height: clamp(310px, 48vw, 490px);
+            margin: 0 auto;
+        }
+        .earth {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: clamp(130px, 21vw, 220px);
+            height: auto;
+            aspect-ratio: 1;
+            transform: translate(-50%, -50%);
+            object-fit: contain;
+            filter: drop-shadow(0 0 24px rgba(80, 170, 255, .30));
+        }
+        .orbit {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: min(85%, 560px);
+            aspect-ratio: 7 / 4;
+            transform: translate(-50%, -50%);
+            border: 2px dashed rgba(201, 167, 100, .55);
+            border-radius: 50%;
+        }
+        .satellite-real {
+            position: absolute;
+            width: clamp(34px, 5vw, 48px);
+            height: auto;
+            transform: translate(-50%, -50%);
+            object-fit: contain;
+            filter: drop-shadow(0 0 6px rgba(255,255,255,.3));
+        }
+        .orbital-note {
+            margin-top: 8px;
+            font-size: 11px;
+            letter-spacing: 2px;
+            color: #8EA2B8;
+        }
+        @media (max-width: 600px) {
+            .orbital { padding-top: 70px; }
+            .orbital-scene { height: 320px; }
+        }
+
+        /* MISSION PROFILE */
+
+        .mission-profile {
+            background-color: #0B1628;
+            color: #F5F7FA;
+            padding: 100px 24px;
+        }
+
+        .mission-container {
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        .mission-header {
+            text-align: center;
+            margin-bottom: 70px;
+        }
+
+        .mission-header h2 {
+            font-size: clamp(32px, 5vw, 56px);
+            margin: 25px auto;
+        }
+
+        .mission-header p {
+            color: #B5C5D7;
+            font-size: 18px;
+            line-height: 1.8;
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+        .mission-step {
+            display: flex;
+            gap: 25px;
+            align-items: flex-start;
+        }
+
+        .step-number {
+            background-color: #C9A764;
+            color: #0B1628;
+            width: 55px;
+            height: 55px;
+            border-radius: 50%;
+
+            display: flex;
+            justify-content: center;
+            align-items: center;
+
+            font-size: 22px;
+            font-weight: bold;
+            flex-shrink: 0;
+        }
+
+        .step-content {
+            flex: 1;
+            min-width: 0;
+        }
+
+        .step-content h3 {
+            font-size: clamp(28px, 4vw, 40px);
+            margin: 15px 0 20px;
+        }
+
+        .step-content p {
+            color: #B5C5D7;
+            font-size: 17px;
+            line-height: 1.8;
+        }
+
+        .mission-data {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 20px;
+            margin-top: 30px;
+        }
+
+        .mission-data-card {
+            background-color: #142C4D;
+            padding: 25px;
+            border-radius: 8px;
+        }
+
+        .mission-data-card span {
+            color: #C9A764;
+            font-size: 12px;
+            font-weight: bold;
+            letter-spacing: 1px;
+        }
+
+        .mission-data-card h4 {
+            color: white;
+            font-size: clamp(20px, 3vw, 28px);
+            margin: 12px 0 5px;
+        }
+
+        .mission-data-card p {
+            font-size: 14px;
+            margin: 0;
+        }
+
+        @media (max-width: 600px) {
+            .mission-step {
+                gap: 15px;
+            }
+
+            .step-number {
+                width: 40px;
+                height: 40px;
+                font-size: 18px;
+            }
+
+            .mission-data {
+                grid-template-columns: 1fr;
+            }
+        }
+
+
+        /* RENDEZVOUS & REFUELING */
+        .rendezvous {
+            position: relative;
+            height: 260vh;
+            background: radial-gradient(ellipse at 50% 50%, #173352, #0B1628 75%);
+            color: #F5F7FA;
+        }
+        .rendezvous-sticky {
+            position: sticky;
+            top: 0;
+            height: 100vh;
+            height: 100svh;
+            box-sizing: border-box;
+            padding: clamp(22px, 4vh, 40px) 16px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 12px;
+            overflow: hidden;
+        }
+        .rendezvous-heading { text-align: center; z-index: 2; }
+        .rendezvous-heading h2 {
+            font-size: clamp(27px, 4.5vw, 52px);
+            margin: 12px 0;
+        }
+        .rendezvous-heading p {
+            color: #B5C5D7;
+            font-size: clamp(13px, 1.6vw, 17px);
+            line-height: 1.6;
+            margin: 0;
+        }
+        .rendezvous-scene {
+            position: relative;
+            width: min(100%, 1100px);
+            flex: 1;
+            min-height: 145px;
+            max-height: 490px;
+            isolation: isolate;
+        }
+        .rendezvous-grid {
+            position: absolute;
+            inset: 8% 0;
+            pointer-events: none;
+            background-image: radial-gradient(circle, rgba(208,225,244,.55) .75px, transparent 1px);
+            background-size: 43px 43px;
+            opacity: .17;
+        }
+        .rv-spacecraft {
+            position: absolute;
+            top: 50%;
+            width: 42%;
+            transform: translateY(-50%);
+            z-index: 2;
+            will-change: left;
+        }
+        .rv-spacecraft img {
+            width: 100%;
+            height: auto;
+            display: block;
+            object-fit: contain;
+        }
+        .rv-service { left: -23%; }
+        .rv-client { left: 77%; }
+        .rv-service img { filter: drop-shadow(0 0 12px rgba(201,167,100,.25)); }
+        .rv-client img { filter: drop-shadow(0 0 12px rgba(77,155,222,.25)); }
+        .rv-label {
+            position: absolute;
+            top: calc(100% + 3px);
+            left: 50%;
+            transform: translateX(-50%);
+            color: #BACADB;
+            font-size: clamp(8px, 1vw, 11px);
+            letter-spacing: 1px;
+            white-space: nowrap;
+        }
+        .rv-connection {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 26px;
+            height: 3px;
+            border-radius: 4px;
+            transform: translate(-50%, -50%);
+            background: rgba(201,167,100,.25);
+            box-shadow: 0 0 12px rgba(201,167,100,.65);
+            opacity: 0;
+            z-index: 3;
+            pointer-events: none;
+        }
+        .rv-flow {
+            display: block;
+            height: 100%;
+            width: 0%;
+            border-radius: inherit;
+            background: #F3D18A;
+            box-shadow: 0 0 14px rgba(243,209,138,.75);
+        }
+        .rendezvous-status {
+            z-index: 2;
+            width: min(92%, 460px);
+            text-align: center;
+        }
+        .rv-status-line {
+            display: flex;
+            justify-content: space-between;
+            font-size: 12px;
+            font-weight: bold;
+            letter-spacing: 1.5px;
+            color: #C9A764;
+        }
+        .rendezvous-status p {
+            color: #B5C5D7;
+            font-size: clamp(12px, 1.4vw, 15px);
+            margin: 10px 0 16px;
+        }
+        .rv-progress {
+            height: 3px;
+            border-radius: 4px;
+            background: #32465E;
+            overflow: hidden;
+        }
+        #rvProgress {
+            width: 0;
+            height: 100%;
+            background: #C9A764;
+        }
+        .rv-hint {
+            display: block;
+            margin-top: 12px;
+            color: #8298AF;
+            font-size: 10px;
+            letter-spacing: 2px;
+        }
+        @media (max-width: 600px) {
+            .rendezvous { height: 220vh; }
+            .rendezvous-sticky { padding: 28px 10px; }
+            .rv-spacecraft { width: 47%; }
+            .rv-label { font-size: 8px; letter-spacing: .2px; }
+            .rv-connection { width: 16px; }
+            .rendezvous-status { width: 95%; }
+        }
+        @media (prefers-reduced-motion: reduce) {
+            html { scroll-behavior: auto; }
+        }
+
+
+        /* HERO / GOLDEN FUEL DROP (scroll controlled) */
+        .logo-drop-stage {
+            position: relative;
+            width: 420px;
+            max-width: 85%;
+            margin: 0 auto 25px;
+        }
+        .logo-drop-stage .logo-portada {
+            display: block;
+            width: 100%;
+            max-width: none;
+            height: auto;
+            margin: 0;
+        }
+        /* The logo file has an integral droplet. Conceal only that region.
+           This matches the existing white hero; don't change its background
+           without adjusting this mask. */
+        .logo-drop-cover {
+            position: absolute;
+            left: 42.5%;
+            top: 55.3%;
+            width: 15.4%;
+            height: 23%;
+            background: #FFFFFF;
+            pointer-events: none;
+        }
+        .falling-logo-drop {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 420px;
+            height: auto;
+            margin: 0;
+            z-index: 50;
+            pointer-events: none;
+            opacity: 0;
+            visibility: hidden;
+            transform: translate3d(0,0,0);
+            /* Display ONLY the original droplet from the same logo image. */
+            clip-path: polygon(
+                49.9% 55.1%, 52.4% 57.8%, 54.9% 63%,
+                56.5% 68%, 56.3% 73.1%, 54.1% 76.5%,
+                50% 78%, 46.1% 77.4%, 43.5% 74%,
+                42.7% 69.1%, 44.0% 64%, 47.0% 58.4%
+            );
+            will-change: transform, opacity;
+        }
+        @media (prefers-reduced-motion: reduce) {
+            .logo-drop-cover, .falling-logo-drop { display: none !important; }
+        }
+
+        /* MISSION PROFILE — SCROLL-DRIVEN TRANSFER */
+        .profile-journey {
+            position: relative;
+            height: 360vh;
+            margin: 55px -24px 0;
+            background: radial-gradient(ellipse at 48% 48%, #183451 0%, #0B1628 73%);
+        }
+        .profile-pin {
+            position: sticky;
+            top: 0;
+            height: 100vh;
+            height: 100svh;
+            box-sizing: border-box;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: clamp(16px, 3vh, 32px) 15px 22px;
+            gap: 8px;
+        }
+        .profile-pin-title { text-align: center; flex: 0 0 auto; }
+        .profile-pin-title h3 {
+            font-size: clamp(23px, 3.4vw, 39px);
+            line-height: 1.12;
+            margin: 8px 0 4px;
+        }
+        .profile-pin-title p {
+            font-size: clamp(12px, 1.5vw, 15px);
+            color: #B5C5D7;
+            margin: 0;
+        }
+        .profile-visual {
+            flex: 1 1 auto;
+            min-height: 0;
+            max-width: 1010px;
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .profile-visual svg {
+            display: block;
+            width: 100%;
+            height: 100%;
+            max-height: 100%;
+            overflow: visible;
+        }
+        .profile-visual .orbit-base {
+            fill: none;
+            stroke: #8FA2BC;
+            stroke-width: 1.8;
+            stroke-dasharray: 7 10;
+            opacity: .50;
+        }
+        .profile-visual .profile-path {
+            fill: none;
+            stroke-width: 3;
+            transition: opacity .24s ease;
+        }
+        .profile-visual #profileInitialPath { stroke: #7294BB; }
+        .profile-visual #profileRaisedPath { stroke: #C9A764; }
+        .profile-visual #profileFinalPath { stroke: #56AEED; }
+        #profileSatellite { filter: drop-shadow(0 0 6px rgba(255,255,255,.30)); }
+        #profileApoPulse { transition: opacity .15s; }
+        .profile-caption {
+            width: min(100%, 640px);
+            flex: 0 0 auto;
+            text-align: center;
+        }
+        .profile-caption .profile-step-number {
+            display: inline-block;
+            color: #C9A764;
+            font-size: 11px;
+            letter-spacing: 2px;
+            font-weight: bold;
+            margin-bottom: 4px;
+        }
+        .profile-caption h4 {
+            font-size: clamp(20px, 2.5vw, 28px);
+            margin: 0 0 5px;
+        }
+        .profile-caption p {
+            font-size: clamp(12px, 1.5vw, 15px);
+            line-height: 1.45;
+            color: #B5C5D7;
+            margin: 0 auto 12px;
+            max-width: 580px;
+            min-height: 2.8em;
+        }
+        .profile-meter { display: flex; gap: 5px; width: 100%; }
+        .profile-meter span {
+            flex: 1;
+            height: 4px;
+            background: #354B65;
+            border-radius: 5px;
+            overflow: hidden;
+        }
+        .profile-meter span i {
+            display: block;
+            height: 100%;
+            width: 0;
+            background: #C9A764;
+        }
+        .profile-hint {
+            display: block;
+            color: #8298AF;
+            letter-spacing: 1.5px;
+            font-size: 10px;
+            margin-top: 8px;
+        }
+        .profile-legend {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 8px 19px;
+            color: #B5C5D7;
+            font-size: 11px;
+            margin-top: 14px;
+        }
+        .profile-legend span::before {
+            content: '';
+            display: inline-block;
+            width: 17px;
+            height: 2px;
+            vertical-align: middle;
+            margin-right: 6px;
+            background: var(--line);
+        }
+        .profile-disclaimer {
+            color: #8399B0;
+            text-align: center;
+            font-size: 11px;
+            margin: 0 auto 25px;
+            padding: 0 12px;
+        }
+        @media (max-width: 600px) {
+            .profile-journey { height: 290vh; }
+            .profile-pin { padding: 23px 8px 17px; }
+            .profile-visual { width: 111%; max-width: none; }
+            .profile-caption { width: 96%; }
+            .profile-caption p { min-height: 4em; }
+            .profile-legend { gap: 6px 10px; font-size: 9px; }
+            .profile-legend span::before { width: 10px; margin-right: 3px; }
+        }
+
+
+        /* BRAND NAVIGATION — astroFUEL umbrella / Lázaro mission */
+        :root { --nav-height: 68px; }
+        section[id] { scroll-margin-top: calc(var(--nav-height) + 6px); }
+        .site-header {
+            position: sticky; top: 0; z-index: 80;
+            height: var(--nav-height); box-sizing: border-box;
+            display: flex; align-items: center; justify-content: space-between;
+            padding: 0 clamp(18px, 4vw, 70px);
+            background: rgba(255,255,255,.97);
+            border-bottom: 1px solid #E8EDF3;
+            box-shadow: 0 3px 20px rgba(13,29,52,.04);
+            backdrop-filter: blur(12px);
+        }
+        .site-brand { font-weight: 800; font-size: clamp(20px,2.1vw,26px);
+            letter-spacing: -.8px; text-decoration: none; color: #142C4D; white-space: nowrap; }
+        .site-brand span { color: #C9A764; }
+        .desktop-navigation { display: flex; align-items: center; gap: clamp(20px,2.5vw,35px); }
+        .desktop-navigation > a, .nav-dropdown > summary {
+            color: #142C4D; font-size: 12px; font-weight: 700; letter-spacing: 1.15px;
+            text-decoration: none; cursor: pointer; list-style: none; white-space: nowrap;
+        }
+        .nav-dropdown { position: relative; }
+        .nav-dropdown > summary::-webkit-details-marker, .mobile-nav > summary::-webkit-details-marker { display:none; }
+        .nav-dropdown > summary::after { content:'⌄'; display:inline-block; margin-left: 7px; font-size:16px; color:#C9A764; }
+        .nav-dropdown[open] > summary::after { transform: rotate(180deg); }
+        .nav-popover {
+            position: absolute; top: calc(100% + 23px); left: -16px; min-width: 215px;
+            padding: 10px; background: #FFFFFF; border: 1px solid #E6EBF1;
+            border-radius: 10px; box-shadow: 0 16px 38px rgba(11,22,40,.13);
+            display: flex; flex-direction: column; gap: 2px;
+        }
+        .nav-popover a, .mobile-nav a {
+            text-decoration: none; color: #142C4D; font-size: 13px; font-weight: 600;
+            line-height: 1.4; border-radius: 6px; padding: 11px 12px;
+        }
+        .nav-popover a:hover, .nav-popover a:focus-visible,
+        .mobile-nav a:hover, .mobile-nav a:focus-visible { background:#F2F5F9; color:#9C793E; }
+        .nav-popover .nav-note { font-size: 10px; letter-spacing: 1px; color: #77889A;
+            padding: 10px 12px 2px; font-weight: 700; }
+        .mobile-nav { display: none; position: relative; }
+        .mobile-nav > summary { color: #142C4D; font-size: 12px; font-weight: 700;
+            letter-spacing: 1px; border: 1px solid #D8E0E8; padding: 9px 12px;
+            border-radius: 6px; cursor: pointer; list-style:none; }
+        .mobile-nav > nav { position: absolute; top: calc(100% + 13px); right: -8px;
+            width: min(305px, calc(100vw - 30px)); max-height: calc(100svh - var(--nav-height) - 18px);
+            overflow-y: auto; box-sizing: border-box; padding: 10px;
+            background: #FFFFFF; border: 1px solid #E6EBF1; border-radius: 12px;
+            box-shadow: 0 20px 45px rgba(11,22,40,.20);
+            display:flex; flex-direction:column;
+        }
+        .mobile-nav nav > details { border-bottom: 1px solid #EDF0F4; }
+        .mobile-nav nav > details > summary { padding: 13px 12px; cursor: pointer; list-style: none;
+            color: #142C4D; font-size:12px; font-weight:800; letter-spacing:1px; }
+        .mobile-nav nav > details > summary::after { content:'⌄'; float:right; color:#C9A764; }
+        .mobile-nav nav > details[open] > summary::after { transform:rotate(180deg); }
+        .mobile-nav nav > details > a { display:block; padding-left:22px; }
+        .hero-mission-pill { color:#9C793E; border:1px solid #DDD0B5; border-radius: 100px;
+            padding:9px 15px; margin-bottom:20px; font-size:11px; letter-spacing:2px; font-weight:800; }
+        .hero-mission-pill strong { color:#142C4D; }
+        .mision .mission-name { color:#C9A764; font-size:clamp(48px, 7vw, 80px);
+            line-height:1.1; margin:20px auto 8px; font-weight:800; letter-spacing: 2px; }
+        .mision .mission-tagline { color:#F5F7FA; font-size:clamp(21px,2.8vw,33px); font-weight:600;
+            line-height:1.25; margin:4px auto 20px; }
+        .mision .mission-disclaimer { font-size:12px; letter-spacing: .3px; color:#8BA4BF; margin-top:30px; }
+        .rendezvous-sticky, .profile-pin { top:var(--nav-height); height:calc(100svh - var(--nav-height)); }
+        .rendezvous-sticky { padding:clamp(14px,3vh,28px) 16px; }
+
+        /* DRAFT REQUIREMENTS AND ABOUT */
+        .requirements { background:#F5F7FA; color:#142C4D; padding:100px 24px; }
+        .content-container { max-width:1050px; margin:0 auto; }
+        .section-lead { max-width:740px; margin:14px auto 45px; font-size:17px; line-height:1.75;
+            color:#586D83; text-align:center; }
+        .requirements h2,.about h2 { font-size:clamp(32px,5vw,55px); text-align:center;
+            line-height:1.15; margin:18px auto 0; }
+        .section-eyebrow { display:block; text-align:center; color:#A5844D; font-size:12px;
+            font-weight:800; letter-spacing:2.5px; }
+        .requirements-grid { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:18px; }
+        .requirement-panel { background:#FFFFFF; padding:28px; border:1px solid #E7ECF1;
+            border-radius:10px; box-shadow:0 7px 25px rgba(11,22,40,.035); }
+        .requirement-panel .requirement-tag { color:#9D7B45; font-size:10px; letter-spacing:1.8px;
+            font-weight:800; }
+        .requirement-panel h3 { margin:10px 0 13px; font-size:23px; }
+        .requirement-panel p { color:#52677C; line-height:1.7; margin:0; font-size:15px; }
+        .requirement-panel ul { margin:15px 0 0; padding-left:19px; color:#52677C;
+            font-size:14px; line-height:1.8; }
+        .requirements-note { color:#667B91; margin:21px 0 0; font-size:12px; line-height:1.7; }
+        .documentation { margin-top:46px; padding:28px; border:1px solid #DCE4ED; border-radius:12px; }
+        .documentation h3 { color:#142C4D; font-size:25px; margin:0 0 12px; }
+        .documentation p { color:#536A81; line-height:1.7; margin:0 0 14px; }
+        .document-list { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:12px; }
+        .document-list > div { padding:20px; border:1px solid #E4EAF0; background:#FFFFFF;
+            border-radius:8px; }
+        .document-list h4 { margin:0 0 7px; font-size:16px; }
+        .document-list p { margin:0; font-size:13px; }
+        .draft-label { display:inline-block; color:#936B2F; background:#F8EEDB; padding:4px 8px;
+            border-radius:100px; font-size:10px; font-weight:800; letter-spacing:.5px; margin-bottom:9px; }
+        .about { background:#0B1628; color:#F5F7FA; padding:105px 24px 95px; }
+        .about .section-lead { color:#B5C5D7; }
+        .about-points { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:18px; }
+        .about-points > div { background:#132942; padding:27px; border:1px solid #29415D; border-radius:9px; }
+        .about-points h3 { color:#E0C48E; margin:0 0 12px; font-size:21px; }
+        .about-points p { color:#C1D0DE; line-height:1.7; margin:0; font-size:15px; }
+        .site-footer { background:#08111F; padding:30px 24px; text-align:center; color:#9BB0C8;
+            font-size:12px; line-height:1.8; }
+        .site-footer strong { color:#FFFFFF; }
+        @media(max-width:700px) {
+            :root { --nav-height:64px; }
+            .site-header { padding:0 19px; }
+            .desktop-navigation { display:none; }
+            .mobile-nav { display:block; }
+            .requirements,.about { padding:70px 20px; }
+            .requirements-grid,.document-list,.about-points { grid-template-columns:1fr; }
+            .requirement-panel,.documentation,.about-points > div { padding:21px; }
+            .rendezvous-sticky { padding:14px 8px 12px; }
+        }
+
+        /* OUR TEAM */
+
+        .team-block {
+            margin-top: 65px;
+            scroll-margin-top: 100px;
+        }
+
+        .team-block h3 {
+            color: #F5F7FA;
+            text-align: center;
+            font-size: clamp(30px, 4vw, 42px);
+            margin: 18px auto;
+        }
+
+        .team-description {
+            color: #B5C5D7;
+            text-align: center;
+            font-size: 17px;
+            line-height: 1.7;
+            max-width: 750px;
+            margin: 0 auto 40px;
+        }
+
+        .team-grid {
+            display: grid;
+            grid-template-columns: repeat(3, minmax(0, 1fr));
+            gap: 18px;
+        }
+
+        .team-card {
+            background-color: #132942;
+            border: 1px solid #29415D;
+            border-radius: 12px;
+            padding: 26px 22px;
+            min-width: 0;
+            transition: transform 0.3s, border-color 0.3s;
+        }
+
+        .team-card:hover {
+            transform: translateY(-5px);
+            border-color: #C9A764;
+        }
+
+        .team-card-number {
+            color: #C9A764;
+            font-size: 12px;
+            font-weight: bold;
+            letter-spacing: 2px;
+        }
+
+        .team-card h4 {
+            color: #FFFFFF;
+            font-size: 21px;
+            margin: 24px 0 12px;
+        }
+
+        .team-card p {
+            color: #B9CADE;
+            font-size: 14px;
+            line-height: 1.7;
+            margin: 0;
+        }
+
+        /* TABLET */
+
+        @media (max-width: 1000px) {
+            .team-grid {
+                grid-template-columns: repeat(2, minmax(0, 1fr));
+            }
+        }
+
+        /* MOBILE */
+
+        @media (max-width: 600px) {
+            .team-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .team-card {
+                padding: 22px;
+            }
+        }
+       
+        /* MISSION REQUIREMENTS */
+
+        .mrd-section {
+            background-color: #F5F7FA;
+            color: #142C4D;
+            padding: 100px 24px;
+            scroll-margin-top: 90px;
+        }
+
+        .mrd-container {
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        .mrd-header {
+            text-align: center;
+            margin-bottom: 45px;
+        }
+
+        .mrd-header h2 {
+            font-size: clamp(32px, 5vw, 54px);
+            margin: 20px 0;
+        }
+
+        .mrd-header p {
+            color: #516479;
+            font-size: 17px;
+            line-height: 1.8;
+            max-width: 720px;
+            margin: 0 auto;
+        }
+
+        .mrd-badges {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 12px;
+            margin-top: 25px;
+        }
+
+        .mrd-badge {
+            background-color: #E5EAF0;
+            color: #142C4D;
+            border-radius: 30px;
+            padding: 9px 16px;
+            font-size: 12px;
+            font-weight: bold;
+        }
+
+        .mrd-badge.pending {
+            background-color: #F4E9CF;
+            color: #856222;
+        }
+
+        /* ACCORDION CARDS */
+
+        .mrd-list {
+            display: grid;
+            gap: 12px;
+        }
+
+        .mrd-card {
+            background-color: #FFFFFF;
+            border: 1px solid #E0E5EB;
+            border-radius: 10px;
+            overflow: hidden;
+        }
+
+        .mrd-card[open] {
+            border-color: #C9A764;
+        }
+
+        .mrd-card summary {
+            display: flex;
+            align-items: center;
+            gap: 18px;
+            padding: 22px;
+            cursor: pointer;
+            list-style: none;
+        }
+
+        .mrd-card summary::-webkit-details-marker {
+            display: none;
+        }
+
+        .mrd-number {
+            color: #B08A45;
+            font-size: 13px;
+            font-weight: bold;
+            white-space: nowrap;
+        }
+
+        .mrd-title {
+            color: #142C4D;
+            font-size: 18px;
+            font-weight: bold;
+            flex: 1;
+        }
+
+        .mrd-status {
+            background-color: #E5EAF0;
+            color: #516479;
+            border-radius: 20px;
+            padding: 6px 10px;
+            font-size: 10px;
+            font-weight: bold;
+        }
+
+        .mrd-status.pending {
+            background-color: #F4E9CF;
+            color: #856222;
+        }
+
+        .mrd-arrow {
+            color: #C9A764;
+            font-size: 22px;
+            transition: transform 0.25s;
+        }
+
+        .mrd-card[open] .mrd-arrow {
+            transform: rotate(180deg);
+        }
+
+        .mrd-content {
+            padding: 0 22px 25px;
+        }
+
+        .mrd-content p {
+            color: #516479;
+            font-size: 16px;
+            line-height: 1.8;
+            margin: 0;
+        }
+
+        .mrd-note {
+            margin-top: 28px;
+            color: #718093;
+            text-align: center;
+            font-size: 13px;
+            line-height: 1.6;
+        }
+
+        /* MOBILE */
+
+        @media (max-width: 600px) {
+
+            .mrd-section {
+                padding: 70px 16px;
+            }
+
+            .mrd-card summary {
+                padding: 18px 14px;
+                gap: 10px;
+            }
+
+            .mrd-title {
+                font-size: 15px;
+            }
+
+            .mrd-number {
+                font-size: 11px;
+            }
+
+            .mrd-status {
+                font-size: 9px;
+                padding: 5px 7px;
+            }
+
+            .mrd-content {
+                padding: 0 14px 20px;
+            }
+
+            .mrd-content p {
+                font-size: 14px;
+            }
+        }
+
+    </style>
+
+</head>
+
+<body>
+
+    <!-- Corporate navigation: astroFUEL is the umbrella; Lázaro is the first mission concept. -->
+    <header class="site-header" id="top">
+        <a class="site-brand" href="#top" aria-label="astroFUEL home">astro<span>FUEL</span></a>
+        <nav class="desktop-navigation" aria-label="Main navigation">
+            <details class="nav-dropdown">
+                <summary>MISSION</summary>
+                <div class="nav-popover">
+                    <span class="nav-note">LÁZARO · FIRST MISSION</span>
+                    <a href="#mision">Mission Lázaro</a>
+                    <a href="#spacecraft">Our spacecraft</a>
+                    <a href="#rendezvous">Rendezvous &amp; refueling</a>
+                    <a href="#mission-profile">Mission profile</a>
+                    <a href="#orbital">36050 km operations</a>
+                </div>
+            </details>
+            <details class="nav-dropdown">
+                <summary>REQUIREMENTS</summary>
+                <div class="nav-popover">
+                    <a href="#requirements">Preliminary requirements</a>
+                    <a href="#documentation">Mission documents</a>
+                </div>
+            </details>
+            
+            <details class="nav-dropdown">
+
+                <summary>ABOUT US</summary>
+
+                <div class="nav-popover">
+
+                    <a href="#about">
+                        Our vision
+                    </a>
+
+                    <a href="#team">
+                        Our team
+                    </a>
+
+                </div>
+
+            </details>
+        </nav>
+        <details class="mobile-nav">
+            <summary>MENU ☰</summary>
+            <nav aria-label="Mobile navigation">
+                <details>
+                    <summary>MISSION</summary>
+                    <a href="#mision">Mission Lázaro</a>
+                    <a href="#spacecraft">Our spacecraft</a>
+                    <a href="#rendezvous">Rendezvous &amp; refueling</a>
+                    <a href="#mission-profile">Mission profile</a>
+                    <a href="#orbital">36050 km operations</a>
+                </details>
+                <details>
+                    <summary>REQUIREMENTS</summary>
+                    <a href="#requirements">Preliminary requirements</a>
+                    <a href="#documentation">Mission documents</a>
+                </details>
+                
+                <details>
+
+                    <summary>ABOUT US</summary>
+
+                    <a href="#about">
+                        Our vision
+                    </a>
+
+                    <a href="#team">
+                        Our team
+                    </a>
+
+                </details>
+            </nav>
+        </details>
+    </header>
+
+
+    <!-- PORTADA -->
+
+    <section class="portada">
+
+        
+        <!-- The original logo PNG contains the drop. The white mask conceals
+             only the printed drop while an identical clipped copy moves on scroll. -->
+        <div class="logo-drop-stage" id="logoDropStage">
+            <img src="logo.png" alt="astroFUEL - Orbital Refueling" class="logo-portada" id="heroLogo">
+            <span class="logo-drop-cover" aria-hidden="true"></span>
+        </div>
+
+        <span class="hero-mission-pill">INTRODUCING <strong>LÁZARO</strong> · OUR FIRST MISSION</span>
+
+        <p>
+            Fueling the next generation of space missions.
+        </p>
+
+        <a href="#mision" class="boton">
+            DISCOVER OUR MISSION
+        </a>
+
+    </section>
+
+
+    <!-- Visual copy of the original golden drop; no new image needed. -->
+    <img src="logo.png" class="falling-logo-drop" id="fallingLogoDrop" alt="" aria-hidden="true">
+
+    <!-- OUR FIRST MISSION -->
+    <section class="mision" id="mision">
+        <span class="etiqueta">01 / OUR FIRST MISSION</span>
+        <h1 class="mission-name">LÁZARO</h1>
+        <h2 class="mission-tagline">A second life for spacecraft.</h2>
+        <p>
+            Satellite operations often end when onboard propellant is depleted.
+            Lázaro is astroFUEL's first conceptual mission: an orbital servicing spacecraft
+            designed to deliver xenon to client satellites and support the extension
+            of their operational lifetimes.
+        </p>
+        <p>
+            The proposed system combines xenon storage, rendezvous, docking and
+            in-orbit transfer. Its reference operating orbit is 50 km above nominal GEO.
+        </p>
+        <p class="mission-disclaimer">AN ACADEMIC CONCEPT UNDER DEVELOPMENT · NOT AN OPERATIONAL SERVICE</p>
+    </section>
+
+    <!-- OUR SPACECRAFT -->
+
+    <section class="spacecraft" id="spacecraft">
+
+        <span class="etiqueta">
+            02 / OUR SPACECRAFT
+        </span>
+
+        <h2>
+            Meet the Lázaro refueling spacecraft.
+        </h2>
+
+        <p class="spacecraft-descripcion">
+            Designed to store, transport and transfer xenon,
+            enabling a new generation of orbital servicing missions.
+        </p>
+
+        <div class="datos">
+
+            <div class="dato">
+                <span>REFERENCE ORBIT</span>
+                <h3>36050 km</h3>
+            </div>
+
+            <div class="dato">
+                <span>PROPELLANT</span>
+                <h3>Xenon</h3>
+            </div>
+
+            <div class="dato">
+                <span>MISSION TYPE</span>
+                <h3>Orbital Refueling</h3>
+            </div>
+
+            <div class="dato">
+                <span>DEVELOPMENT</span>
+                <h3>Conceptual Design</h3>
+            </div>
+
+        </div>
+
+    </section>
+
+    <!-- RENDEZVOUS & REFUELING -->
+
+    <section class="rendezvous" id="rendezvous" aria-labelledby="rendezvous-title">
+        <div class="rendezvous-sticky">
+            <div class="rendezvous-heading">
+                <span class="etiqueta">03 / RENDEZVOUS &amp; REFUELING</span>
+                <h2 id="rendezvous-title">Two spacecraft. One mission.</h2>
+                <p>Follow the approach, docking and xenon transfer as you scroll.</p>
+            </div>
+
+            <div class="rendezvous-scene" aria-label="Illustration of astroFUEL and a client spacecraft approaching each other">
+                <div class="rendezvous-grid" aria-hidden="true"></div>
+
+                <!-- Original concept art: replace later with the engineering CAD model. -->
+                <div class="rv-spacecraft rv-service" id="rvService">
+                    <img src="SateliteAstroFUEL.png" alt="astroFUEL refueling satellite with its brand mark">
+                    <span class="rv-label">astroFUEL</span>
+                </div>
+
+                <div class="rv-connection" id="rvConnection" aria-hidden="true">
+                    <span class="rv-flow" id="rvFlow"></span>
+                </div>
+
+                <!-- Existing satellite image now represents the client. -->
+                <div class="rv-spacecraft rv-client" id="rvClient">
+                    <img src="SateliteGenerico.png" alt="Client spacecraft receiving xenon">
+                    <span class="rv-label">CLIENT SPACECRAFT</span>
+                </div>
+            </div>
+
+            <div class="rendezvous-status" aria-live="off">
+                <div class="rv-status-line">
+                    <span id="rvStage">01 / APPROACH</span>
+                    <span id="rvPercent">0%</span>
+                </div>
+                <p id="rvDescription">The servicing spacecraft closes the relative distance.</p>
+                <div class="rv-progress"><div id="rvProgress"></div></div>
+                <span class="rv-hint">SCROLL TO CONTINUE</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- MISSION PROFILE -->
+
+    <section class="mission-profile" id="mission-profile">
+
+        <div class="mission-container">
+
+            <div class="mission-header">
+
+                <span class="etiqueta">
+                    04 / MISSION PROFILE
+                </span>
+
+                <h2>
+                    From Earth to orbital refueling.
+                </h2>
+
+                <p>
+                    Explore the key stages of Mission Lázaro,
+                    from launch to in-orbit servicing.
+                </p>
+
+            </div>
+
+            <!-- PHASE 01 -->
+
+            <div class="mission-step">
+
+                <div class="step-number">
+                    01
+                </div>
+
+                <div class="step-content">
+
+                    <span class="etiqueta">
+                        MISSION PHASE 01
+                    </span>
+
+                    <h3>
+                        Launch & Orbital Insertion
+                    </h3>
+
+                    <p>
+                        Following launch, Lázaro enters an initial
+                        geostationary transfer orbit (GTO). Subsequent
+                        maneuvers raise its apogee and establish the
+                        target circular orbit 50 km above GEO.
+                    </p>
+
+                    <div class="mission-data">
+
+                        <div class="mission-data-card">
+
+                            <span>FINAL TARGET ALTITUDE</span>
+
+                            <h4>36050 km</h4>
+
+                            <p>CLIENTS ALTITUDE</p>
+
+                        </div>
+
+                        <div class="mission-data-card">
+
+                            <span>REFERENCE ORBIT</span>
+
+                            <h4>GEO (36000 km)</h4>
+
+                            <p>50 km above nominal GEO</p>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+
+    <!-- SCROLL-DRIVEN GTO -> GEO + 50 KM TRANSFER -->
+    <div class="profile-journey" id="profileJourney" aria-label="Illustrated mission transfer sequence">
+        <div class="profile-pin">
+            <div class="profile-pin-title">
+                <span class="etiqueta">MISSION TRAJECTORY</span>
+                <h3>From GTO to GEO + 50 km.</h3>
+                <p>Scroll to follow the spacecraft through four mission stages.</p>
+            </div>
+            <div class="profile-visual">
+                <svg viewBox="0 0 1000 600" preserveAspectRatio="xMidYMid meet"
+                     role="img" aria-label="Conceptual orbital transfer diagram with Earth, initial GTO, raised-apogee GTO, and a final circular equatorial orbit">
+                    <defs>
+                        <clipPath id="profileEarthClip"><circle cx="500" cy="300" r="75"/></clipPath>
+                        <radialGradient id="profileHalo">
+                            <stop offset="0%" stop-color="#56AEED" stop-opacity=".25"/>
+                            <stop offset="100%" stop-color="#56AEED" stop-opacity="0"/>
+                        </radialGradient>
+                    </defs>
+                    <!-- A diagrammatic view: the 50 km offset is deliberately exaggerated. -->
+                    <ellipse class="orbit-base" cx="500" cy="300" rx="356" ry="174"/>
+                    <path class="profile-path" id="profileInitialPath"
+                        d="M 420 300 A 210 136 0 1 1 840 300 A 210 136 0 1 1 420 300"/>
+                    <path class="profile-path" id="profileRaisedPath"
+                        d="M 420 300 A 235 160 0 0 1 890 300" opacity=".2"/>
+                    <path class="profile-path" id="profileFinalPath"
+                        d="M 890 300 A 390 190 0 1 1 110 300 A 390 190 0 1 1 890 300" opacity=".15"/>
+                    <circle cx="500" cy="300" r="105" fill="url(#profileHalo)"/>
+                    <image href="Tierra.png" x="425" y="225" width="150" height="150"
+                           preserveAspectRatio="xMidYMid meet" clip-path="url(#profileEarthClip)"/>
+                    <circle id="profileApoPulse" cx="890" cy="300" r="15" fill="none"
+                            stroke="#C9A764" stroke-width="2" opacity="0"/>
+                    <circle cx="890" cy="300" r="4" fill="#C9A764"/>
+                    <g id="profileMovingSatellite" transform="translate(420 300)">
+                        <image href="SateliteAstroFUEL.png" x="-42" y="-30" width="84" height="60"
+                               preserveAspectRatio="xMidYMid meet"/>
+                    </g>
+                </svg>
+            </div>
+            <div class="profile-caption" aria-live="off">
+                <span class="profile-step-number" id="profileStepNumber">01 / INITIAL GTO</span>
+                <h4 id="profileStepTitle">Launch &amp; GTO insertion</h4>
+                <p id="profileStepDescription">The spacecraft is injected into an inclined transfer orbit.</p>
+                <div class="profile-meter" aria-hidden="true">
+                    <span><i></i></span><span><i></i></span><span><i></i></span><span><i></i></span>
+                </div>
+                <span class="profile-hint">SCROLL TO CONTINUE</span>
+                <div class="profile-legend" aria-hidden="true">
+                    <span style="--line:#7294BB">Initial GTO</span>
+                    <span style="--line:#C9A764">Raised apogee</span>
+                    <span style="--line:#56AEED">Final orbit</span>
+                    <span style="--line:#8FA2BC">Nominal GEO</span>
+                </div>
+            </div>
+        </div>
+    </div>
+    <p class="profile-disclaimer">Illustrative projection, not to scale. The 50 km offset is exaggerated;
+        final maneuver sequencing is subject to mission analysis.</p>
+
+    <!-- ORBITAL OPERATIONS -->
+
+    <section class="orbital" id="orbital">
+
+        <span class="etiqueta">
+            GEO + 50 KM / ORBITAL OVERVIEW
+        </span>
+
+        <h2>
+            A closer look at our operating orbit.
+        </h2>
+
+        <p>
+            The spacecraft operates 50 km above nominal geostationary altitude.
+            Scroll to follow its path around Earth. Diagram not to scale.
+        </p>
+        
+        <div class="orbital-scene" id="orbitalScene">
+            <div class="orbit"></div>
+
+            <img src="Tierra.png" alt="Earth" class="earth">
+
+            <img src="SateliteAstroFUEL.png" alt="astroFUEL satellite"
+                class="satellite-real" id="satellite">
+        </div>
+
+        <div class="orbital-note">
+            SCROLL TO FOLLOW THE ORBIT
+        </div>
+
+    </section>
+
+    
+
+        </div>
+
+    </section>
+    
+    <!-- MISSION REQUIREMENTS -->
+
+    <section class="mrd-section" id="requirements">
+
+        <div class="mrd-container">
+
+            <div class="mrd-header">
+
+                <span class="etiqueta">
+                    MISSION LAZARO / DOCUMENTATION
+                </span>
+
+                <h2>
+                    Mission Requirements
+                </h2>
+
+                <p>
+                    The preliminary Mission Requirements Document
+                    defines the capabilities and constraints of
+                    the astroFUEL orbital refueling spacecraft.
+                </p>
+
+                <div class="mrd-badges">
+
+                    <span class="mrd-badge">
+                        12 DRAFT REQUIREMENTS
+                    </span>
+
+                    <span class="mrd-badge pending">
+                        1 TO BE DEFINED
+                    </span>
+
+                </div>
+
+            </div>
+
+
+            <div class="mrd-list">
+
+
+                <!-- MRD 01 -->
+
+                <details class="mrd-card">
+
+                    <summary>
+                        <span class="mrd-number">MRD-010</span>
+                        <span class="mrd-title">Docking Compatibility</span>
+                        <span class="mrd-status">DRAFT</span>
+                        <span class="mrd-arrow">⌄</span>
+                    </summary>
+
+                    <div class="mrd-content">
+                        <p>
+                            The spacecraft shall be capable of docking
+                            with standard interfaces intended for future
+                            satellite refueling operations and safely
+                            undocking from the client spacecraft
+                            after refueling.
+                        </p>
+                    </div>
+
+                </details>
+
+
+                <!-- MRD 02 -->
+
+                <details class="mrd-card">
+
+                    <summary>
+                        <span class="mrd-number">MRD-020</span>
+                        <span class="mrd-title">Autonomous Abort</span>
+                        <span class="mrd-status">DRAFT</span>
+                        <span class="mrd-arrow">⌄</span>
+                    </summary>
+
+                    <div class="mrd-content">
+                        <p>
+                            The spacecraft shall be capable of
+                            automatically aborting an approach
+                            or docking maneuver if an unsafe
+                            condition is detected.
+                        </p>
+                    </div>
+
+                </details>
+
+
+                <!-- MRD 03 -->
+
+                <details class="mrd-card">
+
+                    <summary>
+                        <span class="mrd-number">MRD-030</span>
+                        <span class="mrd-title">Client Compatibility</span>
+                        <span class="mrd-status">DRAFT</span>
+                        <span class="mrd-arrow">⌄</span>
+                    </summary>
+
+                    <div class="mrd-content">
+                        <p>
+                            The spacecraft shall be capable of
+                            refueling a wide range of client
+                            satellites operating in different
+                            orbits, with different configurations,
+                            types and sizes.
+                        </p>
+                    </div>
+
+                </details>
+
+
+                <!-- MRD 04 -->
+
+                <details class="mrd-card">
+
+                    <summary>
+                        <span class="mrd-number">MRD-040</span>
+                        <span class="mrd-title">Safe Proximity Operations</span>
+                        <span class="mrd-status">DRAFT</span>
+                        <span class="mrd-arrow">⌄</span>
+                    </summary>
+
+                    <div class="mrd-content">
+                        <p>
+                            The spacecraft shall perform approach
+                            maneuvers accurately and safely, without
+                            entering GEO slots other than that of
+                            the client spacecraft.
+                        </p>
+
+                        <p>
+                            It shall position itself at a distance
+                            no greater than 500 m from the client.
+                            For safety, the client spacecraft shall
+                            suspend its operations and adopt the
+                            required attitude to facilitate docking.
+                        </p>
+                    </div>
+
+                </details>
+
+
+                <!-- MRD 05 -->
+
+                <details class="mrd-card">
+
+                    <summary>
+                        <span class="mrd-number">MRD-050</span>
+                        <span class="mrd-title">Payload Capacity</span>
+                        <span class="mrd-status">DRAFT</span>
+                        <span class="mrd-arrow">⌄</span>
+                    </summary>
+
+                    <div class="mrd-content">
+                        <p>
+                            The spacecraft shall have a minimum
+                            payload capacity of 500 kg.
+                        </p>
+                    </div>
+
+                </details>
+
+
+                <!-- MRD 06 -->
+
+                <details class="mrd-card">
+
+                    <summary>
+                        <span class="mrd-number">MRD-060</span>
+                        <span class="mrd-title">Emergency Response</span>
+                        <span class="mrd-status">DRAFT</span>
+                        <span class="mrd-arrow">⌄</span>
+                    </summary>
+
+                    <div class="mrd-content">
+                        <p>
+                            In emergency situations, the spacecraft
+                            shall be capable of performing the
+                            necessary maneuvers to assist another
+                            satellite in GEO within no more than
+                            10 hours.
+                        </p>
+                    </div>
+
+                </details>
+
+
+                <!-- MRD 07 -->
+
+                <details class="mrd-card">
+
+                    <summary>
+                        <span class="mrd-number">MRD-070</span>
+                        <span class="mrd-title">Spacecraft Wet Mass</span>
+                        <span class="mrd-status">DRAFT</span>
+                        <span class="mrd-arrow">⌄</span>
+                    </summary>
+
+                    <div class="mrd-content">
+                        <p>
+                            The spacecraft wet mass shall not
+                            exceed 1,500 kg.
+                        </p>
+                    </div>
+
+                </details>
+
+
+                <!-- MRD 08 -->
+
+                <details class="mrd-card">
+
+                    <summary>
+                        <span class="mrd-number">MRD-080</span>
+                        <span class="mrd-title">Xenon Storage</span>
+                        <span class="mrd-status">DRAFT</span>
+                        <span class="mrd-arrow">⌄</span>
+                    </summary>
+
+                    <div class="mrd-content">
+                        <p>
+                            The spacecraft storage tank shall
+                            safely contain and transport the
+                            xenon payload under space
+                            environmental conditions throughout
+                            the established mission duration.
+                        </p>
+                    </div>
+
+                </details>
+
+
+                <!-- MRD 09 -->
+
+                <details class="mrd-card">
+
+                    <summary>
+                        <span class="mrd-number">MRD-090</span>
+                        <span class="mrd-title">Future Market Compatibility</span>
+                        <span class="mrd-status">DRAFT</span>
+                        <span class="mrd-arrow">⌄</span>
+                    </summary>
+
+                    <div class="mrd-content">
+                        <p>
+                            The spacecraft subsystems shall be
+                            designed and sized with the objective
+                            of serving the satellite market of
+                            the 2030s and beyond.
+                        </p>
+                    </div>
+
+                </details>
+
+
+                <!-- MRD 10 -->
+
+                <details class="mrd-card">
+
+                    <summary>
+                        <span class="mrd-number">MRD-100</span>
+                        <span class="mrd-title">Operational Lifetime</span>
+                        <span class="mrd-status">DRAFT</span>
+                        <span class="mrd-arrow">⌄</span>
+                    </summary>
+
+                    <div class="mrd-content">
+                        <p>
+                            The spacecraft shall have an
+                            operational service lifetime of
+                            no less than two years following
+                            injection into its nominal orbit.
+                        </p>
+                    </div>
+
+                </details>
+
+
+                <!-- MRD 11 -->
+
+                <details class="mrd-card">
+
+                    <summary>
+                        <span class="mrd-number">MRD-110</span>
+                        <span class="mrd-title">Xenon Transfer</span>
+                        <span class="mrd-status">DRAFT</span>
+                        <span class="mrd-arrow">⌄</span>
+                    </summary>
+
+                    <div class="mrd-content">
+                        <p>
+                            The spacecraft shall be capable
+                            of transferring xenon to the
+                            client spacecraft.
+                        </p>
+
+                        <p>
+                            Potential transfer-system components
+                            include pumps and heating elements,
+                            subject to the final system design.
+                        </p>
+                    </div>
+
+                </details>
+
+
+                <!-- MRD 12 -->
+
+                <details class="mrd-card">
+
+                    <summary>
+                        <span class="mrd-number">MRD-120</span>
+                        <span class="mrd-title">Autonomous Rendezvous</span>
+                        <span class="mrd-status">DRAFT</span>
+                        <span class="mrd-arrow">⌄</span>
+                    </summary>
+
+                    <div class="mrd-content">
+                        <p>
+                            The spacecraft shall be capable
+                            of autonomously performing rendezvous
+                            at any point along its orbit,
+                            while communicating with the
+                            client spacecraft.
+                        </p>
+                    </div>
+
+                </details>
+
+
+                <!-- MRD 13 -->
+
+                <details class="mrd-card">
+
+                    <summary>
+                        <span class="mrd-number">MRD-130</span>
+                        <span class="mrd-title">Communications Coverage</span>
+                        <span class="mrd-status pending">TBD</span>
+                        <span class="mrd-arrow">⌄</span>
+                    </summary>
+
+                    <div class="mrd-content">
+                        <p>
+                            The spacecraft shall maintain
+                            continuous communications coverage,
+                            except during maneuvers required
+                            for docking operations.
+                        </p>
+
+                        <p>
+                            The coverage conditions and permitted
+                            interruptions remain to be defined.
+                        </p>
+                    </div>
+
+                </details>
+
+
+            </div>
+
+
+            <p class="mrd-note">
+                Preliminary requirements under development.
+                Requirement identifiers, verification methods
+                and technical specifications are subject to revision.
+            </p>
+
+        </div>
+
+    </section>
+
+    <!-- COMPANY / PROJECT TEAM -->
+    <section class="about" id="about">
+        <div class="content-container">
+            <span class="section-eyebrow">06 / ABOUT US</span>
+            <h2>One vision. More than one mission.</h2>
+            <p class="section-lead">
+                astroFUEL is the umbrella identity for a proposed space-systems venture.
+                Lázaro is our first mission concept, focused on orbital refueling.
+            </p>
+            <div class="about-points">
+                <div>
+                    <h3>Our approach</h3>
+                    <p>Explore space infrastructure concepts that may enable longer-lasting,
+                    more flexible missions. Further concepts may be developed under the astroFUEL identity.</p>
+                </div>
+                <div>
+                    <h3>Our team</h3>
+                    <p>Lázaro is currently being developed as an academic mission-design project
+                    at ETSIAE–UPM. Team profiles and responsibilities will be added as the project progresses.</p>
+                </div>
+            </div>
+            
+<!-- OUR TEAM -->
+
+<section class="team-block" id="team">
+
+    <span class="section-eyebrow">
+        THE PEOPLE BEHIND THE MISSION
+    </span>
+
+    <h3>
+        Nine roles. One mission.
+    </h3>
+
+    <p class="team-description">
+        Mission Lázaro is developed by a team of nine
+        aerospace engineering students, working together
+        across the main spacecraft engineering disciplines.
+    </p>
+
+    <div class="team-grid">
+
+        <!-- PROJECT MANAGER -->
+
+        <article class="team-card">
+
+            <span class="team-card-number">
+                01 / MANAGEMENT
+            </span>
+
+            <h4>Project Manager</h4>
+
+            <p>
+                Project planning, coordination between
+                engineering areas, milestones and deliverables.
+            </p>
+
+        </article>
+
+
+        <!-- MECHANICAL & STRUCTURAL -->
+
+        <article class="team-card">
+
+            <span class="team-card-number">
+                02 / STRUCTURES
+            </span>
+
+            <h4>Mechanical &amp; Structural</h4>
+
+            <p>
+                Spacecraft configuration, structural design
+                and mechanical integration of components.
+            </p>
+
+        </article>
+
+
+        <!-- MISSION ANALYSIS -->
+
+        <article class="team-card">
+
+            <span class="team-card-number">
+                03 / MISSION
+            </span>
+
+            <h4>Mission Analysis</h4>
+
+            <p>
+                Orbital trajectory design, maneuver planning
+                and mission operational scenarios.
+            </p>
+
+        </article>
+
+
+        <!-- AOCS -->
+
+        <article class="team-card">
+
+            <span class="team-card-number">
+                04 / CONTROL
+            </span>
+
+            <h4>AOCS</h4>
+
+            <p>
+                Attitude and orbit determination and control
+                for the spacecraft and its maneuvers.
+            </p>
+
+        </article>
+
+
+        <!-- COMMUNICATIONS & DATA -->
+
+        <article class="team-card">
+
+            <span class="team-card-number">
+                05 / DATA
+            </span>
+
+            <h4>Communications &amp; Data</h4>
+
+            <p>
+                Space-to-ground communications, onboard
+                data handling and command interfaces.
+            </p>
+
+        </article>
+
+
+        <!-- THERMAL CONTROL -->
+
+        <article class="team-card">
+
+            <span class="team-card-number">
+                06 / THERMAL
+            </span>
+
+            <h4>Thermal Control</h4>
+
+            <p>
+                Thermal analysis and temperature control
+                of spacecraft systems and equipment.
+            </p>
+
+        </article>
+
+
+        <!-- PROPULSION -->
+
+        <article class="team-card">
+
+            <span class="team-card-number">
+                07 / PROPULSION
+            </span>
+
+            <h4>Propulsion</h4>
+
+            <p>
+                Propulsion architecture and maneuver
+                capability for the orbital service vehicle.
+            </p>
+
+        </article>
+
+
+        <!-- PAYLOAD -->
+
+        <article class="team-card">
+
+            <span class="team-card-number">
+                08 / PAYLOAD
+            </span>
+
+            <h4>Payload</h4>
+
+            <p>
+                Refueling payload concept and its
+                spacecraft-level interfaces.
+            </p>
+
+        </article>
+
+
+        <!-- POWER PLANT -->
+
+        <article class="team-card">
+
+            <span class="team-card-number">
+                09 / POWER
+            </span>
+
+            <h4>Power Plant</h4>
+
+            <p>
+                Electrical power generation, storage
+                and distribution across the spacecraft.
+            </p>
+
+        </article>
+
+    </div>
+
+</section>
+        </div>
+    </section>
+    <footer class="site-footer">
+        <strong>astroFUEL</strong> · Lázaro mission concept<br>
+        Academic conceptual design · ETSIAE–UPM
+    </footer>
+
+    <script>
+        // Close navigation after an anchor is selected, on outside click and on Escape.
+        document.querySelectorAll('.site-header a[href^="#"]').forEach(link => {
+            link.addEventListener('click', () => {
+                document.querySelectorAll('.site-header details[open]').forEach(menu => menu.open = false);
+            });
+        });
+        document.addEventListener('click', event => {
+            document.querySelectorAll('.site-header details[open]').forEach(menu => {
+                if (!menu.contains(event.target)) menu.open = false;
+            });
+        });
+        document.addEventListener('keydown', event => {
+            if (event.key === 'Escape') {
+                document.querySelectorAll('.site-header details[open]').forEach(menu => menu.open = false);
+            }
+        });
+        // Rendezvous: three consecutive scroll-driven stages.
+        const rvSection = document.getElementById('rendezvous');
+        const rvService = document.getElementById('rvService');
+        const rvClient = document.getElementById('rvClient');
+        const rvConnection = document.getElementById('rvConnection');
+        const rvFlow = document.getElementById('rvFlow');
+        const rvStage = document.getElementById('rvStage');
+        const rvDescription = document.getElementById('rvDescription');
+        const rvPercent = document.getElementById('rvPercent');
+        const rvProgress = document.getElementById('rvProgress');
+
+        // Orbital overview: follows the actual rendered ellipse dimensions.
+        const orbitalSection = document.getElementById('orbital');
+        const orbitalScene = document.getElementById('orbitalScene');
+        const orbit = document.querySelector('#orbitalScene .orbit');
+        const satellite = document.getElementById('satellite');
+
+        function clamp01(value) {
+            return Math.min(1, Math.max(0, value));
+        }
+
+        function ease(value) {
+            return value * value * (3 - 2 * value);
+        }
+
+        function getScrollProgress(section) {
+            const rect = section.getBoundingClientRect();
+            const total = rect.height - window.innerHeight;
+            return clamp01(-rect.top / Math.max(1, total));
+        }
+
+        function updateRendezvous() {
+            const progress = getScrollProgress(rvSection);
+            const approach = ease(clamp01(progress / 0.60));
+            const scene = rvSection.querySelector('.rendezvous-scene');
+            const sceneWidth = scene.clientWidth;
+            const serviceWidth = rvService.getBoundingClientRect().width;
+            const clientWidth = rvClient.getBoundingClientRect().width;
+            const center = sceneWidth / 2;
+
+            // Both spacecraft approach the same docking point.
+            // A small overlap compensates for transparent margins in the PNGs.
+            const overlap = Math.min(30, sceneWidth * 0.035);
+            const serviceStart = -serviceWidth * 0.58;
+            const clientStart = sceneWidth - clientWidth * 0.42;
+            const serviceEnd = center - serviceWidth + overlap / 2;
+            const clientEnd = center - overlap / 2;
+
+            rvService.style.left = `${serviceStart + (serviceEnd - serviceStart) * approach}px`;
+            rvClient.style.left = `${clientStart + (clientEnd - clientStart) * approach}px`;
+            rvProgress.style.width = `${progress * 100}%`;
+            rvPercent.textContent = `${Math.round(progress * 100)}%`;
+
+            if (progress < 0.60) {
+                rvStage.textContent = '01 / APPROACH';
+                rvDescription.textContent = 'Both spacecraft close their relative distance.';
+                rvConnection.style.opacity = '0';
+                rvFlow.style.width = '0%';
+            } else if (progress < 0.75) {
+                rvStage.textContent = '02 / DOCKING';
+                rvDescription.textContent = 'The spacecraft align and establish a connection.';
+                rvConnection.style.opacity = String(ease(clamp01((progress - 0.60) / 0.15)));
+                rvFlow.style.width = '0%';
+            } else {
+                rvStage.textContent = '03 / XENON TRANSFER';
+                rvDescription.textContent = 'The connected vehicles begin xenon transfer.';
+                rvConnection.style.opacity = '1';
+                rvFlow.style.width = `${ease(clamp01((progress - 0.75) / 0.25)) * 100}%`;
+            }
+        }
+
+        function updateOrbitalPosition() {
+            const rect = orbitalSection.getBoundingClientRect();
+            const progress = clamp01((window.innerHeight - rect.top) / (window.innerHeight + rect.height));
+            const angle = -Math.PI * 0.15 + Math.PI * 1.5 * progress;
+            const a = orbit.offsetWidth / 2;
+            const b = orbit.offsetHeight / 2;
+            const x = orbitalScene.offsetWidth / 2 + a * Math.cos(angle);
+            const y = orbitalScene.offsetHeight / 2 + b * Math.sin(angle);
+            satellite.style.left = `${x}px`;
+            satellite.style.top = `${y}px`;
+        }
+
+
+        // Golden fuel drop: matches the original pixels, follows scroll, and
+        // returns to its place when the user scrolls back up.
+        const heroSection = document.querySelector('.portada');
+        const heroLogo = document.getElementById('heroLogo');
+        const fallingDrop = document.getElementById('fallingLogoDrop');
+        const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
+
+        function updateHeroDrop() {
+            if (reducedMotion.matches || !heroLogo.complete || !heroLogo.naturalWidth) {
+                fallingDrop.style.visibility = 'hidden';
+                return;
+            }
+
+            const logoRect = heroLogo.getBoundingClientRect();
+            const heroRect = heroSection.getBoundingClientRect();
+            // Start point in viewport coordinates at scroll position zero.
+            const initialTop = logoRect.top + window.scrollY;
+            const initialLeft = logoRect.left;
+            const heroDistance = Math.max(heroRect.height * 0.82, 1);
+            const progress = clamp01((-heroRect.top) / heroDistance);
+
+            // Accelerating downward motion, like a drop released by the logo.
+            const fallingDistance = window.innerHeight * 0.30 * progress
+                + (window.innerHeight * 1.25 + logoRect.height * 0.3) * progress * progress;
+            const drift = Math.sin(progress * Math.PI * 1.2) * 13 * progress;
+            const fade = 1 - ease(clamp01((progress - 0.80) / 0.20));
+
+            fallingDrop.style.width = `${logoRect.width}px`;
+            fallingDrop.style.left = `${initialLeft}px`;
+            fallingDrop.style.top = `${initialTop}px`;
+            fallingDrop.style.transform = `translate3d(${drift}px, ${fallingDistance}px, 0)`;
+            fallingDrop.style.opacity = String(fade);
+            fallingDrop.style.visibility = progress >= 1 ? 'hidden' : 'visible';
+        }
+
+
+        // Mission profile: GTO insertion, apogee raise, circularization, plane alignment.
+        const profileJourney = document.getElementById('profileJourney');
+        const profileMovingSatellite = document.getElementById('profileMovingSatellite');
+        const profileInitialPath = document.getElementById('profileInitialPath');
+        const profileRaisedPath = document.getElementById('profileRaisedPath');
+        const profileFinalPath = document.getElementById('profileFinalPath');
+        const profileApoPulse = document.getElementById('profileApoPulse');
+        const profileStepNumber = document.getElementById('profileStepNumber');
+        const profileStepTitle = document.getElementById('profileStepTitle');
+        const profileStepDescription = document.getElementById('profileStepDescription');
+        const profileMeters = document.querySelectorAll('.profile-meter i');
+        const profileSteps = [
+            ['01 / INITIAL GTO', 'Launch & GTO insertion',
+             'The spacecraft enters an inclined transfer orbit after launch.'],
+            ['02 / APOGEE RAISING', 'Raise the transfer apogee',
+             'An orbital maneuver raises apogee to the GEO + 50 km target altitude.'],
+            ['03 / CIRCULARIZATION', 'Circularize at apogee',
+             'A maneuver at apogee establishes the final circular altitude.'],
+            ['04 / PLANE ALIGNMENT', 'Enter the operational orbit',
+             'The orbital plane is aligned with the equator. Circularization and inclination correction may be combined.']
+        ];
+        const profileInitialLength = profileInitialPath.getTotalLength();
+        const profileRaisedLength = profileRaisedPath.getTotalLength();
+        const profileFinalLength = profileFinalPath.getTotalLength();
+
+        function updateMissionProfile() {
+            const progress = getScrollProgress(profileJourney);
+            const index = Math.min(3, Math.floor(progress * 4));
+            const local = clamp01(progress * 4 - index);
+            const point = index === 0
+                ? profileInitialPath.getPointAtLength(profileInitialLength * ease(local))
+                : index === 1
+                    ? profileRaisedPath.getPointAtLength(profileRaisedLength * ease(local))
+                    : index === 2
+                        ? profileRaisedPath.getPointAtLength(profileRaisedLength)
+                        : profileFinalPath.getPointAtLength(profileFinalLength * ease(local));
+
+            profileMovingSatellite.setAttribute('transform', `translate(${point.x} ${point.y})`);
+            profileInitialPath.style.opacity = index === 0 ? '1' : '.33';
+            profileRaisedPath.style.opacity = index === 1 || index === 2 ? '1' : '.22';
+            profileFinalPath.style.opacity = index >= 2 ? '1' : '.15';
+            profileApoPulse.style.opacity = index === 2 ? String(.4 + .5 * Math.sin(local * Math.PI)) : '0';
+
+            profileStepNumber.textContent = profileSteps[index][0];
+            profileStepTitle.textContent = profileSteps[index][1];
+            profileStepDescription.textContent = profileSteps[index][2];
+            profileMeters.forEach((meter, i) => {
+                meter.style.width = i < index ? '100%' : i === index ? `${local * 100}%` : '0%';
+            });
+        }
+
+        let animationQueued = false;
+        function updateAnimations() {
+            updateRendezvous();
+            updateOrbitalPosition();
+            updateMissionProfile();
+            updateHeroDrop();
+            animationQueued = false;
+        }
+        function queueAnimations() {
+            if (!animationQueued) {
+                animationQueued = true;
+                requestAnimationFrame(updateAnimations);
+            }
+        }
+        window.addEventListener('scroll', queueAnimations, { passive: true });
+        window.addEventListener('resize', queueAnimations);
+        window.addEventListener('load', queueAnimations);
+        heroLogo.addEventListener('load', queueAnimations);
+        reducedMotion.addEventListener('change', queueAnimations);
+        updateAnimations();
+    </script>
+</body>
+
+</html>
