@@ -1234,6 +1234,96 @@
         }
 
     }
+
+    /* WEBSITE QR */
+
+        .qr-section {
+            background: #F5F7FA;
+            color: #142C4D;
+            padding: 100px 24px;
+            text-align: center;
+        }
+
+        .qr-container {
+            max-width: 850px;
+            margin: 0 auto;
+        }
+
+        .qr-section h2 {
+            font-size: clamp(32px, 5vw, 54px);
+            margin: 18px auto 20px;
+        }
+
+        .qr-section p {
+            max-width: 650px;
+            margin: 0 auto 40px;
+
+            color: #586D83;
+            font-size: 17px;
+            line-height: 1.8;
+        }
+
+        .qr-image-link {
+            display: inline-block;
+
+            padding: 18px;
+
+            background: white;
+
+            border: 1px solid #DCE4ED;
+            border-radius: 14px;
+
+            box-shadow:
+                0 14px 40px rgba(11,22,40,.08);
+
+            transition:
+                transform .3s,
+                box-shadow .3s;
+        }
+
+        .qr-image-link:hover {
+            transform: translateY(-5px);
+
+            box-shadow:
+                0 20px 50px rgba(11,22,40,.13);
+        }
+
+        .qr-image {
+            display: block;
+
+            width: min(420px, 75vw);
+            height: auto;
+
+            border-radius: 8px;
+        }
+
+        .qr-hint {
+            display: block;
+
+            margin-top: 22px;
+
+            color: #A5844D;
+
+            font-size: 10px;
+            font-weight: bold;
+
+            letter-spacing: 2px;
+        }
+
+        @media (max-width: 600px) {
+
+            .qr-section {
+                padding: 75px 18px;
+            }
+
+            .qr-image-link {
+                padding: 12px;
+            }
+
+            .qr-image {
+                width: min(340px, 80vw);
+            }
+        }
     
     </style>
 
@@ -2176,6 +2266,43 @@
 </section>
         </div>
     </section>
+    <!-- WEBSITE QR -->
+
+        <section class="qr-section" id="qr">
+
+            <div class="qr-container">
+
+                <span class="section-eyebrow">
+                    EXPLORE THE PROJECT
+                </span>
+
+                <h2>
+                    Take Mission Lázaro with you.
+                </h2>
+
+                <p>
+                    Scan the QR code to explore the latest version of the
+                    astroFUEL website, Mission Lázaro and its technical deliverables.
+                </p>
+
+                <a href="astroFUEL_QR_presentacion.png"
+                target="_blank"
+                class="qr-image-link">
+
+                    <img src="astroFUEL_QR_presentacion.png"
+                        alt="QR code linking to the astroFUEL website"
+                        class="qr-image">
+
+                </a>
+
+                <span class="qr-hint">
+                    CLICK THE QR TO OPEN PRESENTATION MODE
+                </span>
+
+            </div>
+
+        </section>
+
     <footer class="site-footer">
         <strong>astroFUEL</strong> · Lázaro mission concept<br>
         Academic conceptual design · ETSIAE–UPM
