@@ -273,6 +273,27 @@
             align-items: flex-start;
         }
 
+        .mission-step + .mission-step {
+            margin-top: 85px;
+        }
+
+        .mission-cycle-note {
+            margin: 80px auto 0;
+            max-width: 760px;
+            padding: 24px 28px;
+            border: 1px solid #29415D;
+            border-radius: 10px;
+            background: #122841;
+            color: #B5C5D7;
+            text-align: center;
+            line-height: 1.7;
+            font-size: 15px;
+        }
+
+        .mission-cycle-note strong {
+            color: #C9A764;
+        }
+
         .step-number {
             background-color: #C9A764;
             color: #0B1628;
@@ -518,11 +539,15 @@
            without adjusting this mask. */
         .logo-drop-cover {
             position: absolute;
-            left: 42.5%;
-            top: 55.3%;
-            width: 15.4%;
-            height: 23%;
+
+            left: 42.0%;
+            top: 56.5%;
+
+            width: 11.2%;
+            height: 26.2%;
+
             background: #FFFFFF;
+
             pointer-events: none;
         }
         .falling-logo-drop {
@@ -538,11 +563,11 @@
             visibility: hidden;
             transform: translate3d(0,0,0);
             /* Display ONLY the original droplet from the same logo image. */
-            clip-path: polygon(
-                49.9% 55.1%, 52.4% 57.8%, 54.9% 63%,
-                56.5% 68%, 56.3% 73.1%, 54.1% 76.5%,
-                50% 78%, 46.1% 77.4%, 43.5% 74%,
-                42.7% 69.1%, 44.0% 64%, 47.0% 58.4%
+            clip-path: inset(
+                56.5%
+                46.8%
+                17.3%
+                42.0%
             );
             will-change: transform, opacity;
         }
@@ -709,9 +734,17 @@
             box-shadow: 0 3px 20px rgba(13,29,52,.04);
             backdrop-filter: blur(12px);
         }
-        .site-brand { font-weight: 800; font-size: clamp(20px,2.1vw,26px);
-            letter-spacing: -.8px; text-decoration: none; color: #142C4D; white-space: nowrap; }
-        .site-brand span { color: #C9A764; }
+        .site-brand {
+            display: flex;
+            align-items: center;
+            text-decoration: none;
+        }
+
+        .site-brand img {
+            width: 145px;
+            height: auto;
+            display: block;
+        }
         .desktop-navigation { display: flex; align-items: center; gap: clamp(20px,2.5vw,35px); }
         .desktop-navigation > a, .nav-dropdown > summary {
             color: #142C4D; font-size: 12px; font-weight: 700; letter-spacing: 1.15px;
@@ -810,6 +843,9 @@
             .requirements-grid,.document-list,.about-points { grid-template-columns:1fr; }
             .requirement-panel,.documentation,.about-points > div { padding:21px; }
             .rendezvous-sticky { padding:14px 8px 12px; }
+            .site-brand img {
+                width: 125px;
+            }
         }
 
         /* OUR TEAM */
@@ -894,184 +930,311 @@
                 padding: 22px;
             }
         }
-       
-        /* MISSION REQUIREMENTS */
 
-        .mrd-section {
-            background-color: #F5F7FA;
-            color: #142C4D;
-            padding: 100px 24px;
-            scroll-margin-top: 90px;
+        /* PHASE 02 - TRANSFER TO GEO */
+
+        .phase2-transfer-scene {
+            position: relative;
+            width: min(920px, 100%);
+            height: 520px;
+            margin: 45px auto 0;
         }
 
-        .mrd-container {
-            max-width: 1000px;
-            margin: 0 auto;
+        .phase2-svg {
+            position: absolute;
+            inset: 0;
+            width: 100%;
+            height: 100%;
+            overflow: visible;
         }
 
-        .mrd-header {
-            text-align: center;
-            margin-bottom: 45px;
+        .geo-orbit {
+            fill: none;
+            stroke: rgba(255,255,255,0.32);
+            stroke-width: 2.5;
+            stroke-dasharray: 7 8;
         }
 
-        .mrd-header h2 {
-            font-size: clamp(32px, 5vw, 54px);
-            margin: 20px 0;
+        .geo50-orbit {
+            fill: none;
+            stroke: rgba(201,167,100,0.9);
+            stroke-width: 2.5;
+            stroke-dasharray: 10 8;
         }
 
-        .mrd-header p {
-            color: #516479;
-            font-size: 17px;
-            line-height: 1.8;
-            max-width: 720px;
-            margin: 0 auto;
+        .transfer-orbit {
+            fill: none;
+            stroke: #3E78FF;
+            stroke-width: 3.2;
+            stroke-linecap: round;
+            stroke-dasharray: 10 10;
         }
 
-        .mrd-badges {
-            display: flex;
-            justify-content: center;
-            flex-wrap: wrap;
-            gap: 12px;
-            margin-top: 25px;
+        .phase2-earth {
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            width: 150px;
+            transform: translate(-50%, -50%);
+            z-index: 2;
+            filter: drop-shadow(0 0 22px rgba(62,120,255,0.16));
         }
 
-        .mrd-badge {
-            background-color: #E5EAF0;
-            color: #142C4D;
-            border-radius: 30px;
-            padding: 9px 16px;
+        .phase2-satellite {
+            position: absolute;
+            left: 0;
+            top: 0;
+            height: auto;
+            transform: translate(-50%, -50%);
+            transform-origin: center center;
+            z-index: 4;
+            transition: none;
+            will-change: left, top, transform;
+        }
+
+        .client-satellite {
+            width: 68px;
+        }
+
+        .service-satellite {
+            width: 78px;
+        }
+
+        .orbit-label {
+            position: absolute;
             font-size: 12px;
             font-weight: bold;
-        }
-
-        .mrd-badge.pending {
-            background-color: #F4E9CF;
-            color: #856222;
-        }
-
-        /* ACCORDION CARDS */
-
-        .mrd-list {
-            display: grid;
-            gap: 12px;
-        }
-
-        .mrd-card {
-            background-color: #FFFFFF;
-            border: 1px solid #E0E5EB;
-            border-radius: 10px;
-            overflow: hidden;
-        }
-
-        .mrd-card[open] {
-            border-color: #C9A764;
-        }
-
-        .mrd-card summary {
-            display: flex;
-            align-items: center;
-            gap: 18px;
-            padding: 22px;
-            cursor: pointer;
-            list-style: none;
-        }
-
-        .mrd-card summary::-webkit-details-marker {
-            display: none;
-        }
-
-        .mrd-number {
-            color: #B08A45;
-            font-size: 13px;
-            font-weight: bold;
+            letter-spacing: 2px;
+            text-transform: uppercase;
             white-space: nowrap;
         }
 
-        .mrd-title {
-            color: #142C4D;
-            font-size: 18px;
-            font-weight: bold;
-            flex: 1;
+        .orbit-label-geo {
+            right: 17%;
+            top: 12%;
+            color: rgba(255,255,255,0.88);
         }
 
-        .mrd-status {
-            background-color: #E5EAF0;
-            color: #516479;
-            border-radius: 20px;
-            padding: 6px 10px;
-            font-size: 10px;
-            font-weight: bold;
-        }
-
-        .mrd-status.pending {
-            background-color: #F4E9CF;
-            color: #856222;
-        }
-
-        .mrd-arrow {
+        .orbit-label-geo50 {
+            left: 9%;
+            top: 10%;
             color: #C9A764;
-            font-size: 22px;
-            transition: transform 0.25s;
         }
 
-        .mrd-card[open] .mrd-arrow {
-            transform: rotate(180deg);
-        }
+        @media (max-width: 900px) {
+            .phase2-transfer-scene {
+                height: 420px;
+            }
 
-        .mrd-content {
-            padding: 0 22px 25px;
-        }
+            .phase2-earth {
+                width: 118px;
+            }
 
-        .mrd-content p {
-            color: #516479;
-            font-size: 16px;
-            line-height: 1.8;
-            margin: 0;
-        }
+            .client-satellite {
+                width: 56px;
+            }
 
-        .mrd-note {
-            margin-top: 28px;
-            color: #718093;
-            text-align: center;
-            font-size: 13px;
-            line-height: 1.6;
+            .service-satellite {
+                width: 64px;
+            }
         }
-
-        /* MOBILE */
 
         @media (max-width: 600px) {
-
-            .mrd-section {
-                padding: 70px 16px;
+            .phase2-transfer-scene {
+                height: 330px;
+                margin-top: 30px;
             }
 
-            .mrd-card summary {
-                padding: 18px 14px;
-                gap: 10px;
+            .phase2-earth {
+                width: 92px;
             }
 
-            .mrd-title {
-                font-size: 15px;
+            .client-satellite {
+                width: 42px;
             }
 
-            .mrd-number {
-                font-size: 11px;
+            .service-satellite {
+                width: 50px;
             }
 
-            .mrd-status {
-                font-size: 9px;
-                padding: 5px 7px;
+            .orbit-label {
+                font-size: 10px;
+                letter-spacing: 1.5px;
             }
 
-            .mrd-content {
-                padding: 0 14px 20px;
+            .orbit-label-geo {
+                right: 10%;
+                top: 10%;
             }
 
-            .mrd-content p {
-                font-size: 14px;
+            .orbit-label-geo50 {
+                left: 4%;
+                top: 8%;
             }
         }
 
+        .transfer-maneuver {
+            fill: #C9A764;
+            stroke: #F5F7FA;
+            stroke-width: 2;
+            filter: drop-shadow(0 0 6px rgba(201,167,100,0.6));
+        }
+
+        /* PHASE 04 — XENON */
+
+    .xenon-feature {
+        display: grid;
+        grid-template-columns: 230px minmax(0, 1fr);
+        gap: 45px;
+        align-items: center;
+
+        margin-top: 50px;
+        padding: 38px;
+
+        background: #122841;
+        border: 1px solid #29415D;
+        border-radius: 14px;
+    }
+
+    .xenon-element {
+        position: relative;
+
+        width: 190px;
+        aspect-ratio: 1;
+
+        margin: 0 auto;
+
+        border: 2px solid #C9A764;
+        border-radius: 10px;
+
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+
+        background:
+            radial-gradient(
+                circle at 50% 45%,
+                #183A5C 0%,
+                #10253D 75%
+            );
+
+        box-shadow:
+            0 0 35px rgba(201,167,100,.10);
+    }
+
+    .xenon-element strong {
+        color: #FFFFFF;
+        font-size: 76px;
+        line-height: 1;
+    }
+
+    .xenon-number {
+        position: absolute;
+        top: 15px;
+        left: 17px;
+
+        color: #C9A764;
+        font-size: 15px;
+        font-weight: bold;
+    }
+
+    .xenon-name {
+        margin-top: 10px;
+
+        color: #C9A764;
+        font-size: 11px;
+        font-weight: bold;
+        letter-spacing: 3px;
+    }
+
+    .xenon-mass {
+        position: absolute;
+        bottom: 13px;
+        right: 15px;
+
+        color: #8399B0;
+        font-size: 11px;
+    }
+
+    .xenon-info h4 {
+        margin: 13px 0 18px;
+
+        color: #FFFFFF;
+        font-size: clamp(27px, 3.5vw, 40px);
+    }
+
+    .xenon-info p {
+        color: #B5C5D7;
+        font-size: 16px;
+        line-height: 1.75;
+    }
+
+
+    .xenon-properties {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+
+        gap: 15px;
+
+        margin-top: 18px;
+    }
+
+    .xenon-property {
+        padding: 25px;
+
+        background: #132942;
+
+        border: 1px solid #29415D;
+        border-radius: 10px;
+    }
+
+    .xenon-property > span {
+        color: #C9A764;
+
+        font-size: 11px;
+        font-weight: bold;
+        letter-spacing: 2px;
+    }
+
+    .xenon-property h5 {
+        margin: 13px 0 9px;
+
+        color: #FFFFFF;
+        font-size: 19px;
+    }
+
+    .xenon-property p {
+        margin: 0;
+
+        color: #B9CADE;
+
+        font-size: 14px;
+        line-height: 1.65;
+    }
+
+
+    @media (max-width: 700px) {
+
+        .xenon-feature {
+            grid-template-columns: 1fr;
+            padding: 27px 20px;
+        }
+
+        .xenon-element {
+            width: 165px;
+        }
+
+        .xenon-element strong {
+            font-size: 66px;
+        }
+
+        .xenon-properties {
+            grid-template-columns: 1fr;
+        }
+
+    }
+    
     </style>
 
 </head>
@@ -1080,7 +1243,9 @@
 
     <!-- Corporate navigation: astroFUEL is the umbrella; Lázaro is the first mission concept. -->
     <header class="site-header" id="top">
-        <a class="site-brand" href="#top" aria-label="astroFUEL home">astro<span>FUEL</span></a>
+        <a class="site-brand" href="#top" aria-label="astroFUEL home">
+            <img src="astrofuel-wordmark.png" alt="astroFUEL">
+        </a>
         <nav class="desktop-navigation" aria-label="Main navigation">
             <details class="nav-dropdown">
                 <summary>MISSION</summary>
@@ -1094,10 +1259,14 @@
                 </div>
             </details>
             <details class="nav-dropdown">
-                <summary>REQUIREMENTS</summary>
+                <summary>DELIVERABLES</summary>
+
                 <div class="nav-popover">
-                    <a href="#requirements">Preliminary requirements</a>
-                    <a href="#documentation">Mission documents</a>
+                    <span class="nav-note">MISSION LÁZARO</span>
+
+                    <a href="requirements.html">
+                        01 / Mission Requirements
+                    </a>
                 </div>
             </details>
             
@@ -1131,9 +1300,11 @@
                     <a href="#orbital">36050 km operations</a>
                 </details>
                 <details>
-                    <summary>REQUIREMENTS</summary>
-                    <a href="#requirements">Preliminary requirements</a>
-                    <a href="#documentation">Mission documents</a>
+                    <summary>DELIVERABLES</summary>
+
+                    <a href="requirements.html">
+                        01 / Mission Requirements
+                    </a>
                 </details>
                 
                 <details>
@@ -1162,7 +1333,7 @@
         <!-- The original logo PNG contains the drop. The white mask conceals
              only the printed drop while an identical clipped copy moves on scroll. -->
         <div class="logo-drop-stage" id="logoDropStage">
-            <img src="logo.png" alt="astroFUEL - Orbital Refueling" class="logo-portada" id="heroLogo">
+            <img src="Logo.png" alt="astroFUEL - Orbital Refueling" class="logo-portada" id="heroLogo">
             <span class="logo-drop-cover" aria-hidden="true"></span>
         </div>
 
@@ -1180,7 +1351,7 @@
 
 
     <!-- Visual copy of the original golden drop; no new image needed. -->
-    <img src="logo.png" class="falling-logo-drop" id="fallingLogoDrop" alt="" aria-hidden="true">
+    <img src="Logo.png" class="falling-logo-drop" id="fallingLogoDrop" alt="" aria-hidden="true">
 
     <!-- OUR FIRST MISSION -->
     <section class="mision" id="mision">
@@ -1337,21 +1508,21 @@
 
                         <div class="mission-data-card">
 
-                            <span>FINAL TARGET ALTITUDE</span>
+                            <span>CLIENT ORBIT ALTITUDE</span>
 
-                            <h4>36050 km</h4>
+                            <h4>36000 km  (GEO)</h4>
 
-                            <p>CLIENTS ALTITUDE</p>
+                            <p>Nominal GEO client orbit</p>
 
                         </div>
 
                         <div class="mission-data-card">
 
-                            <span>REFERENCE ORBIT</span>
+                            <span>LÁZARO STANDBY ORBIT</span>
 
-                            <h4>GEO (36000 km)</h4>
+                            <h4>36050 km</h4>
 
-                            <p>50 km above nominal GEO</p>
+                            <p>50 km above the client orbit</p>
 
                         </div>
 
@@ -1421,414 +1592,381 @@
     <p class="profile-disclaimer">Illustrative projection, not to scale. The 50 km offset is exaggerated;
         final maneuver sequencing is subject to mission analysis.</p>
 
-    <!-- ORBITAL OPERATIONS -->
 
-    <section class="orbital" id="orbital">
+    <!-- PHASE 02 -->
 
-        <span class="etiqueta">
-            GEO + 50 KM / ORBITAL OVERVIEW
-        </span>
+            <div class="mission-step">
 
-        <h2>
-            A closer look at our operating orbit.
-        </h2>
+                <div class="step-number">
+                    02
+                </div>
 
-        <p>
-            The spacecraft operates 50 km above nominal geostationary altitude.
-            Scroll to follow its path around Earth. Diagram not to scale.
-        </p>
-        
-        <div class="orbital-scene" id="orbitalScene">
-            <div class="orbit"></div>
+                <div class="step-content">
 
-            <img src="Tierra.png" alt="Earth" class="earth">
-
-            <img src="SateliteAstroFUEL.png" alt="astroFUEL satellite"
-                class="satellite-real" id="satellite">
-        </div>
-
-        <div class="orbital-note">
-            SCROLL TO FOLLOW THE ORBIT
-        </div>
-
-    </section>
-
-    
-
-        </div>
-
-    </section>
-    
-    <!-- MISSION REQUIREMENTS -->
-
-    <section class="mrd-section" id="requirements">
-
-        <div class="mrd-container">
-
-            <div class="mrd-header">
-
-                <span class="etiqueta">
-                    MISSION LAZARO / DOCUMENTATION
-                </span>
-
-                <h2>
-                    Mission Requirements
-                </h2>
-
-                <p>
-                    The preliminary Mission Requirements Document
-                    defines the capabilities and constraints of
-                    the astroFUEL orbital refueling spacecraft.
-                </p>
-
-                <div class="mrd-badges">
-
-                    <span class="mrd-badge">
-                        12 DRAFT REQUIREMENTS
+                    <span class="etiqueta">
+                        MISSION PHASE 02
                     </span>
 
-                    <span class="mrd-badge pending">
-                        1 TO BE DEFINED
-                    </span>
+                    <h3>
+                        Service Request & Rendezvous
+                    </h3>
+
+                    <p>
+                        Once a client satellite requests assistance, Lázaro
+                        leaves its standby orbit at GEO + 50 km and performs
+                        the required orbital maneuvers to reach the client's
+                        geostationary orbital slot.
+                    </p>
+
+                    <p>
+                        The spacecraft coordinates its rendezvous with the
+                        client while remaining within the operational and
+                        safety constraints imposed by the assigned GEO slot.
+                    </p>
+
+                    <!-- ORBITAL OPERATIONS -->
+
+                    <section class="orbital" id="orbital">
+
+                        <div class="phase2-transfer-scene" id="phase2Scene">
+
+                            <svg class="phase2-svg"
+                                viewBox="0 0 900 520"
+                                preserveAspectRatio="xMidYMid meet">
+
+                                <!-- GEO orbit -->
+
+                                <circle cx="450"
+                                        cy="260"
+                                        r="165"
+                                        class="geo-orbit">
+                                </circle>
+
+                                <!-- GEO + 50 km standby orbit -->
+
+                                <circle cx="450"
+                                        cy="260"
+                                        r="210"
+                                        class="geo50-orbit">
+                                </circle>
+
+                                <!-- Transfer trajectory -->
+
+                                <path id="phase2TransferPath"
+                                    class="transfer-orbit"
+                                    d="M 240 260
+                                        A 187.5 186 0 0 1 615 260">
+                                </path>
+
+                                <!-- Departure burn at apoapsis -->
+
+                                <circle cx="240"
+                                        cy="260"
+                                        r="6"
+                                        class="transfer-maneuver">
+                                </circle>
+
+
+                                <!-- Arrival / circularization at periapsis -->
+
+                                <circle cx="615"
+                                        cy="260"
+                                        r="6"
+                                        class="transfer-maneuver">
+                                </circle>
+
+                            </svg>
+
+                            <div class="orbit-label orbit-label-geo">
+                                GEO
+                            </div>
+
+                            <div class="orbit-label orbit-label-geo50">
+                                GEO + 50 km
+                            </div>
+
+                            <img src="Tierra.png"
+                                alt="Earth"
+                                class="phase2-earth">
+
+                            <img src="SateliteGenerico.png"
+                                alt="Client spacecraft"
+                                class="phase2-satellite client-satellite"
+                                id="phase2ClientSat">
+
+                            <img src="SateliteAstroFUEL.png"
+                                alt="Lázaro servicing spacecraft"
+                                class="phase2-satellite service-satellite"
+                                id="phase2ServiceSat">
+
+                        </div>
+
+                        <div class="orbital-note">
+                            SCROLL TO FOLLOW THE ORBIT
+                        </div>
+
+                    </section>
 
                 </div>
 
             </div>
 
+            <!-- PHASE 03 -->
 
-            <div class="mrd-list">
+            <div class="mission-step">
 
+                <div class="step-number">
+                    03
+                </div>
 
-                <!-- MRD 01 -->
+                <div class="step-content">
 
-                <details class="mrd-card">
+                    <span class="etiqueta">
+                        MISSION PHASE 03
+                    </span>
 
-                    <summary>
-                        <span class="mrd-number">MRD-010</span>
-                        <span class="mrd-title">Docking Compatibility</span>
-                        <span class="mrd-status">DRAFT</span>
-                        <span class="mrd-arrow">⌄</span>
-                    </summary>
+                    <h3>
+                        Final Approach & Docking
+                    </h3>
 
-                    <div class="mrd-content">
-                        <p>
-                            The spacecraft shall be capable of docking
-                            with standard interfaces intended for future
-                            satellite refueling operations and safely
-                            undocking from the client spacecraft
-                            after refueling.
-                        </p>
-                    </div>
+                    <p>
+                        After reaching the client satellite's vicinity,
+                        Lázaro begins the final proximity operations required
+                        for docking.
+                    </p>
 
-                </details>
+                    <p>
+                        The propulsion and AOCS subsystems control the relative
+                        position, velocity and attitude of the spacecraft,
+                        allowing both vehicles to achieve the alignment and
+                        stability required for a safe docking maneuver.
+                    </p>
 
-
-                <!-- MRD 02 -->
-
-                <details class="mrd-card">
-
-                    <summary>
-                        <span class="mrd-number">MRD-020</span>
-                        <span class="mrd-title">Autonomous Abort</span>
-                        <span class="mrd-status">DRAFT</span>
-                        <span class="mrd-arrow">⌄</span>
-                    </summary>
-
-                    <div class="mrd-content">
-                        <p>
-                            The spacecraft shall be capable of
-                            automatically aborting an approach
-                            or docking maneuver if an unsafe
-                            condition is detected.
-                        </p>
-                    </div>
-
-                </details>
-
-
-                <!-- MRD 03 -->
-
-                <details class="mrd-card">
-
-                    <summary>
-                        <span class="mrd-number">MRD-030</span>
-                        <span class="mrd-title">Client Compatibility</span>
-                        <span class="mrd-status">DRAFT</span>
-                        <span class="mrd-arrow">⌄</span>
-                    </summary>
-
-                    <div class="mrd-content">
-                        <p>
-                            The spacecraft shall be capable of
-                            refueling a wide range of client
-                            satellites operating in different
-                            orbits, with different configurations,
-                            types and sizes.
-                        </p>
-                    </div>
-
-                </details>
-
-
-                <!-- MRD 04 -->
-
-                <details class="mrd-card">
-
-                    <summary>
-                        <span class="mrd-number">MRD-040</span>
-                        <span class="mrd-title">Safe Proximity Operations</span>
-                        <span class="mrd-status">DRAFT</span>
-                        <span class="mrd-arrow">⌄</span>
-                    </summary>
-
-                    <div class="mrd-content">
-                        <p>
-                            The spacecraft shall perform approach
-                            maneuvers accurately and safely, without
-                            entering GEO slots other than that of
-                            the client spacecraft.
-                        </p>
-
-                        <p>
-                            It shall position itself at a distance
-                            no greater than 500 m from the client.
-                            For safety, the client spacecraft shall
-                            suspend its operations and adopt the
-                            required attitude to facilitate docking.
-                        </p>
-                    </div>
-
-                </details>
-
-
-                <!-- MRD 05 -->
-
-                <details class="mrd-card">
-
-                    <summary>
-                        <span class="mrd-number">MRD-050</span>
-                        <span class="mrd-title">Payload Capacity</span>
-                        <span class="mrd-status">DRAFT</span>
-                        <span class="mrd-arrow">⌄</span>
-                    </summary>
-
-                    <div class="mrd-content">
-                        <p>
-                            The spacecraft shall have a minimum
-                            payload capacity of 500 kg.
-                        </p>
-                    </div>
-
-                </details>
-
-
-                <!-- MRD 06 -->
-
-                <details class="mrd-card">
-
-                    <summary>
-                        <span class="mrd-number">MRD-060</span>
-                        <span class="mrd-title">Emergency Response</span>
-                        <span class="mrd-status">DRAFT</span>
-                        <span class="mrd-arrow">⌄</span>
-                    </summary>
-
-                    <div class="mrd-content">
-                        <p>
-                            In emergency situations, the spacecraft
-                            shall be capable of performing the
-                            necessary maneuvers to assist another
-                            satellite in GEO within no more than
-                            10 hours.
-                        </p>
-                    </div>
-
-                </details>
-
-
-                <!-- MRD 07 -->
-
-                <details class="mrd-card">
-
-                    <summary>
-                        <span class="mrd-number">MRD-070</span>
-                        <span class="mrd-title">Spacecraft Wet Mass</span>
-                        <span class="mrd-status">DRAFT</span>
-                        <span class="mrd-arrow">⌄</span>
-                    </summary>
-
-                    <div class="mrd-content">
-                        <p>
-                            The spacecraft wet mass shall not
-                            exceed 1,500 kg.
-                        </p>
-                    </div>
-
-                </details>
-
-
-                <!-- MRD 08 -->
-
-                <details class="mrd-card">
-
-                    <summary>
-                        <span class="mrd-number">MRD-080</span>
-                        <span class="mrd-title">Xenon Storage</span>
-                        <span class="mrd-status">DRAFT</span>
-                        <span class="mrd-arrow">⌄</span>
-                    </summary>
-
-                    <div class="mrd-content">
-                        <p>
-                            The spacecraft storage tank shall
-                            safely contain and transport the
-                            xenon payload under space
-                            environmental conditions throughout
-                            the established mission duration.
-                        </p>
-                    </div>
-
-                </details>
-
-
-                <!-- MRD 09 -->
-
-                <details class="mrd-card">
-
-                    <summary>
-                        <span class="mrd-number">MRD-090</span>
-                        <span class="mrd-title">Future Market Compatibility</span>
-                        <span class="mrd-status">DRAFT</span>
-                        <span class="mrd-arrow">⌄</span>
-                    </summary>
-
-                    <div class="mrd-content">
-                        <p>
-                            The spacecraft subsystems shall be
-                            designed and sized with the objective
-                            of serving the satellite market of
-                            the 2030s and beyond.
-                        </p>
-                    </div>
-
-                </details>
-
-
-                <!-- MRD 10 -->
-
-                <details class="mrd-card">
-
-                    <summary>
-                        <span class="mrd-number">MRD-100</span>
-                        <span class="mrd-title">Operational Lifetime</span>
-                        <span class="mrd-status">DRAFT</span>
-                        <span class="mrd-arrow">⌄</span>
-                    </summary>
-
-                    <div class="mrd-content">
-                        <p>
-                            The spacecraft shall have an
-                            operational service lifetime of
-                            no less than two years following
-                            injection into its nominal orbit.
-                        </p>
-                    </div>
-
-                </details>
-
-
-                <!-- MRD 11 -->
-
-                <details class="mrd-card">
-
-                    <summary>
-                        <span class="mrd-number">MRD-110</span>
-                        <span class="mrd-title">Xenon Transfer</span>
-                        <span class="mrd-status">DRAFT</span>
-                        <span class="mrd-arrow">⌄</span>
-                    </summary>
-
-                    <div class="mrd-content">
-                        <p>
-                            The spacecraft shall be capable
-                            of transferring xenon to the
-                            client spacecraft.
-                        </p>
-
-                        <p>
-                            Potential transfer-system components
-                            include pumps and heating elements,
-                            subject to the final system design.
-                        </p>
-                    </div>
-
-                </details>
-
-
-                <!-- MRD 12 -->
-
-                <details class="mrd-card">
-
-                    <summary>
-                        <span class="mrd-number">MRD-120</span>
-                        <span class="mrd-title">Autonomous Rendezvous</span>
-                        <span class="mrd-status">DRAFT</span>
-                        <span class="mrd-arrow">⌄</span>
-                    </summary>
-
-                    <div class="mrd-content">
-                        <p>
-                            The spacecraft shall be capable
-                            of autonomously performing rendezvous
-                            at any point along its orbit,
-                            while communicating with the
-                            client spacecraft.
-                        </p>
-                    </div>
-
-                </details>
-
-
-                <!-- MRD 13 -->
-
-                <details class="mrd-card">
-
-                    <summary>
-                        <span class="mrd-number">MRD-130</span>
-                        <span class="mrd-title">Communications Coverage</span>
-                        <span class="mrd-status pending">TBD</span>
-                        <span class="mrd-arrow">⌄</span>
-                    </summary>
-
-                    <div class="mrd-content">
-                        <p>
-                            The spacecraft shall maintain
-                            continuous communications coverage,
-                            except during maneuvers required
-                            for docking operations.
-                        </p>
-
-                        <p>
-                            The coverage conditions and permitted
-                            interruptions remain to be defined.
-                        </p>
-                    </div>
-
-                </details>
-
+                </div>
 
             </div>
 
+            <!-- PHASE 04 -->
 
-            <p class="mrd-note">
-                Preliminary requirements under development.
-                Requirement identifiers, verification methods
-                and technical specifications are subject to revision.
-            </p>
+            <div class="mission-step">
+
+                <div class="step-number">
+                    04
+                </div>
+
+                <div class="step-content">
+
+                    <span class="etiqueta">
+                        MISSION PHASE 04
+                    </span>
+
+                    <h3>
+                        Docking & Xenon Transfer
+                    </h3>
+
+                    <p>
+                        Once docking is completed, the universal refueling
+                        interface establishes the mechanical and fluid
+                        connection between Lázaro and the client spacecraft.
+                    </p>
+
+                    <p>
+                        Xenon is then transferred under controlled pressure,
+                        temperature and flow conditions, providing the client
+                        satellite with the propellant required to extend its
+                        operational lifetime.
+                    </p>
+
+                    <div class="xenon-feature">
+
+                        <div class="xenon-element">
+
+                            <span class="xenon-number">54</span>
+
+                            <strong>Xe</strong>
+
+                            <span class="xenon-name">XENON</span>
+
+                            <span class="xenon-mass">131.29</span>
+
+                        </div>
+
+
+                        <div class="xenon-info">
+
+                            <span class="etiqueta">
+                                WHY XENON?
+                            </span>
+
+                            <h4>
+                                Designed for long-duration missions.
+                            </h4>
+
+                            <p>
+                                Xenon is widely used as a propellant in electric propulsion
+                                systems, making it especially relevant for satellites designed
+                                to remain operational for many years.
+                            </p>
+
+                            <p>
+                                Its physical properties allow a significant quantity of
+                                propellant to be stored compactly at high pressure, while
+                                its chemical inertness simplifies long-term storage and
+                                handling aboard the spacecraft.
+                            </p>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="xenon-properties">
+
+                        <div class="xenon-property">
+
+                            <span>01</span>
+
+                            <h5>High atomic mass</h5>
+
+                            <p>
+                                Heavy xenon ions provide useful momentum transfer
+                                when accelerated by electric propulsion systems.
+                            </p>
+
+                        </div>
+
+
+                        <div class="xenon-property">
+
+                            <span>02</span>
+
+                            <h5>Compact storage</h5>
+
+                            <p>
+                                High-pressure storage allows the spacecraft to carry
+                                a substantial xenon payload within a limited tank volume.
+                            </p>
+
+                        </div>
+
+
+                        <div class="xenon-property">
+
+                            <span>03</span>
+
+                            <h5>Chemically inert</h5>
+
+                            <p>
+                                As a noble gas, xenon does not chemically react with
+                                spacecraft components during long-term storage.
+                            </p>
+
+                        </div>
+
+
+                        <div class="xenon-property">
+
+                            <span>04</span>
+
+                            <h5>Long-life missions</h5>
+
+                            <p>
+                                Electric propulsion is particularly suited to spacecraft
+                                requiring efficient propellant use over extended
+                                operational lifetimes.
+                            </p>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+            <!-- PHASE 05 -->
+
+            <div class="mission-step">
+
+                <div class="step-number">
+                    05
+                </div>
+
+                <div class="step-content">
+
+                    <span class="etiqueta">
+                        MISSION PHASE 05
+                    </span>
+
+                    <h3>
+                        Undocking & Return to Standby
+                    </h3>
+
+                    <p>
+                        After completing the xenon transfer, Lázaro performs
+                        a controlled undocking and establishes a safe separation
+                        from the serviced spacecraft.
+                    </p>
+
+                    <p>
+                        The vehicle then executes the required orbital maneuvers
+                        to return to its standby orbit at GEO + 50 km, where it
+                        remains ready to receive the next refueling request.
+                    </p>
+
+                </div>
+
+            </div>
+
+            <!-- PHASE 06 -->
+
+            <div class="mission-step">
+
+                <div class="step-number">
+                    06
+                </div>
+
+                <div class="step-content">
+
+                    <span class="etiqueta">
+                        MISSION PHASE 06
+                    </span>
+
+                    <h3>
+                        End-of-Life Disposal
+                    </h3>
+
+                    <p>
+                        At the end of its operational lifetime, Lázaro retains
+                        the propellant required to perform its final disposal
+                        maneuver.
+                    </p>
+
+                    <p>
+                        The spacecraft is transferred away from the operational
+                        geostationary region and placed into a graveyard orbit,
+                        reducing interference with active GEO satellites.
+                    </p>
+
+                </div>
+
+            </div>
+
+            <div class="mission-cycle-note">
+
+                <strong>REUSABLE SERVICING CYCLE</strong><br><br>
+
+                Phases 02–05 are repeated throughout Lázaro's operational
+                lifetime, allowing the spacecraft to service multiple client
+                satellites before performing its final disposal maneuver.
+
+            </div>
+                
 
         </div>
 
     </section>
+    
 
     <!-- COMPANY / PROJECT TEAM -->
     <section class="about" id="about">
@@ -2072,10 +2210,12 @@
         const rvProgress = document.getElementById('rvProgress');
 
         // Orbital overview: follows the actual rendered ellipse dimensions.
-        const orbitalSection = document.getElementById('orbital');
-        const orbitalScene = document.getElementById('orbitalScene');
-        const orbit = document.querySelector('#orbitalScene .orbit');
-        const satellite = document.getElementById('satellite');
+       // PHASE 02 — transfer from GEO + 50 km to the client in GEO
+
+        const phase2Scene = document.getElementById('phase2Scene');
+        const phase2ServiceSat = document.getElementById('phase2ServiceSat');
+        const phase2ClientSat = document.getElementById('phase2ClientSat');
+        const phase2TransferPath = document.getElementById('phase2TransferPath');
 
         function clamp01(value) {
             return Math.min(1, Math.max(0, value));
@@ -2131,16 +2271,131 @@
             }
         }
 
-        function updateOrbitalPosition() {
-            const rect = orbitalSection.getBoundingClientRect();
-            const progress = clamp01((window.innerHeight - rect.top) / (window.innerHeight + rect.height));
-            const angle = -Math.PI * 0.15 + Math.PI * 1.5 * progress;
-            const a = orbit.offsetWidth / 2;
-            const b = orbit.offsetHeight / 2;
-            const x = orbitalScene.offsetWidth / 2 + a * Math.cos(angle);
-            const y = orbitalScene.offsetHeight / 2 + b * Math.sin(angle);
-            satellite.style.left = `${x}px`;
-            satellite.style.top = `${y}px`;
+        function placePhase2Satellite(element, x, y, rotation, sceneWidth, sceneHeight) {
+
+            const px = (x / 900) * sceneWidth;
+            const py = (y / 520) * sceneHeight;
+
+            element.style.left = `${px}px`;
+            element.style.top = `${py}px`;
+
+            element.style.transform =
+                `translate(-50%, -50%) rotate(${rotation}deg)`;
+        }
+
+
+        function updatePhase2Scene() {
+
+            if (
+                !phase2Scene ||
+                !phase2ServiceSat ||
+                !phase2ClientSat ||
+                !phase2TransferPath
+            ) {
+                return;
+            }
+
+            const rect = phase2Scene.getBoundingClientRect();
+
+            const rawProgress =
+                (window.innerHeight - rect.top) /
+                (window.innerHeight + rect.height);
+
+            const progress = clamp01(rawProgress);
+
+            const sceneWidth = phase2Scene.clientWidth;
+            const sceneHeight = phase2Scene.clientHeight;
+
+
+            /* CLIENT SATELLITE — GEO ORBIT */
+
+            const centerX = 450;
+            const centerY = 260;
+
+            const geoRadius = 165;
+
+            /*
+            The client moves slowly along GEO while Lázaro
+            performs the transfer.
+            */
+
+            const clientStartAngle = -1.25;
+            const clientEndAngle = 0;
+
+            const clientAngle =
+                clientStartAngle +
+                (clientEndAngle - clientStartAngle) * progress;
+
+            const clientX =
+                centerX + geoRadius * Math.cos(clientAngle);
+
+            const clientY =
+                centerY + geoRadius * Math.sin(clientAngle);
+
+            const clientRotation =
+                clientAngle * 180 / Math.PI + 90;
+
+            placePhase2Satellite(
+                phase2ClientSat,
+                clientX,
+                clientY,
+                clientRotation,
+                sceneWidth,
+                sceneHeight
+            );
+
+
+            /* ASTROFUEL — GEO + 50 km TO GEO TRANSFER */
+
+            const transferLength =
+                phase2TransferPath.getTotalLength();
+
+            const transferProgress =
+                ease(progress);
+
+            const point =
+                phase2TransferPath.getPointAtLength(
+                    transferLength * transferProgress
+                );
+
+            /*
+            Two neighbouring points allow us to calculate
+            the local direction of the trajectory.
+            */
+
+            const previousPoint =
+                phase2TransferPath.getPointAtLength(
+                    Math.max(
+                        0,
+                        transferLength * transferProgress - 2
+                    )
+                );
+
+            const nextPoint =
+                phase2TransferPath.getPointAtLength(
+                    Math.min(
+                        transferLength,
+                        transferLength * transferProgress + 2
+                    )
+                );
+
+            const trajectoryAngle =
+                Math.atan2(
+                    nextPoint.y - previousPoint.y,
+                    nextPoint.x - previousPoint.x
+                );
+
+            const serviceRotation =
+                trajectoryAngle * 180 / Math.PI;
+
+            placePhase2Satellite(
+                phase2ServiceSat,
+                point.x,
+                point.y,
+                serviceRotation,
+                sceneWidth,
+                sceneHeight
+            );
         }
 
 
@@ -2234,7 +2489,7 @@
         let animationQueued = false;
         function updateAnimations() {
             updateRendezvous();
-            updateOrbitalPosition();
+            updatePhase2Scene();
             updateMissionProfile();
             updateHeroDrop();
             animationQueued = false;

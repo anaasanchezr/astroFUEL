@@ -1,0 +1,1251 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>
+        Mission Requirements | astroFUEL
+    </title>
+
+    <style>
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background-color: #F5F7FA;
+            color: #142C4D;
+        }
+
+        /* HEADER */
+
+        .header {
+            position: sticky;
+            top: 0;
+            z-index: 100;
+
+            height: 68px;
+
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+
+            padding: 0 clamp(18px, 4vw, 70px);
+            box-sizing: border-box;
+
+            background-color: rgba(255,255,255,0.97);
+
+            border-bottom: 1px solid #E8EDF3;
+
+            box-shadow: 0 3px 20px rgba(13,29,52,0.04);
+        }
+
+        .brand {
+            display: flex;
+            align-items: center;
+            text-decoration: none;
+        }
+
+        .brand img {
+            width: 145px;
+            height: auto;
+            display: block;
+        }
+
+        .header-links {
+            display: flex;
+            align-items: center;
+            gap: 25px;
+        }
+
+        .header-links a {
+            color: #142C4D;
+
+            text-decoration: none;
+
+            font-size: 12px;
+            font-weight: bold;
+
+            letter-spacing: 1px;
+        }
+
+        .header-links a:hover {
+            color: #C9A764;
+        }
+
+
+        /* HERO */
+
+        .hero {
+            background:
+                radial-gradient(
+                    ellipse at top,
+                    #173552 0%,
+                    #0B1628 72%
+                );
+
+            color: white;
+
+            padding: 100px 24px 90px;
+
+            text-align: center;
+        }
+
+        .eyebrow {
+            color: #C9A764;
+
+            font-size: 12px;
+            font-weight: bold;
+
+            letter-spacing: 3px;
+        }
+
+        .hero h1 {
+            font-size: clamp(42px, 7vw, 76px);
+
+            margin: 20px auto;
+
+            line-height: 1.05;
+        }
+
+        .hero-description {
+            color: #B5C5D7;
+
+            font-size: 18px;
+            line-height: 1.7;
+
+            max-width: 720px;
+
+            margin: 0 auto;
+        }
+
+
+        /* DOCUMENT INFO */
+
+        .document-meta {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+
+            gap: 12px;
+
+            margin-top: 35px;
+        }
+
+        .meta-pill {
+            padding: 9px 15px;
+
+            border-radius: 100px;
+
+            border: 1px solid rgba(201,167,100,0.45);
+
+            color: #E2C791;
+
+            font-size: 11px;
+            font-weight: bold;
+
+            letter-spacing: 1.5px;
+        }
+
+        .document-actions {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+
+            gap: 12px;
+
+            margin-top: 30px;
+        }
+
+        .button {
+            display: inline-block;
+
+            padding: 14px 23px;
+
+            border-radius: 6px;
+
+            text-decoration: none;
+
+            font-size: 12px;
+            font-weight: bold;
+
+            letter-spacing: 1px;
+
+            transition: 0.25s;
+        }
+
+        .button-primary {
+            background-color: #C9A764;
+            color: #0B1628;
+        }
+
+        .button-primary:hover {
+            background-color: #E0C48E;
+        }
+
+        .button-secondary {
+            border: 1px solid #607991;
+            color: white;
+        }
+
+        .button-secondary:hover {
+            border-color: #C9A764;
+            color: #C9A764;
+        }
+
+
+        /* CONTENT */
+
+        .content {
+            max-width: 1050px;
+
+            margin: 0 auto;
+
+            padding: 90px 24px;
+        }
+
+        .section {
+            margin-bottom: 100px;
+        }
+
+        .section-number {
+            color: #A5844D;
+
+            font-size: 12px;
+            font-weight: bold;
+
+            letter-spacing: 2.5px;
+        }
+
+        .section h2 {
+            font-size: clamp(32px, 5vw, 50px);
+
+            margin: 16px 0 30px;
+        }
+
+        .section-intro {
+            color: #516479;
+
+            font-size: 17px;
+            line-height: 1.8;
+
+            max-width: 850px;
+        }
+
+
+        /* SCOPE */
+
+        .scope-text {
+            max-width: 900px;
+        }
+
+        .scope-text p {
+            color: #516479;
+
+            font-size: 17px;
+
+            line-height: 1.9;
+
+            margin-bottom: 22px;
+        }
+
+
+        /* REQUIREMENTS */
+
+        .requirements-list {
+            display: grid;
+
+            gap: 12px;
+
+            margin-top: 40px;
+        }
+
+        .requirement {
+            background-color: white;
+
+            border: 1px solid #E0E6EC;
+
+            border-radius: 10px;
+
+            overflow: hidden;
+
+            transition:
+                border-color 0.25s,
+                box-shadow 0.25s;
+        }
+
+        .requirement[open] {
+            border-color: #C9A764;
+
+            box-shadow:
+                0 8px 28px rgba(11,22,40,0.06);
+        }
+
+        .requirement summary {
+            display: grid;
+
+            grid-template-columns:
+                95px
+                minmax(0, 1fr)
+                auto;
+
+            gap: 18px;
+
+            align-items: center;
+
+            padding: 22px;
+
+            cursor: pointer;
+
+            list-style: none;
+        }
+
+        .requirement summary::-webkit-details-marker {
+            display: none;
+        }
+
+        .req-id {
+            color: #A5844D;
+
+            font-size: 13px;
+            font-weight: bold;
+
+            letter-spacing: 1px;
+        }
+
+        .req-short {
+            color: #142C4D;
+
+            font-size: 17px;
+            font-weight: bold;
+        }
+
+        .req-arrow {
+            color: #C9A764;
+
+            font-size: 22px;
+
+            transition: transform 0.25s;
+        }
+
+        .requirement[open] .req-arrow {
+            transform: rotate(180deg);
+        }
+
+        .req-content {
+            padding:
+                0 22px 25px
+                135px;
+        }
+
+        .req-content p {
+            color: #516479;
+
+            font-size: 16px;
+
+            line-height: 1.8;
+
+            margin: 0;
+        }
+
+
+        /* REFERENCES */
+
+        .references {
+            background-color: #0B1628;
+
+            color: white;
+
+            padding: 85px 24px;
+        }
+
+        .references-container {
+            max-width: 1050px;
+
+            margin: 0 auto;
+        }
+
+        .references h2 {
+            font-size: clamp(30px, 5vw, 45px);
+
+            margin: 15px 0 35px;
+        }
+
+        .reference {
+            color: #B5C5D7;
+
+            line-height: 1.8;
+
+            margin-bottom: 20px;
+        }
+
+
+        /* FOOTER */
+
+        footer {
+            background-color: #08111F;
+
+            color: #8EA2B8;
+
+            text-align: center;
+
+            padding: 30px 20px;
+
+            font-size: 12px;
+
+            line-height: 1.8;
+        }
+
+        footer strong {
+            color: white;
+        }
+
+
+        /* MOBILE */
+
+        @media (max-width: 650px) {
+
+            .header {
+                height: 64px;
+                padding: 0 18px;
+            }
+
+            .header-links a:nth-child(1) {
+                display: none;
+            }
+
+            .hero {
+                padding: 80px 20px 70px;
+            }
+
+            .content {
+                padding: 70px 18px;
+            }
+
+            .section {
+                margin-bottom: 75px;
+            }
+
+            .requirement summary {
+
+                grid-template-columns:
+                    70px
+                    minmax(0,1fr)
+                    auto;
+
+                gap: 10px;
+
+                padding: 18px 14px;
+            }
+
+            .req-id {
+                font-size: 11px;
+            }
+
+            .req-short {
+                font-size: 14px;
+            }
+
+            .req-content {
+                padding:
+                    0 14px 20px
+                    14px;
+            }
+
+            .req-content p {
+                font-size: 14px;
+            }
+
+            .brand img {
+                width: 125px;
+            }
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+   <!-- HEADER -->
+
+    <header class="header">
+
+        <a href="index.html#top" class="brand" aria-label="astroFUEL home">
+            <img src="astrofuel-wordmark.png" alt="astroFUEL">
+        </a>
+
+        <div class="header-links">
+
+            <a href="#requirements">
+                REQUIREMENTS
+            </a>
+
+            <a href="index.html#top">
+                ← BACK TO HOME
+            </a>
+
+        </div>
+
+    </header>
+
+
+
+    <!-- HERO -->
+
+    <section class="hero">
+
+        <span class="eyebrow">
+            MISSION LÁZARO · DELIVERABLE 01
+        </span>
+
+        <h1>
+            Mission Requirements
+        </h1>
+
+        <p class="hero-description">
+
+            The first technical deliverable of Mission Lázaro
+            establishes the mission scope and the high-level
+            requirements governing the orbital refueling spacecraft.
+
+        </p>
+
+
+        <div class="document-meta">
+
+            <span class="meta-pill">
+                SEPTEMBER 2026
+            </span>
+
+            <span class="meta-pill">
+                13 MISSION REQUIREMENTS
+            </span>
+
+            <span class="meta-pill">
+                CURRENT VERSION
+            </span>
+
+        </div>
+
+
+        <div class="document-actions">
+
+            <a href="Lazarus.pdf"
+               target="_blank"
+               class="button button-primary">
+
+                OPEN SUBMITTED PDF ↗
+
+            </a>
+
+
+            <a href="#scope"
+               class="button button-secondary">
+
+                EXPLORE DOCUMENT
+
+            </a>
+
+        </div>
+
+    </section>
+
+
+
+    <main class="content">
+
+
+        <!-- SCOPE -->
+
+        <section class="section"
+                 id="scope">
+
+            <span class="section-number">
+                01 / SCOPE OF THE MISSION
+            </span>
+
+            <h2>
+                Giving satellites a second life.
+            </h2>
+
+
+            <div class="scope-text">
+
+                <p>
+
+                    astroFUEL focuses on developing an orbital
+                    refuelling infrastructure to extend the life
+                    of satellites in geostationary orbit (GEO).
+                    Its main goal is to offer an alternative for
+                    satellites that are otherwise fully functional
+                    but lack the propellant required to maintain
+                    their orbit.
+
+                </p>
+
+
+                <p>
+
+                    The first mission is called Lázaro, targeted
+                    for the 2030s market and inspired by the idea
+                    of bringing satellites back to life.
+                    It consists of a refuelling satellite that
+                    approaches a client satellite to provide the
+                    fuel it needs.
+
+                </p>
+
+
+                <p>
+
+                    Lázaro carries its propellant in high-pressure
+                    tanks and incorporates a standard refuelling
+                    interface and docking mechanism compatible
+                    with future satellites. The spacecraft performs
+                    rendezvous and docking, transfers propellant
+                    to the client, safely separates after refuelling
+                    and subsequently becomes available for further
+                    servicing operations.
+
+                </p>
+
+            </div>
+
+        </section>
+
+
+
+        <!-- REQUIREMENTS -->
+
+        <section class="section"
+                 id="requirements">
+
+            <span class="section-number">
+                02 / MISSION LEVEL REQUIREMENTS
+            </span>
+
+            <h2>
+                Mission requirements.
+            </h2>
+
+
+            <p class="section-intro">
+
+                The following requirements define the principal
+                capabilities, constraints and operational objectives
+                established for Mission Lázaro.
+
+            </p>
+
+
+
+            <div class="requirements-list">
+
+
+                <!-- MIS 010 -->
+
+                <details class="requirement">
+
+                    <summary>
+
+                        <span class="req-id">
+                            MIS_010
+                        </span>
+
+                        <span class="req-short">
+                            Client satellite compatibility
+                        </span>
+
+                        <span class="req-arrow">
+                            ⌄
+                        </span>
+
+                    </summary>
+
+
+                    <div class="req-content">
+
+                        <p>
+
+                            The satellite shall be capable of providing
+                            refuelling services to different types of client
+                            satellites, regardless of their geometry, size
+                            and configuration, provided that they have a
+                            compatible refuelling interface.
+
+                        </p>
+
+                    </div>
+
+                </details>
+
+
+
+                <!-- MIS 020 -->
+
+                <details class="requirement">
+
+                    <summary>
+
+                        <span class="req-id">
+                            MIS_020
+                        </span>
+
+                        <span class="req-short">
+                            Standard refuelling interface
+                        </span>
+
+                        <span class="req-arrow">
+                            ⌄
+                        </span>
+
+                    </summary>
+
+
+                    <div class="req-content">
+
+                        <p>
+
+                            The satellite shall have a mechanical interface
+                            compatible with the standard refuelling ports
+                            expected to be used by future client satellites,
+                            allowing a safe and stable connection during
+                            xenon transfer, as well as a controlled and safe
+                            undocking once the operation is completed.
+
+                        </p>
+
+                    </div>
+
+                </details>
+
+
+
+                <!-- MIS 030 -->
+
+                <details class="requirement">
+
+                    <summary>
+
+                        <span class="req-id">
+                            MIS_030
+                        </span>
+
+                        <span class="req-short">
+                            Emergency service response
+                        </span>
+
+                        <span class="req-arrow">
+                            ⌄
+                        </span>
+
+                    </summary>
+
+
+                    <div class="req-content">
+
+                        <p>
+
+                            The satellite shall be capable of performing
+                            the necessary orbital manoeuvres to reach and
+                            assist a client satellite in geostationary orbit
+                            (GEO) within a maximum of 10 hours after receiving
+                            an emergency service request.
+
+                        </p>
+
+                    </div>
+
+                </details>
+
+
+
+                <!-- MIS 040 -->
+
+                <details class="requirement">
+
+                    <summary>
+
+                        <span class="req-id">
+                            MIS_040
+                        </span>
+
+                        <span class="req-short">
+                            Operational lifetime
+                        </span>
+
+                        <span class="req-arrow">
+                            ⌄
+                        </span>
+
+                    </summary>
+
+
+                    <div class="req-content">
+
+                        <p>
+
+                            The satellite shall have a minimum operational
+                            lifetime of 2 years after insertion into its
+                            nominal orbit, during which it shall maintain
+                            the capabilities required to perform the planned
+                            refuelling services.
+
+                        </p>
+
+                    </div>
+
+                </details>
+
+
+
+                <!-- MIS 050 -->
+
+                <details class="requirement">
+
+                    <summary>
+
+                        <span class="req-id">
+                            MIS_050
+                        </span>
+
+                        <span class="req-short">
+                            2030s market compatibility
+                        </span>
+
+                        <span class="req-arrow">
+                            ⌄
+                        </span>
+
+                    </summary>
+
+
+                    <div class="req-content">
+
+                        <p>
+
+                            The satellite subsystems shall be designed and
+                            sized considering the expected needs of the space
+                            market from the 2030s onwards, taking into account
+                            technological developments, the characteristics
+                            of client satellites and the operational
+                            requirements expected during the mission's
+                            service life.
+
+                        </p>
+
+                    </div>
+
+                </details>
+
+
+
+                <!-- MIS 060 -->
+
+                <details class="requirement">
+
+                    <summary>
+
+                        <span class="req-id">
+                            MIS_060
+                        </span>
+
+                        <span class="req-short">
+                            Maximum wet mass
+                        </span>
+
+                        <span class="req-arrow">
+                            ⌄
+                        </span>
+
+                    </summary>
+
+
+                    <div class="req-content">
+
+                        <p>
+
+                            The total mass of the satellite at launch
+                            (wet mass), including the structure, subsystems,
+                            xenon payload and propellant for its own manoeuvres,
+                            shall not exceed 1,500 kg.
+
+                        </p>
+
+                    </div>
+
+                </details>
+
+
+
+                <!-- MIS 070 -->
+
+                <details class="requirement">
+
+                    <summary>
+
+                        <span class="req-id">
+                            MIS_070
+                        </span>
+
+                        <span class="req-short">
+                            Xenon payload capacity
+                        </span>
+
+                        <span class="req-arrow">
+                            ⌄
+                        </span>
+
+                    </summary>
+
+
+                    <div class="req-content">
+
+                        <p>
+
+                            The satellite shall have a minimum payload
+                            capacity of 500 kg of xenon to supply different
+                            client satellites. As a reference scenario,
+                            five refuelling operations of 100 kg each are
+                            considered, with the aim of extending the
+                            operational lifetime of each client by approximately
+                            five years. However, the amount of propellant
+                            transferred during each operation may be adjusted
+                            according to the client's needs, allowing a
+                            different number of refuelling operations,
+                            provided that the total available payload
+                            capacity is not exceeded.
+
+                        </p>
+
+                    </div>
+
+                </details>
+
+
+
+                <!-- MIS 080 -->
+
+                <details class="requirement">
+
+                    <summary>
+
+                        <span class="req-id">
+                            MIS_080
+                        </span>
+
+                        <span class="req-short">
+                            Xenon storage
+                        </span>
+
+                        <span class="req-arrow">
+                            ⌄
+                        </span>
+
+                    </summary>
+
+
+                    <div class="req-content">
+
+                        <p>
+
+                            The satellite's tank shall ensure the safe
+                            storage of the xenon payload throughout the
+                            mission's operational lifetime, maintaining
+                            its structural integrity and preventing leaks
+                            under the conditions of the space environment.
+
+                        </p>
+
+                    </div>
+
+                </details>
+
+
+
+                <!-- MIS 090 -->
+
+                <details class="requirement">
+
+                    <summary>
+
+                        <span class="req-id">
+                            MIS_090
+                        </span>
+
+                        <span class="req-short">
+                            Autonomous rendezvous
+                        </span>
+
+                        <span class="req-arrow">
+                            ⌄
+                        </span>
+
+                    </summary>
+
+
+                    <div class="req-content">
+
+                        <p>
+
+                            The satellite shall be capable of performing
+                            autonomous rendezvous manoeuvres at any point
+                            in its orbit, maintaining communication with
+                            the client satellite throughout the process
+                            to ensure a coordinated and safe approach.
+
+                        </p>
+
+                    </div>
+
+                </details>
+
+
+
+                <!-- MIS 100 -->
+
+                <details class="requirement">
+
+                    <summary>
+
+                        <span class="req-id">
+                            MIS_100
+                        </span>
+
+                        <span class="req-short">
+                            Safe approach operations
+                        </span>
+
+                        <span class="req-arrow">
+                            ⌄
+                        </span>
+
+                    </summary>
+
+
+                    <div class="req-content">
+
+                        <p>
+
+                            The satellite shall be capable of performing
+                            accurate and safe approach manoeuvres without
+                            entering GEO orbital slots assigned to other
+                            satellites. During the approach, it shall
+                            position itself at a relative distance of no
+                            more than 500 m from the client satellite,
+                            maintaining the necessary safety conditions
+                            to continue with docking and refuelling
+                            operations.
+
+                        </p>
+
+                    </div>
+
+                </details>
+
+
+
+                <!-- MIS 110 -->
+
+                <details class="requirement">
+
+                    <summary>
+
+                        <span class="req-id">
+                            MIS_110
+                        </span>
+
+                        <span class="req-short">
+                            Autonomous abort
+                        </span>
+
+                        <span class="req-arrow">
+                            ⌄
+                        </span>
+
+                    </summary>
+
+
+                    <div class="req-content">
+
+                        <p>
+
+                            The satellite shall be capable of detecting
+                            unsafe conditions during approach or docking
+                            manoeuvres and automatically aborting the
+                            operation, performing the necessary manoeuvres
+                            to ensure a safe separation from the client
+                            satellite.
+
+                        </p>
+
+                    </div>
+
+                </details>
+
+
+
+                <!-- MIS 120 -->
+
+                <details class="requirement">
+
+                    <summary>
+
+                        <span class="req-id">
+                            MIS_120
+                        </span>
+
+                        <span class="req-short">
+                            Xenon transfer system
+                        </span>
+
+                        <span class="req-arrow">
+                            ⌄
+                        </span>
+
+                    </summary>
+
+
+                    <div class="req-content">
+
+                        <p>
+
+                            The satellite shall have a system capable of
+                            transferring xenon to the client satellite
+                            under vacuum and microgravity conditions,
+                            using the necessary connection, pressure
+                            regulation and flow control mechanisms to
+                            ensure a safe and controlled transfer, while
+                            respecting the operating pressure and
+                            temperature limits of both spacecraft.
+
+                        </p>
+
+                    </div>
+
+                </details>
+
+
+
+                <!-- MIS 130 -->
+
+                <details class="requirement">
+
+                    <summary>
+
+                        <span class="req-id">
+                            MIS_130
+                        </span>
+
+                        <span class="req-short">
+                            Communications coverage
+                        </span>
+
+                        <span class="req-arrow">
+                            ⌄
+                        </span>
+
+                    </summary>
+
+
+                    <div class="req-content">
+
+                        <p>
+
+                            The satellite shall maintain continuous
+                            coverage, except during manoeuvres required
+                            to provide the docking service.
+
+                        </p>
+
+                    </div>
+
+                </details>
+
+
+            </div>
+
+        </section>
+
+    </main>
+
+
+
+    <!-- REFERENCES -->
+
+    <section class="references">
+
+        <div class="references-container">
+
+            <span class="section-number">
+                03 / REFERENCES
+            </span>
+
+            <h2>
+                References
+            </h2>
+
+
+            <p class="reference">
+
+                [1] Bombardelli C. Astrodynamics and Attitude
+                Dynamics: Gravity Assist and Flyby Dynamics.
+                Madrid, Spain; 2023. Lecture notes,
+                Master's Degree in Aeronautical Engineering.
+
+            </p>
+
+
+            <p class="reference">
+
+                [2] Bombardelli C. Astrodynamics and Attitude
+                Dynamics: The Two-Body Problem (Review).
+                Madrid, Spain; 2025. Lecture notes,
+                Master's Degree in Aeronautical Engineering.
+
+            </p>
+
+
+            <p class="reference">
+
+                [3] del Cura Velayos JM. Systems Engineering
+                and Preliminary Design of Space Vehicles.
+                Topic 3: Preliminary Design of a Space Mission.
+                Presentation. Madrid, Spain; 2020. Lecture notes.
+
+            </p>
+
+        </div>
+
+    </section>
+
+
+
+    <!-- FOOTER -->
+
+    <footer>
+
+        <strong>astroFUEL</strong>
+        · Mission Lázaro<br>
+
+        Deliverable 01 · Mission Requirements
+        · ETSIAE–UPM
+
+    </footer>
+
+
+</body>
+
+</html>
