@@ -1,0 +1,6059 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta name="viewport"
+      content="width=device-width, initial-scale=1.0">
+
+<title>
+    Management Plan | astroFUEL
+</title>
+
+
+<style>
+
+/* ============================================================
+   GLOBAL
+   ============================================================ */
+
+:root {
+
+    --navy: #0B1628;
+    --navy-2: #142C4D;
+    --navy-3: #1B3658;
+
+    --gold: #C9A764;
+    --gold-dark: #A5844D;
+
+    --white: #F5F7FA;
+
+    --text: #142C4D;
+    --muted: #61758A;
+
+    --light-border: #DCE4ED;
+    --dark-border: #29415D;
+
+    --purple-mp: #B89BCB;
+
+    --header-height: 68px;
+
+}
+
+
+* {
+    box-sizing: border-box;
+}
+
+
+html {
+    scroll-behavior: smooth;
+}
+
+
+body {
+
+    margin: 0;
+
+    font-family:
+        Arial,
+        Helvetica,
+        sans-serif;
+
+    color: var(--text);
+
+    background: var(--white);
+
+}
+
+
+button,
+summary {
+    font-family: inherit;
+}
+
+
+button {
+    cursor: pointer;
+}
+
+
+
+/* ============================================================
+   HEADER
+   ============================================================ */
+
+.site-header {
+
+    position: sticky;
+
+    top: 0;
+
+    z-index: 200;
+
+    height: var(--header-height);
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: space-between;
+
+    padding:
+        0 clamp(18px, 4vw, 70px);
+
+    background:
+        rgba(255,255,255,.97);
+
+    border-bottom:
+        1px solid #E6EBF0;
+
+    box-shadow:
+        0 3px 20px
+        rgba(11,22,40,.04);
+
+    backdrop-filter:
+        blur(12px);
+
+}
+
+
+.brand {
+
+    display: flex;
+
+    align-items: center;
+
+    text-decoration: none;
+
+}
+
+
+.brand img {
+
+    display: block;
+
+    width: 145px;
+
+    height: auto;
+
+}
+
+
+.header-actions {
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 22px;
+
+}
+
+
+.header-actions a,
+.header-actions button {
+
+    border: 0;
+
+    background: transparent;
+
+    color: var(--navy-2);
+
+    text-decoration: none;
+
+    font-size: 11px;
+
+    font-weight: 800;
+
+    letter-spacing: 1px;
+
+}
+
+
+.header-actions a:hover,
+.header-actions button:hover {
+    color: var(--gold-dark);
+}
+
+
+.present-button {
+
+    padding:
+        9px 13px !important;
+
+    border:
+        1px solid #D8E0E8 !important;
+
+    border-radius: 6px !important;
+
+}
+
+
+
+/* ============================================================
+   HERO
+   ============================================================ */
+
+.hero {
+
+    min-height:
+        calc(
+            100vh -
+            var(--header-height)
+        );
+
+    display: grid;
+
+    grid-template-columns:
+        minmax(0,1.15fr)
+        minmax(250px,.85fr);
+
+    align-items: center;
+
+    gap:
+        clamp(40px,8vw,100px);
+
+    width:
+        min(1160px, calc(100% - 40px));
+
+    margin: auto;
+
+    padding:
+        80px 0 90px;
+
+}
+
+
+.eyebrow {
+
+    display: block;
+
+    color: var(--gold-dark);
+
+    font-size: 11px;
+
+    font-weight: 800;
+
+    letter-spacing: 2.7px;
+
+}
+
+
+.hero h1 {
+
+    margin:
+        18px 0 22px;
+
+    font-size:
+        clamp(48px,7vw,82px);
+
+    line-height: .98;
+
+    letter-spacing: -2.5px;
+
+}
+
+
+.hero-description {
+
+    max-width: 700px;
+
+    margin: 0;
+
+    color: var(--muted);
+
+    font-size: 18px;
+
+    line-height: 1.8;
+
+}
+
+
+.meta-row {
+
+    display: flex;
+
+    flex-wrap: wrap;
+
+    gap: 9px;
+
+    margin-top: 28px;
+
+}
+
+
+.meta-pill {
+
+    padding:
+        8px 13px;
+
+    border:
+        1px solid #DDD0B5;
+
+    border-radius: 100px;
+
+    color: #83652F;
+
+    font-size: 10px;
+
+    font-weight: 800;
+
+    letter-spacing: 1.2px;
+
+}
+
+
+.hero-buttons {
+
+    display: flex;
+
+    flex-wrap: wrap;
+
+    gap: 10px;
+
+    margin-top: 30px;
+
+}
+
+
+.action-button {
+
+    display: inline-block;
+
+    padding:
+        14px 21px;
+
+    border-radius: 6px;
+
+    border: 0;
+
+    text-decoration: none;
+
+    font-size: 11px;
+
+    font-weight: 800;
+
+    letter-spacing: 1px;
+
+    transition: .2s;
+
+}
+
+
+.action-primary {
+
+    background: var(--navy-2);
+
+    color: white;
+
+}
+
+
+.action-primary:hover {
+
+    background: var(--gold);
+
+    color: var(--navy);
+
+}
+
+
+.action-secondary {
+
+    border:
+        1px solid #AEBCCA;
+
+    background: transparent;
+
+    color: var(--navy-2);
+
+}
+
+
+.action-secondary:hover {
+
+    border-color: var(--gold);
+
+    color: var(--gold-dark);
+
+}
+
+
+.hero-patch {
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+}
+
+
+.hero-patch img {
+
+    width:
+        min(335px, 80vw);
+
+    height: auto;
+
+    border-radius: 50%;
+
+    filter:
+        drop-shadow(
+            0 22px 38px
+            rgba(11,22,40,.18)
+        );
+
+}
+
+
+
+/* ============================================================
+   INTERNAL NAVIGATION
+   ============================================================ */
+
+.document-nav {
+
+    position: sticky;
+
+    top: var(--header-height);
+
+    z-index: 150;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    gap: 4px;
+
+    overflow-x: auto;
+
+    padding:
+        11px 16px;
+
+    background:
+        rgba(11,22,40,.98);
+
+    border-bottom:
+        1px solid #29415D;
+
+}
+
+
+.document-nav a {
+
+    flex: 0 0 auto;
+
+    padding:
+        9px 12px;
+
+    border-radius: 5px;
+
+    color: #AFC0D2;
+
+    text-decoration: none;
+
+    font-size: 9px;
+
+    font-weight: 800;
+
+    letter-spacing: .8px;
+
+}
+
+
+.document-nav a:hover,
+.document-nav a.active {
+
+    background: #17304D;
+
+    color: #E4C785;
+
+}
+
+
+
+/* ============================================================
+   GENERAL SECTIONS
+   ============================================================ */
+
+.mp-section {
+
+    scroll-margin-top: 120px;
+
+    padding:
+        100px 24px;
+
+}
+
+
+.mp-section.light {
+
+    background: #F5F7FA;
+
+    color: var(--text);
+
+}
+
+
+.mp-section.dark {
+
+    background: var(--navy);
+
+    color: white;
+
+}
+
+
+.section-container {
+
+    width:
+        min(1150px,100%);
+
+    margin: auto;
+
+}
+
+
+.section-label {
+
+    color: var(--gold-dark);
+
+    font-size: 10px;
+
+    font-weight: 800;
+
+    letter-spacing: 2.2px;
+
+}
+
+
+.dark .section-label {
+    color: var(--gold);
+}
+
+
+.section-title {
+
+    max-width: 850px;
+
+    margin:
+        15px 0 18px;
+
+    font-size:
+        clamp(34px,5vw,55px);
+
+    line-height: 1.05;
+
+}
+
+
+.section-intro {
+
+    max-width: 830px;
+
+    margin:
+        0 0 45px;
+
+    color: var(--muted);
+
+    font-size: 16px;
+
+    line-height: 1.8;
+
+}
+
+
+.dark .section-intro {
+    color: #B5C5D7;
+}
+
+
+.source-caption {
+
+    margin-top: 20px;
+
+    color: #8395A8;
+
+    font-size: 11px;
+
+    line-height: 1.6;
+
+}
+
+
+
+/* ============================================================
+   1 / INTRODUCTION
+   ============================================================ */
+
+.introduction-content {
+
+    max-width: 900px;
+
+}
+
+
+.introduction-content p {
+
+    margin:
+        0 0 22px;
+
+    color:
+        #52687E;
+
+    font-size:
+        16px;
+
+    line-height:
+        1.85;
+
+}
+
+
+.introduction-content p:first-child {
+
+    color:
+        var(--navy-2);
+
+    font-size:
+        18px;
+
+    font-weight:
+        600;
+
+}
+
+
+.introduction-map {
+
+    display: grid;
+
+    grid-template-columns:
+        repeat(3, minmax(0,1fr));
+
+    gap: 10px;
+
+    margin-top: 50px;
+
+}
+
+
+.intro-map-item {
+
+    position: relative;
+
+    min-height: 135px;
+
+    padding:
+        20px;
+
+    border:
+        1px solid #D6E0E8;
+
+    border-radius:
+        7px;
+
+    background:
+        white;
+
+    color:
+        var(--navy-2);
+
+    text-decoration:
+        none;
+
+    transition:
+        transform .2s,
+        border-color .2s,
+        box-shadow .2s;
+
+}
+
+
+.intro-map-item:hover {
+
+    transform:
+        translateY(-3px);
+
+    border-color:
+        var(--gold);
+
+    box-shadow:
+        0 10px 28px
+        rgba(11,22,40,.07);
+
+}
+
+
+.intro-map-item span {
+
+    display:
+        block;
+
+    margin-bottom:
+        15px;
+
+    color:
+        var(--gold-dark);
+
+    font-size:
+        10px;
+
+    font-weight:
+        800;
+
+    letter-spacing:
+        1.5px;
+
+}
+
+
+.intro-map-item strong {
+
+    display:
+        block;
+
+    margin-bottom:
+        7px;
+
+    font-size:
+        15px;
+
+}
+
+
+.intro-map-item small {
+
+    color:
+        #73869A;
+
+    font-size:
+        11px;
+
+    line-height:
+        1.5;
+
+}
+
+
+
+/* ============================================================
+   2 / ORGANIZATION
+   ============================================================ */
+
+.organization-chart {
+
+    width: 100%;
+
+    overflow-x: auto;
+
+    padding:
+        15px 10px 25px;
+
+}
+
+
+.org-root {
+
+    display: flex;
+
+    flex-direction: column;
+
+    align-items: center;
+
+    min-width: 900px;
+
+}
+
+
+.org-box {
+
+    border: 0;
+
+    border-radius: 7px;
+
+    padding:
+        15px 20px;
+
+    text-align: center;
+
+    font-size: 12px;
+
+    font-weight: 800;
+
+}
+
+
+.org-box.ceo {
+
+    min-width: 170px;
+
+    background: var(--gold);
+
+    color: var(--navy);
+
+}
+
+
+.org-box.pm {
+
+    min-width: 190px;
+
+    background: var(--navy-2);
+
+    color: white;
+
+}
+
+
+.org-line-vertical {
+
+    width: 2px;
+
+    height: 30px;
+
+    background: #AAB6C2;
+
+}
+
+
+.org-horizontal {
+
+    position: relative;
+
+    width: 88%;
+
+    height: 28px;
+
+    border-top:
+        2px solid #AAB6C2;
+
+}
+
+
+.org-horizontal::before,
+.org-horizontal::after {
+
+    content: "";
+
+    position: absolute;
+
+    top: -2px;
+
+    height: 29px;
+
+    border-left:
+        2px solid #AAB6C2;
+
+}
+
+
+.org-horizontal::before {
+    left: 0;
+}
+
+
+.org-horizontal::after {
+    right: 0;
+}
+
+
+.org-teams {
+
+    display: grid;
+
+    grid-template-columns:
+        repeat(8, 1fr);
+
+    gap: 8px;
+
+    width: 100%;
+
+}
+
+
+.org-team {
+
+    position: relative;
+
+    min-height: 92px;
+
+    padding:
+        15px 10px;
+
+    border:
+        1px solid #CAD5DF;
+
+    border-radius: 7px;
+
+    background: white;
+
+    color: var(--navy-2);
+
+    font-size: 11px;
+
+    font-weight: 800;
+
+    line-height: 1.35;
+
+    transition: .2s;
+
+}
+
+
+.org-team::before {
+
+    content: "";
+
+    position: absolute;
+
+    left: 50%;
+
+    top: -31px;
+
+    height: 30px;
+
+    border-left:
+        2px solid #AAB6C2;
+
+}
+
+
+.org-team:hover,
+.org-team.active {
+
+    border-color: var(--gold);
+
+    transform:
+        translateY(-3px);
+
+    box-shadow:
+        0 10px 25px
+        rgba(11,22,40,.07);
+
+}
+
+
+.org-detail {
+
+    margin-top: 30px;
+
+    padding:
+        25px 28px;
+
+    border-left:
+        4px solid var(--gold);
+
+    border-radius:
+        0 8px 8px 0;
+
+    background: white;
+
+}
+
+
+.org-detail h3 {
+
+    margin:
+        7px 0 9px;
+
+    font-size: 22px;
+
+}
+
+
+.org-detail p {
+
+    margin: 0;
+
+    color: var(--muted);
+
+    line-height: 1.75;
+
+}
+
+
+.customer-note {
+
+    margin-top: 24px;
+
+    padding:
+        17px 20px;
+
+    border:
+        1px solid #E1D4B9;
+
+    border-radius: 7px;
+
+    background: #FFF9EE;
+
+    color: #725C32;
+
+    font-size: 13px;
+
+    line-height: 1.6;
+
+}
+
+
+
+/* ============================================================
+   COMMON TABS
+   ============================================================ */
+
+.tab-row {
+
+    display: flex;
+
+    flex-wrap: wrap;
+
+    gap: 7px;
+
+    margin-bottom: 26px;
+
+}
+
+
+.tab-button {
+
+    padding:
+        10px 15px;
+
+    border:
+        1px solid #D2DCE5;
+
+    border-radius: 6px;
+
+    background: transparent;
+
+    color: var(--navy-2);
+
+    font-size: 10px;
+
+    font-weight: 800;
+
+}
+
+
+.dark .tab-button {
+
+    border-color: #3E566F;
+
+    color: #B9C8D8;
+
+}
+
+
+.tab-button.active {
+
+    border-color: var(--gold);
+
+    background: var(--gold);
+
+    color: var(--navy);
+
+}
+
+
+.tab-panel {
+    display: none;
+}
+
+
+.tab-panel.active {
+    display: block;
+}
+
+
+
+/* ============================================================
+   TREES
+   ============================================================ */
+
+.tree-shell {
+
+    overflow-x: auto;
+
+    padding:
+        10px 5px 30px;
+
+}
+
+
+.tech-tree {
+    min-width: 750px;
+}
+
+
+.tree-root-label {
+
+    width: fit-content;
+
+    margin:
+        0 auto 25px;
+
+    padding:
+        14px 22px;
+
+    border:
+        2px solid var(--gold);
+
+    border-radius: 7px;
+
+    background: #10243A;
+
+    color: white;
+
+    text-align: center;
+
+    font-size: 13px;
+
+    font-weight: 800;
+
+}
+
+
+.tree-node {
+
+    position: relative;
+
+    margin:
+        8px 0 8px 25px;
+
+}
+
+
+.tree-node::before {
+
+    content: "";
+
+    position: absolute;
+
+    left: -17px;
+
+    top: 0;
+
+    bottom: -8px;
+
+    border-left:
+        1px solid #48627D;
+
+}
+
+
+.tree-node::after {
+
+    content: "";
+
+    position: absolute;
+
+    left: -17px;
+
+    top: 22px;
+
+    width: 17px;
+
+    border-top:
+        1px solid #48627D;
+
+}
+
+
+.tree-node > details > summary,
+.tree-leaf {
+
+    display: inline-flex;
+
+    align-items: center;
+
+    gap: 9px;
+
+    min-width: 240px;
+
+    max-width: 590px;
+
+    padding:
+        12px 15px;
+
+    border:
+        1px solid #3B5570;
+
+    border-radius: 6px;
+
+    background: #122841;
+
+    color: white;
+
+    list-style: none;
+
+    font-size: 12px;
+
+    font-weight: 700;
+
+}
+
+
+.tree-node > details > summary {
+    cursor: pointer;
+}
+
+
+.tree-node > details > summary::-webkit-details-marker {
+    display: none;
+}
+
+
+.tree-node > details > summary::after {
+
+    content: "+";
+
+    margin-left: auto;
+
+    color: var(--gold);
+
+    font-size: 16px;
+
+}
+
+
+.tree-node > details[open] > summary::after {
+    content: "−";
+}
+
+
+.tree-node > details > summary:hover {
+    border-color: var(--gold);
+}
+
+
+.tree-code {
+
+    color: var(--gold);
+
+    font-size: 10px;
+
+    font-weight: 800;
+
+}
+
+
+.tree-children {
+
+    margin:
+        5px 0 5px 12px;
+
+}
+
+
+.tree-leaf {
+
+    background: #0E2136;
+
+    color: #C7D4E0;
+
+}
+
+
+.tree-phase {
+
+    margin-left: auto;
+
+    padding:
+        3px 7px;
+
+    border-radius: 100px;
+
+    background:
+        rgba(201,167,100,.13);
+
+    color: #D7BD8A;
+
+    font-size: 8px;
+
+    font-weight: 800;
+
+}
+
+
+
+/* ============================================================
+   4 / PHASING
+   ============================================================ */
+
+.phase-track {
+
+    position: relative;
+
+    display: grid;
+
+    grid-template-columns:
+        repeat(7,1fr);
+
+    gap: 8px;
+
+    margin-top: 25px;
+
+}
+
+
+.phase-track::before {
+
+    content: "";
+
+    position: absolute;
+
+    left: 6%;
+
+    right: 6%;
+
+    top: 37px;
+
+    border-top:
+        2px solid #46617C;
+
+}
+
+
+.phase-button {
+
+    position: relative;
+
+    z-index: 2;
+
+    min-height: 115px;
+
+    padding:
+        13px 8px;
+
+    border:
+        1px solid #3E566F;
+
+    border-radius: 7px;
+
+    background: #122841;
+
+    color: #B7C8D8;
+
+    text-align: center;
+
+}
+
+
+.phase-button strong {
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    width: 44px;
+
+    height: 44px;
+
+    margin:
+        0 auto 9px;
+
+    border-radius: 50%;
+
+    background: var(--navy);
+
+    border:
+        2px solid var(--gold);
+
+    color: var(--gold);
+
+    font-size: 17px;
+
+}
+
+
+.phase-button span {
+
+    display: block;
+
+    font-size: 8px;
+
+    font-weight: 800;
+
+    line-height: 1.35;
+
+}
+
+
+.phase-button.active {
+
+    border-color: var(--gold);
+
+    background: var(--gold);
+
+    color: var(--navy);
+
+}
+
+
+.phase-button.active strong {
+
+    background: var(--navy);
+
+    color: white;
+
+}
+
+
+.phase-detail {
+
+    display: grid;
+
+    grid-template-columns:
+        1.5fr .8fr;
+
+    gap: 15px;
+
+    margin-top: 27px;
+
+}
+
+
+.phase-description,
+.phase-milestone {
+
+    padding:
+        27px;
+
+    border:
+        1px solid #29415D;
+
+    border-radius: 8px;
+
+    background: #122841;
+
+}
+
+
+.phase-description h3 {
+
+    margin:
+        7px 0 13px;
+
+    font-size: 26px;
+
+}
+
+
+.phase-description p {
+
+    color: #B7C7D7;
+
+    line-height: 1.7;
+
+}
+
+
+.phase-description ul {
+
+    padding-left: 20px;
+
+    color: #C8D5E2;
+
+    line-height: 1.75;
+
+}
+
+
+.phase-milestone {
+
+    display: flex;
+
+    flex-direction: column;
+
+    justify-content: center;
+
+    text-align: center;
+
+}
+
+
+.phase-milestone span {
+
+    color: var(--gold);
+
+    font-size: 9px;
+
+    font-weight: 800;
+
+}
+
+
+.phase-milestone strong {
+
+    margin-top: 14px;
+
+    font-size:
+        clamp(22px,3vw,32px);
+
+}
+
+
+
+/* ============================================================
+   5 / PLANNING
+   ============================================================ */
+
+.planning-menu {
+
+    display: flex;
+
+    flex-wrap: wrap;
+
+    gap: 7px;
+
+    margin-bottom: 27px;
+
+}
+
+
+.planning-button {
+
+    padding:
+        11px 15px;
+
+    border:
+        1px solid #CAD6E0;
+
+    border-radius: 6px;
+
+    background: white;
+
+    color: var(--navy-2);
+
+    font-size: 9px;
+
+    font-weight: 800;
+
+}
+
+
+.planning-button.active {
+
+    background: var(--navy-2);
+
+    border-color: var(--navy-2);
+
+    color: white;
+
+}
+
+
+.planning-panel {
+    display: none;
+}
+
+
+.planning-panel.active {
+    display: block;
+}
+
+
+/* RAM */
+
+.ram-toolbar {
+
+    display: flex;
+
+    flex-wrap: wrap;
+
+    gap: 7px;
+
+    margin-bottom: 15px;
+
+}
+
+
+.ram-filter {
+
+    padding:
+        8px 10px;
+
+    border:
+        1px solid #D4DEE7;
+
+    border-radius: 5px;
+
+    background: white;
+
+    color: var(--navy-2);
+
+    font-size: 9px;
+
+    font-weight: 800;
+
+}
+
+
+.ram-filter.active {
+
+    background: var(--gold);
+
+    border-color: var(--gold);
+
+    color: var(--navy);
+
+}
+
+
+.ram-table-wrapper {
+
+    max-height: 620px;
+
+    overflow: auto;
+
+    border:
+        1px solid #D9E1E8;
+
+    border-radius: 7px;
+
+    background: white;
+
+}
+
+
+.ram-table {
+
+    width: 100%;
+
+    min-width: 880px;
+
+    border-collapse: collapse;
+
+    font-size: 10px;
+
+}
+
+
+.ram-table th {
+
+    position: sticky;
+
+    top: 0;
+
+    padding:
+        10px 7px;
+
+    background: #C8ACD6;
+
+    color: #282034;
+
+    border:
+        1px solid #9481A0;
+
+}
+
+
+.ram-table td {
+
+    padding:
+        7px 8px;
+
+    border:
+        1px solid #D5DBE2;
+
+    text-align: center;
+
+}
+
+
+.ram-table td:first-child {
+
+    text-align: left;
+
+    font-weight: 700;
+
+}
+
+
+.ram-R {
+
+    background: #E7D5F0;
+
+    color: #4B2E59;
+
+    font-weight: 900;
+
+}
+
+
+.ram-S {
+
+    color: #67788A;
+
+    font-weight: 700;
+
+}
+
+
+/* FLOW */
+
+.flow-root {
+
+    overflow-x: auto;
+
+    padding:
+        20px 0 35px;
+
+}
+
+
+.flow-diagram {
+    min-width: 1000px;
+}
+
+
+.flow-start {
+
+    width: 160px;
+
+    margin:
+        0 auto 28px;
+
+    padding:
+        14px;
+
+    border:
+        2px solid var(--navy-2);
+
+    background: white;
+
+    text-align: center;
+
+    font-weight: 800;
+
+}
+
+
+.flow-level {
+
+    display: grid;
+
+    grid-template-columns:
+        repeat(2,1fr);
+
+    gap: 70px;
+
+}
+
+
+.flow-column {
+
+    padding:
+        20px;
+
+    border:
+        1px solid #CAD5DF;
+
+    border-radius: 8px;
+
+    background: white;
+
+}
+
+
+.flow-column > h4 {
+
+    text-align: center;
+
+    color: var(--navy-2);
+
+}
+
+
+.flow-subgrid {
+
+    display: grid;
+
+    grid-template-columns:
+        repeat(3,1fr);
+
+    gap: 8px;
+
+}
+
+
+.flow-item {
+
+    padding:
+        12px 8px;
+
+    border:
+        1px solid #D6DEE6;
+
+    border-radius: 5px;
+
+    background: #F6F8FA;
+
+    text-align: center;
+
+    font-size: 10px;
+
+    line-height: 1.45;
+
+}
+
+
+.flow-item strong {
+
+    display: block;
+
+    color: var(--gold-dark);
+
+    margin-bottom: 5px;
+
+}
+
+
+.flow-milestone {
+
+    width:
+        min(430px,100%);
+
+    margin:
+        28px auto 0;
+
+    padding:
+        16px;
+
+    border:
+        2px solid var(--purple-mp);
+
+    border-radius: 6px;
+
+    background: #F3EAF7;
+
+    color: #513C5D;
+
+    text-align: center;
+
+    font-weight: 800;
+
+}
+
+
+
+/* ============================================================
+   6 / RISK MANAGEMENT
+   ============================================================ */
+
+.risk-selector {
+
+    display: grid;
+
+    grid-template-columns:
+        repeat(3,minmax(0,1fr));
+
+    gap: 9px;
+
+    margin-bottom: 25px;
+
+}
+
+
+.risk-button {
+
+    padding:
+        17px;
+
+    border:
+        1px solid #3E566F;
+
+    border-radius: 7px;
+
+    background: #122841;
+
+    color: #BDCAD7;
+
+    text-align: left;
+
+}
+
+
+.risk-button span {
+
+    display: block;
+
+    margin-bottom: 7px;
+
+    color: var(--gold);
+
+    font-size: 9px;
+
+    font-weight: 800;
+
+}
+
+
+.risk-button strong {
+
+    font-size: 12px;
+
+    line-height: 1.45;
+
+}
+
+
+.risk-button.active {
+
+    background: var(--gold);
+
+    border-color: var(--gold);
+
+    color: var(--navy);
+
+}
+
+
+.risk-button.active span {
+    color: var(--navy);
+}
+
+
+.risk-detail {
+
+    display: grid;
+
+    grid-template-columns:
+        1.35fr .65fr;
+
+    gap: 15px;
+
+}
+
+
+.risk-description,
+.risk-data {
+
+    padding: 26px;
+
+    border:
+        1px solid #29415D;
+
+    border-radius: 8px;
+
+    background: #122841;
+
+}
+
+
+.risk-description h3 {
+
+    margin:
+        8px 0 13px;
+
+    font-size: 25px;
+
+}
+
+
+.risk-description p {
+
+    color: #B7C7D7;
+
+    line-height: 1.75;
+
+}
+
+
+.risk-data-row {
+
+    display: flex;
+
+    justify-content: space-between;
+
+    gap: 15px;
+
+    padding:
+        12px 0;
+
+    border-bottom:
+        1px solid #29415D;
+
+}
+
+
+.risk-data-row span {
+
+    color: #91A5B8;
+
+    font-size: 10px;
+
+    font-weight: 800;
+
+}
+
+
+.risk-data-row strong {
+
+    color: white;
+
+    font-size: 12px;
+
+}
+
+
+.risk-table-wrapper {
+
+    margin-top: 35px;
+
+    overflow-x: auto;
+
+}
+
+
+.risk-table {
+
+    width: 100%;
+
+    min-width: 720px;
+
+    border-collapse: collapse;
+
+    background: white;
+
+    color: var(--navy-2);
+
+    font-size: 11px;
+
+}
+
+
+.risk-table th {
+
+    padding: 11px;
+
+    background: #C8ACD6;
+
+    color: #2B2132;
+
+    border: 1px solid #93839C;
+
+}
+
+
+.risk-table td {
+
+    padding: 10px;
+
+    border:
+        1px solid #D3DCE4;
+
+    text-align: center;
+
+}
+
+
+.risk-table td:last-child {
+    text-align: left;
+}
+
+
+
+/* ============================================================
+   REFERENCES
+   ============================================================ */
+
+.references {
+
+    padding:
+        65px 24px;
+
+    background: #F5F7FA;
+
+}
+
+
+.references details {
+
+    width:
+        min(1100px,100%);
+
+    margin: auto;
+
+    border:
+        1px solid #D8E1E9;
+
+    border-radius: 8px;
+
+    background: white;
+
+}
+
+
+.references summary {
+
+    padding:
+        20px 22px;
+
+    list-style: none;
+
+    cursor: pointer;
+
+    color: var(--navy-2);
+
+    font-weight: 800;
+
+}
+
+
+.reference-list {
+
+    padding:
+        0 35px 25px 48px;
+
+    color: var(--muted);
+
+    font-size: 12px;
+
+    line-height: 1.7;
+
+}
+
+
+
+/* ============================================================
+   FOOTER
+   ============================================================ */
+
+.site-footer {
+
+    padding:
+        30px 20px;
+
+    background: #08111F;
+
+    color: #8296AA;
+
+    text-align: center;
+
+    font-size: 11px;
+
+    line-height: 1.8;
+
+}
+
+
+.site-footer strong {
+    color: white;
+}
+
+
+
+/* ============================================================
+   PRESENTATION MODE
+   ============================================================ */
+
+.presentation-controls {
+
+    position: fixed;
+
+    left: 50%;
+
+    bottom: 18px;
+
+    z-index: 500;
+
+    display: none;
+
+    align-items: center;
+
+    gap: 7px;
+
+    transform:
+        translateX(-50%);
+
+    padding: 7px;
+
+    border:
+        1px solid #344E68;
+
+    border-radius: 8px;
+
+    background:
+        rgba(8,17,31,.95);
+
+}
+
+
+.presentation-controls button {
+
+    padding:
+        9px 12px;
+
+    border:
+        1px solid #405B75;
+
+    border-radius: 5px;
+
+    background: transparent;
+
+    color: white;
+
+    font-size: 9px;
+
+    font-weight: 800;
+
+}
+
+
+.presentation-controls span {
+
+    min-width: 145px;
+
+    color: var(--gold);
+
+    text-align: center;
+
+    font-size: 9px;
+
+    font-weight: 800;
+
+}
+
+
+body.presentation-mode {
+
+    background: var(--navy);
+
+}
+
+
+body.presentation-mode .site-header,
+body.presentation-mode .hero,
+body.presentation-mode .document-nav,
+body.presentation-mode .references,
+body.presentation-mode .site-footer {
+
+    display: none;
+
+}
+
+
+body.presentation-mode .mp-section {
+
+    display: none;
+
+    min-height: 100vh;
+
+    padding-top: 65px;
+
+    padding-bottom: 100px;
+
+}
+
+
+body.presentation-mode
+.mp-section.presentation-current {
+
+    display: block;
+
+}
+
+
+body.presentation-mode
+.presentation-controls {
+
+    display: flex;
+
+}
+
+
+
+/* ============================================================
+   RESPONSIVE
+   ============================================================ */
+
+@media(max-width:900px) {
+
+    .hero {
+
+        grid-template-columns:
+            1fr;
+
+        text-align: center;
+
+    }
+
+
+    .hero-patch {
+        grid-row: 1;
+    }
+
+
+    .hero-patch img {
+        width: 220px;
+    }
+
+
+    .meta-row,
+    .hero-buttons {
+        justify-content: center;
+    }
+
+
+    .introduction-map {
+
+        grid-template-columns:
+            repeat(2,minmax(0,1fr));
+
+    }
+
+
+    .phase-detail,
+    .risk-detail {
+
+        grid-template-columns:
+            1fr;
+
+    }
+
+
+    .phase-track {
+
+        grid-template-columns:
+            repeat(4,1fr);
+
+    }
+
+
+    .phase-track::before {
+        display: none;
+    }
+
+
+    .risk-selector {
+
+        grid-template-columns:
+            repeat(2,1fr);
+
+    }
+
+}
+
+
+@media(max-width:650px) {
+
+    :root {
+        --header-height: 64px;
+    }
+
+
+    .site-header {
+        padding: 0 17px;
+    }
+
+
+    .brand img {
+        width: 123px;
+    }
+
+
+    .header-actions a:first-child,
+    .present-button {
+        display: none;
+    }
+
+
+    .mp-section {
+
+        padding:
+            75px 17px;
+
+    }
+
+
+    .introduction-map,
+    .risk-selector {
+
+        grid-template-columns:
+            1fr;
+
+    }
+
+
+    .phase-track {
+
+        grid-template-columns:
+            repeat(2,1fr);
+
+    }
+
+
+    .presentation-controls {
+
+        width:
+            calc(100vw - 20px);
+
+        justify-content:
+            space-between;
+
+    }
+
+}
+
+</style>
+
+</head>
+
+
+
+<body>
+
+
+
+<!-- ============================================================
+     HEADER
+     ============================================================ -->
+
+<header class="site-header">
+
+    <a href="index.html#top"
+       class="brand"
+       aria-label="astroFUEL home">
+
+        <img src="astrofuel_wordmark.png"
+             alt="astroFUEL">
+
+    </a>
+
+
+    <div class="header-actions">
+
+        <a href="Lazarus_Management_Plan.pdf"
+           target="_blank"
+           rel="noopener">
+
+            PDF
+
+        </a>
+
+
+        <button class="present-button"
+                id="headerPresent">
+
+            PRESENT
+
+        </button>
+
+
+        <a href="index.html#top">
+
+            ← BACK TO HOME
+
+        </a>
+
+    </div>
+
+</header>
+
+
+
+<!-- ============================================================
+     COVER
+     ============================================================ -->
+
+<section class="hero"
+         id="top">
+
+
+    <div>
+
+        <span class="eyebrow">
+
+            MISSION LAZARUS · DELIVERABLE 02
+
+        </span>
+
+
+        <h1>
+
+            Management Plan
+
+        </h1>
+
+
+        <p class="hero-description">
+
+            Project organization, breakdown structures,
+            project phasing, planning, risk management
+            and Work Breakdown Structure for Mission Lazarus.
+
+        </p>
+
+
+        <div class="meta-row">
+
+            <span class="meta-pill">
+                MADRID · OCTOBER 2026
+            </span>
+
+            <span class="meta-pill">
+                MANAGEMENT PLAN
+            </span>
+
+        </div>
+
+
+        <div class="hero-buttons">
+
+            <button class="action-button action-primary"
+                    id="startPresentation">
+
+                START PRESENTATION
+
+            </button>
+
+
+            <a href="Lazarus_Management_Plan.pdf"
+               target="_blank"
+               rel="noopener"
+               class="action-button action-secondary">
+
+                OPEN PDF ↗
+
+            </a>
+
+        </div>
+
+    </div>
+
+
+
+    <div class="hero-patch">
+
+        <img src="Parche_Lazarus.png"
+             alt="Lazarus mission patch">
+
+    </div>
+
+
+</section>
+
+
+
+<!-- ============================================================
+     DOCUMENT NAVIGATION
+     ============================================================ -->
+
+<nav class="document-nav">
+
+    <a href="#introduction">
+        1 · INTRODUCTION
+    </a>
+
+    <a href="#organization">
+        2 · ORGANIZATION
+    </a>
+
+    <a href="#pbs">
+        3 · PBS
+    </a>
+
+    <a href="#phasing">
+        4 · PHASING
+    </a>
+
+    <a href="#planning">
+        5 · PLANNING
+    </a>
+
+    <a href="#risks">
+        6 · RISKS
+    </a>
+
+    <a href="#wbs">
+        7 · WBS
+    </a>
+
+</nav>
+
+
+
+<!-- ============================================================
+     1 / INTRODUCTION
+     ============================================================ -->
+
+<section class="mp-section light"
+         id="introduction">
+
+<div class="section-container">
+
+
+    <span class="section-label">
+
+        1 / INTRODUCTION
+
+    </span>
+
+
+    <h2 class="section-title">
+
+        Management framework for Mission Lazarus.
+
+    </h2>
+
+
+    <div class="introduction-content">
+
+
+        <p>
+
+            The purpose of this Management Plan is to define
+            how the LAZARUS project is organized, planned
+            and controlled during its development.
+
+        </p>
+
+
+        <p>
+
+            LAZARUS is the first mission developed by
+            astroFUEL and is focused on demonstrating an
+            in-orbit refuelling service for satellites in
+            geostationary orbit. The mission requires the
+            coordination of several technical areas working
+            together on the spacecraft, the refuelling
+            payload, mission operations and launcher-related
+            activities.
+
+        </p>
+
+
+        <p>
+
+            For this reason, a clear management structure
+            is required to define responsibilities, organize
+            the work, establish the main project phases and
+            plan the activities needed throughout the
+            development. This Management Plan provides the
+            common framework used by the different technical
+            areas to coordinate their work and follow the
+            evolution of the project.
+
+        </p>
+
+
+        <p>
+
+            The document presents the internal organization
+            of astroFUEL for the LAZARUS mission, the Project
+            Breakdown Structure (PBS), the project phasing,
+            the project planning, the main project risks and
+            the Work Breakdown Structure (WBS). Both the
+            preliminary design stage and the complete project
+            lifecycle are considered, providing a general
+            view of how the mission is expected to progress
+            from its initial definition to operations and
+            End of Life.
+
+        </p>
+
+
+    </div>
+
+
+
+    <div class="introduction-map">
+
+
+        <a href="#organization"
+           class="intro-map-item">
+
+            <span>02</span>
+
+            <strong>
+                Project Organization
+            </strong>
+
+            <small>
+                Company structure and technical areas
+            </small>
+
+        </a>
+
+
+        <a href="#pbs"
+           class="intro-map-item">
+
+            <span>03</span>
+
+            <strong>
+                PBS
+            </strong>
+
+            <small>
+                Physical and document deliverables
+            </small>
+
+        </a>
+
+
+        <a href="#phasing"
+           class="intro-map-item">
+
+            <span>04</span>
+
+            <strong>
+                Project Phasing
+            </strong>
+
+            <small>
+                Mission development lifecycle
+            </small>
+
+        </a>
+
+
+        <a href="#planning"
+           class="intro-map-item">
+
+            <span>05</span>
+
+            <strong>
+                Project Planning
+            </strong>
+
+            <small>
+                Responsibilities and schedule
+            </small>
+
+        </a>
+
+
+        <a href="#risks"
+           class="intro-map-item">
+
+            <span>06</span>
+
+            <strong>
+                Risk Management
+            </strong>
+
+            <small>
+                Risk identification and evaluation
+            </small>
+
+        </a>
+
+
+        <a href="#wbs"
+           class="intro-map-item">
+
+            <span>07</span>
+
+            <strong>
+                WBS
+            </strong>
+
+            <small>
+                Project work decomposition
+            </small>
+
+        </a>
+
+
+    </div>
+
+
+</div>
+
+</section>
+
+
+
+<!-- ============================================================
+     2 / PROJECT ORGANIZATION
+     ============================================================ -->
+
+<section class="mp-section light"
+         id="organization">
+
+<div class="section-container">
+
+
+    <span class="section-label">
+
+        2 / PROJECT ORGANIZATION
+
+    </span>
+
+
+    <h2 class="section-title">
+
+        astroFUEL company organization.
+
+    </h2>
+
+
+    <p class="section-intro">
+
+        astroFUEL follows a clear chain of command.
+        The CEO oversees the ongoing projects and appoints
+        a Project Manager for each project. Under the Project
+        Manager, the technical development of LAZARUS is
+        divided into the technical areas represented below.
+
+    </p>
+
+
+
+    <div class="organization-chart">
+
+        <div class="org-root">
+
+
+            <div class="org-box ceo">
+
+                CEO
+
+            </div>
+
+
+            <div class="org-line-vertical"></div>
+
+
+            <div class="org-box pm">
+
+                PROJECT MANAGER
+
+            </div>
+
+
+            <div class="org-line-vertical"></div>
+
+
+            <div class="org-horizontal"></div>
+
+
+            <div class="org-teams">
+
+
+                <button class="org-team active"
+                        data-org="mission">
+
+                    Mission Analysis
+
+                </button>
+
+
+                <button class="org-team"
+                        data-org="propulsion">
+
+                    Propulsion
+
+                </button>
+
+
+                <button class="org-team"
+                        data-org="mechanics">
+
+                    Mechanics
+                    & Structure
+
+                </button>
+
+
+                <button class="org-team"
+                        data-org="aocs">
+
+                    AOCS /
+                    GNC
+
+                </button>
+
+
+                <button class="org-team"
+                        data-org="power">
+
+                    Power
+
+                </button>
+
+
+                <button class="org-team"
+                        data-org="thermal">
+
+                    Thermal
+
+                </button>
+
+
+                <button class="org-team"
+                        data-org="comms">
+
+                    Comms.
+                    & Data
+
+                </button>
+
+
+                <button class="org-team"
+                        data-org="payload">
+
+                    Payload
+
+                </button>
+
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+
+    <div class="org-detail">
+
+        <span class="section-label"
+              id="orgDetailLabel">
+
+            MISSION ANALYSIS
+
+        </span>
+
+
+        <h3 id="orgDetailTitle">
+
+            Mission scenarios and orbital requirements
+
+        </h3>
+
+
+        <p id="orgDetailText">
+
+            Mission Analysis is responsible for defining
+            and analysing the mission scenarios and
+            orbital requirements.
+
+        </p>
+
+    </div>
+
+
+
+    <div class="customer-note">
+
+        <strong>
+            2.1 · IDENTIFICATION OF THE CUSTOMER
+        </strong>
+
+        · Customer, stakeholders and the management
+        requirements they impose.
+
+    </div>
+
+
+</div>
+
+</section>
+
+
+
+<!-- ============================================================
+     3 / PBS
+     ============================================================ -->
+
+<section class="mp-section dark"
+         id="pbs">
+
+<div class="section-container">
+
+
+    <span class="section-label">
+
+        3 / PROJECT BREAKDOWN STRUCTURE · PBS
+
+    </span>
+
+
+    <h2 class="section-title">
+
+        LAZARUS Space System.
+
+    </h2>
+
+
+    <p class="section-intro">
+
+        The Preliminary Design PBS outlines the physical
+        and document deliverables required during Phases
+        0, A and B. The Complete Project PBS extends this
+        structure through the complete mission lifecycle.
+
+    </p>
+
+
+
+    <div class="tab-row">
+
+        <button class="tab-button active"
+                data-tab-group="pbs"
+                data-tab-target="pbsPreliminary">
+
+            3.1 · PRELIMINARY DESIGN
+
+        </button>
+
+
+        <button class="tab-button"
+                data-tab-group="pbs"
+                data-tab-target="pbsComplete">
+
+            3.2 · COMPLETE PROJECT
+
+        </button>
+
+    </div>
+
+
+
+    <div class="tab-panel active"
+         id="pbsPreliminary">
+
+        <div class="tree-shell">
+
+            <div class="tech-tree"
+                 id="pbsPreliminaryTree">
+            </div>
+
+        </div>
+
+    </div>
+
+
+
+    <div class="tab-panel"
+         id="pbsComplete">
+
+        <div class="tree-shell">
+
+            <div class="tech-tree"
+                 id="pbsCompleteTree">
+            </div>
+
+        </div>
+
+    </div>
+
+
+</div>
+
+</section>
+
+
+
+<!-- ============================================================
+     4 / PROJECT PHASING
+     ============================================================ -->
+
+<section class="mp-section dark"
+         id="phasing">
+
+<div class="section-container">
+
+
+    <span class="section-label">
+
+        4 / PROJECT PHASING
+
+    </span>
+
+
+    <h2 class="section-title">
+
+        LAZARUS project lifecycle.
+
+    </h2>
+
+
+    <p class="section-intro">
+
+        LAZARUS is divided into sequenced and consecutive
+        phases covering the entire mission lifecycle.
+
+    </p>
+
+
+
+    <div class="phase-track">
+
+
+        <button class="phase-button active"
+                data-phase="0">
+
+            <strong>0</strong>
+
+            <span>
+                MISSION ANALYSIS
+            </span>
+
+        </button>
+
+
+        <button class="phase-button"
+                data-phase="A">
+
+            <strong>A</strong>
+
+            <span>
+                FEASIBILITY &
+                CONCEPTUAL DESIGN
+            </span>
+
+        </button>
+
+
+        <button class="phase-button"
+                data-phase="B">
+
+            <strong>B</strong>
+
+            <span>
+                PRELIMINARY DESIGN
+            </span>
+
+        </button>
+
+
+        <button class="phase-button"
+                data-phase="C">
+
+            <strong>C</strong>
+
+            <span>
+                DETAILED DESIGN
+            </span>
+
+        </button>
+
+
+        <button class="phase-button"
+                data-phase="D">
+
+            <strong>D</strong>
+
+            <span>
+                MANUFACTURING
+                & AIT
+            </span>
+
+        </button>
+
+
+        <button class="phase-button"
+                data-phase="E">
+
+            <strong>E</strong>
+
+            <span>
+                LAUNCH &
+                OPERATIONS
+            </span>
+
+        </button>
+
+
+        <button class="phase-button"
+                data-phase="F">
+
+            <strong>F</strong>
+
+            <span>
+                END OF LIFE
+            </span>
+
+        </button>
+
+
+    </div>
+
+
+
+    <div class="phase-detail">
+
+
+        <div class="phase-description">
+
+            <span class="section-label"
+                  id="phaseCode">
+
+                PHASE 0
+
+            </span>
+
+
+            <h3 id="phaseTitle">
+            </h3>
+
+
+            <p id="phaseDescription">
+            </p>
+
+
+            <ul id="phaseActivities">
+            </ul>
+
+        </div>
+
+
+
+        <div class="phase-milestone">
+
+            <span>
+                MILESTONE
+            </span>
+
+            <strong id="phaseMilestone">
+            </strong>
+
+        </div>
+
+
+    </div>
+
+
+</div>
+
+</section>
+
+
+
+<!-- ============================================================
+     5 / PROJECT PLANNING
+     ============================================================ -->
+
+<section class="mp-section light"
+         id="planning">
+
+<div class="section-container">
+
+
+    <span class="section-label">
+
+        5 / PROJECT PLANNING
+
+    </span>
+
+
+    <h2 class="section-title">
+
+        Responsibilities and project development.
+
+    </h2>
+
+
+    <p class="section-intro">
+
+        The preliminary design planning is based on
+        the work packages defined in the WBS, the RAM,
+        the logical development diagram and the project
+        schedule.
+
+    </p>
+
+
+
+    <div class="planning-menu">
+
+
+        <button class="planning-button active"
+                data-planning="ram">
+
+            5.1 · RAM
+
+        </button>
+
+
+        <button class="planning-button"
+                data-planning="flow">
+
+            LOGICAL FLOW
+
+        </button>
+
+
+        <button class="planning-button"
+                data-planning="complete">
+
+            5.2 · COMPLETE PROJECT
+
+        </button>
+
+
+    </div>
+
+
+
+    <div class="planning-panel active"
+         id="planning-ram">
+
+
+        <p>
+
+            <strong>R</strong> identifies the main
+            department responsible for leading the work
+            package. <strong>S</strong> identifies the
+            supporting areas.
+
+        </p>
+
+
+        <div class="ram-toolbar">
+
+            <button class="ram-filter active"
+                    data-ram-col="all">
+                ALL
+            </button>
+
+            <button class="ram-filter"
+                    data-ram-col="PM">
+                PM
+            </button>
+
+            <button class="ram-filter"
+                    data-ram-col="MA">
+                MA
+            </button>
+
+            <button class="ram-filter"
+                    data-ram-col="MS">
+                M&S
+            </button>
+
+            <button class="ram-filter"
+                    data-ram-col="Prop">
+                PROP
+            </button>
+
+            <button class="ram-filter"
+                    data-ram-col="AOCS">
+                AOCS/GNC
+            </button>
+
+            <button class="ram-filter"
+                    data-ram-col="Pwr">
+                PWR
+            </button>
+
+            <button class="ram-filter"
+                    data-ram-col="Thrm">
+                THRM
+            </button>
+
+            <button class="ram-filter"
+                    data-ram-col="CD">
+                C&D
+            </button>
+
+            <button class="ram-filter"
+                    data-ram-col="Pay">
+                PAY
+            </button>
+
+        </div>
+
+
+
+        <div class="ram-table-wrapper">
+
+            <table class="ram-table">
+
+                <thead>
+
+                    <tr>
+
+                        <th>Work Package</th>
+                        <th>PM</th>
+                        <th>MA</th>
+                        <th>M&S</th>
+                        <th>Prop</th>
+                        <th>AOCS/GNC</th>
+                        <th>Pwr</th>
+                        <th>Thrm</th>
+                        <th>C&D</th>
+                        <th>Pay</th>
+
+                    </tr>
+
+                </thead>
+
+
+                <tbody id="ramBody">
+                </tbody>
+
+            </table>
+
+        </div>
+
+    </div>
+
+
+
+    <div class="planning-panel"
+         id="planning-flow">
+
+
+        <div class="flow-root">
+
+            <div class="flow-diagram">
+
+
+                <div class="flow-start">
+
+                    MISSION START
+
+                </div>
+
+
+                <div class="flow-level">
+
+
+                    <div class="flow-column">
+
+                        <h4>
+                            WP-1000 · SPACE SEGMENT
+                        </h4>
+
+
+                        <div class="flow-subgrid">
+
+                            <div class="flow-item">
+
+                                <strong>
+                                    WP-1100
+                                </strong>
+
+                                Subsystems
+
+                            </div>
+
+                            <div class="flow-item">
+
+                                <strong>
+                                    WP-1200
+                                </strong>
+
+                                Payloads
+                                (Refueling)
+
+                            </div>
+
+                            <div class="flow-item">
+
+                                <strong>
+                                    WP-1300
+                                </strong>
+
+                                Operations
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+
+
+                    <div class="flow-column">
+
+                        <h4>
+                            WP-3000 · LAUNCHER
+                        </h4>
+
+
+                        <div class="flow-subgrid"
+                             style="grid-template-columns:1fr 1fr;">
+
+                            <div class="flow-item">
+
+                                <strong>
+                                    WP-3100
+                                </strong>
+
+                                Launcher Selection
+
+                            </div>
+
+                            <div class="flow-item">
+
+                                <strong>
+                                    WP-3300
+                                </strong>
+
+                                Launch Operations
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+
+                </div>
+
+
+
+                <div class="flow-milestone">
+
+                    MILESTONE · PRELIMINARY DESIGN RELEASE
+
+                </div>
+
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+
+    <div class="planning-panel"
+         id="planning-complete">
+
+
+        <p>
+
+            The complete project planning extends from
+            the initial definition of the mission through
+            End of Life and follows the WBS of Section 7.2.
+
+        </p>
+
+
+        <div class="flow-root">
+
+            <div class="flow-diagram">
+
+
+                <div class="flow-start">
+
+                    WP-0000 MANAGEMENT
+
+                </div>
+
+
+                <div class="flow-level">
+
+
+                    <div class="flow-column">
+
+                        <h4>
+                            SPACE SEGMENT
+                        </h4>
+
+                        <div class="flow-item">
+                            Definition
+                        </div>
+
+                        <div class="flow-item">
+                            Design
+                        </div>
+
+                        <div class="flow-item">
+                            Subsystem AIT
+                        </div>
+
+                        <div class="flow-item">
+                            Full Spacecraft AIT
+                        </div>
+
+                        <div class="flow-item">
+                            LEOP
+                        </div>
+
+                        <div class="flow-item">
+                            Rendezvous
+                        </div>
+
+                        <div class="flow-item">
+                            Refueling
+                        </div>
+
+                        <div class="flow-item">
+                            Disposal
+                        </div>
+
+                    </div>
+
+
+
+                    <div class="flow-column">
+
+                        <h4>
+                            GROUND & LAUNCH SEGMENTS
+                        </h4>
+
+                        <div class="flow-item">
+                            Ground Segment Development
+                        </div>
+
+                        <div class="flow-item">
+                            Mission Control
+                        </div>
+
+                        <div class="flow-item">
+                            Launcher Selection
+                        </div>
+
+                        <div class="flow-item">
+                            Launch Campaign
+                        </div>
+
+                        <div class="flow-item">
+                            Launch Operations
+                        </div>
+
+                    </div>
+
+
+                </div>
+
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+</div>
+
+</section>
+
+
+
+<!-- ============================================================
+     6 / RISK MANAGEMENT
+     ============================================================ -->
+
+<section class="mp-section dark"
+         id="risks">
+
+<div class="section-container">
+
+
+    <span class="section-label">
+
+        6 / RISK MANAGEMENT
+
+    </span>
+
+
+    <h2 class="section-title">
+
+        Main project risks.
+
+    </h2>
+
+
+    <p class="section-intro">
+
+        The main risks of LAZARUS are identified and
+        characterized according to their impact and
+        probability. Select a risk to review its
+        assessment and proposed mitigation strategy.
+
+    </p>
+
+
+
+    <div class="risk-selector">
+
+
+        <button class="risk-button active"
+                data-risk="1">
+
+            <span>
+                RISK 01
+            </span>
+
+            <strong>
+                Not accurate docking maneuver
+            </strong>
+
+        </button>
+
+
+        <button class="risk-button"
+                data-risk="2">
+
+            <span>
+                RISK 02
+            </span>
+
+            <strong>
+                Malfunctioning during the refueling
+            </strong>
+
+        </button>
+
+
+        <button class="risk-button"
+                data-risk="3">
+
+            <span>
+                RISK 03
+            </span>
+
+            <strong>
+                Fuel waste and Delta-V management
+            </strong>
+
+        </button>
+
+
+        <button class="risk-button"
+                data-risk="4">
+
+            <span>
+                RISK 04
+            </span>
+
+            <strong>
+                Component performance and flight heritage
+            </strong>
+
+        </button>
+
+
+        <button class="risk-button"
+                data-risk="5">
+
+            <span>
+                RISK 05
+            </span>
+
+            <strong>
+                Schedule Risks
+            </strong>
+
+        </button>
+
+
+        <button class="risk-button"
+                data-risk="6">
+
+            <span>
+                RISK 06
+            </span>
+
+            <strong>
+                Market and economics risks
+            </strong>
+
+        </button>
+
+
+    </div>
+
+
+
+    <div class="risk-detail">
+
+
+        <div class="risk-description">
+
+            <span class="section-label"
+                  id="riskNumber">
+
+                RISK 01
+
+            </span>
+
+
+            <h3 id="riskTitle">
+            </h3>
+
+
+            <p id="riskText">
+            </p>
+
+
+            <p>
+
+                <strong style="color:#C9A764;">
+                    MITIGATION
+                </strong>
+
+            </p>
+
+
+            <p id="riskMitigation">
+            </p>
+
+        </div>
+
+
+
+        <div class="risk-data">
+
+
+            <div class="risk-data-row">
+
+                <span>
+                    TYPE
+                </span>
+
+                <strong id="riskType">
+                </strong>
+
+            </div>
+
+
+            <div class="risk-data-row">
+
+                <span>
+                    IMPACT
+                </span>
+
+                <strong id="riskImpact">
+                </strong>
+
+            </div>
+
+
+            <div class="risk-data-row">
+
+                <span>
+                    PROBABILITY
+                </span>
+
+                <strong id="riskProbability">
+                </strong>
+
+            </div>
+
+
+            <div class="risk-data-row">
+
+                <span>
+                    RISK LEVEL
+                </span>
+
+                <strong id="riskLevel">
+                </strong>
+
+            </div>
+
+
+        </div>
+
+
+    </div>
+
+
+
+    <div class="risk-table-wrapper">
+
+        <table class="risk-table">
+
+            <thead>
+
+                <tr>
+
+                    <th>No.</th>
+                    <th>Type</th>
+                    <th>Impact</th>
+                    <th>Prob.</th>
+                    <th>Risk</th>
+                    <th>Comment</th>
+
+                </tr>
+
+            </thead>
+
+
+            <tbody>
+
+                <tr>
+                    <td>1</td>
+                    <td>Tech / Cost</td>
+                    <td>0.95</td>
+                    <td>0.05</td>
+                    <td>Medium-High</td>
+                    <td>
+                        Catastrophic damage on both satellites
+                    </td>
+                </tr>
+
+                <tr>
+                    <td>2</td>
+                    <td>Tech</td>
+                    <td>0.8</td>
+                    <td>0.20</td>
+                    <td>High</td>
+                    <td>
+                        Commercial failure
+                    </td>
+                </tr>
+
+                <tr>
+                    <td>3</td>
+                    <td>Cost</td>
+                    <td>0.2</td>
+                    <td>0.40</td>
+                    <td>Low</td>
+                    <td>
+                        High frequency of debris but low impact
+                    </td>
+                </tr>
+
+                <tr>
+                    <td>4</td>
+                    <td>Tech</td>
+                    <td>0.5</td>
+                    <td>0.4</td>
+                    <td>Low</td>
+                    <td>
+                        Uncertainty for developed technologies
+                    </td>
+                </tr>
+
+                <tr>
+                    <td>5</td>
+                    <td>Sched</td>
+                    <td>0.4</td>
+                    <td>0.2</td>
+                    <td>Very Low</td>
+                    <td>
+                        Not respecting contracts with clients
+                    </td>
+                </tr>
+
+                <tr>
+                    <td>6</td>
+                    <td>Cost</td>
+                    <td>0.6</td>
+                    <td>0.2</td>
+                    <td>Low</td>
+                    <td>
+                        Enterprise risk
+                    </td>
+                </tr>
+
+            </tbody>
+
+        </table>
+
+    </div>
+
+
+</div>
+
+</section>
+
+
+
+<!-- ============================================================
+     7 / WBS
+     ============================================================ -->
+
+<section class="mp-section dark"
+         id="wbs">
+
+<div class="section-container">
+
+
+    <span class="section-label">
+
+        7 / WORK BREAKDOWN STRUCTURE · WBS
+
+    </span>
+
+
+    <h2 class="section-title">
+
+        Project work decomposition.
+
+    </h2>
+
+
+    <p class="section-intro">
+
+        The Preliminary Design WBS covers the work
+        required to reach the Preliminary Design Review.
+        The Complete Project WBS extends the structure
+        through the entire mission lifecycle.
+
+    </p>
+
+
+
+    <div class="tab-row">
+
+        <button class="tab-button active"
+                data-tab-group="wbs"
+                data-tab-target="wbsPreliminary">
+
+            7.1 · PRELIMINARY DESIGN
+
+        </button>
+
+
+        <button class="tab-button"
+                data-tab-group="wbs"
+                data-tab-target="wbsComplete">
+
+            7.2 · COMPLETE PROJECT
+
+        </button>
+
+    </div>
+
+
+
+    <div style="margin-bottom:15px;">
+
+        <button class="tab-button"
+                id="wbsExpand">
+
+            EXPAND ALL
+
+        </button>
+
+        <button class="tab-button"
+                id="wbsCollapse">
+
+            COLLAPSE ALL
+
+        </button>
+
+    </div>
+
+
+
+    <div class="tab-panel active"
+         id="wbsPreliminary">
+
+        <div class="tree-shell">
+
+            <div class="tech-tree"
+                 id="wbsPreliminaryTree">
+            </div>
+
+        </div>
+
+    </div>
+
+
+
+    <div class="tab-panel"
+         id="wbsComplete">
+
+        <div class="tree-shell">
+
+            <div class="tech-tree"
+                 id="wbsCompleteTree">
+            </div>
+
+        </div>
+
+    </div>
+
+
+</div>
+
+</section>
+
+
+
+<!-- ============================================================
+     REFERENCES
+     ============================================================ -->
+
+<section class="references">
+
+<details>
+
+    <summary>
+
+        REFERENCES · OPEN SOURCE LIST
+
+    </summary>
+
+    <ol class="reference-list">
+
+        <li>
+            Bombardelli C. Astrodynamics and Attitude Dynamics:
+            Gravity Assist and Flyby Dynamics. Madrid, Spain; 2023.
+        </li>
+
+        <li>
+            Bombardelli C. Astrodynamics and Attitude Dynamics:
+            The Two-Body Problem (Review). Madrid, Spain; 2025.
+        </li>
+
+        <li>
+            del Cura Velayos JM. Systems Engineering and
+            Preliminary Design of Space Vehicles. Topic 3:
+            Preliminary Design of a Space Mission. 2020.
+        </li>
+
+        <li>
+            Hardware Upgrade. ESA e ClearSpace svilupperanno
+            un satellite per prolungare la vita utile di altri
+            satelliti in orbita geostazionaria; 2024.
+        </li>
+
+        <li>
+            Hardware Upgrade. Northrop Grumman MRV-MEP; 2024.
+        </li>
+
+        <li>
+            Skybrokers. GEO Satellites Database and
+            Information; 2026.
+        </li>
+
+        <li>
+            Zorita D. et al. Autonomous Orbit Control Strategy
+            for Accurate Large Delta-V Manoeuvres; 2004.
+        </li>
+
+        <li>
+            Miravet C. et al. Image-Based Sensor System for
+            Autonomous Rendez-Vous; 2008.
+        </li>
+
+        <li>
+            Lozano González JM. et al. OPASKEP. ESA; 2006.
+        </li>
+
+        <li>
+            Tarabini L. et al. Ground guided CX-OLEV
+            rendez-vous; 2007.
+        </li>
+
+        <li>
+            Jehn R. et al. End-of-Life Disposal of
+            Geostationary Satellites; 2005.
+        </li>
+
+        <li>
+            Del Cura JM. et al. ConeXpress Orbital Life
+            Extension Vehicle GNC; 2006.
+        </li>
+
+    </ol>
+
+</details>
+
+</section>
+
+
+
+<footer class="site-footer">
+
+    <strong>
+        astroFUEL
+    </strong>
+
+    · Mission Lazarus
+
+    <br>
+
+    Deliverable 02 · Management Plan
+    · ETSIAE–UPM
+
+</footer>
+
+
+
+<!-- ============================================================
+     PRESENTATION CONTROLS
+     ============================================================ -->
+
+<div class="presentation-controls"
+     id="presentationControls">
+
+
+    <button id="presentationPrevious">
+        ← PREVIOUS
+    </button>
+
+
+    <span id="presentationLabel">
+        01 / INTRODUCTION
+    </span>
+
+
+    <button id="presentationNext">
+        NEXT →
+    </button>
+
+
+    <button id="presentationExit">
+        EXIT
+    </button>
+
+
+</div>
+
+
+
+<script>
+
+
+/* ============================================================
+   ORGANIZATION
+   ============================================================ */
+
+const organizationData = {
+
+    mission: {
+        label: "MISSION ANALYSIS",
+        title: "Mission scenarios and orbital requirements",
+        text: "Mission Analysis is responsible for defining and analysing the mission scenarios and orbital requirements."
+    },
+
+    propulsion: {
+        label: "PROPULSION",
+        title: "Spacecraft propulsion system",
+        text: "Propulsion is responsible for the design and development of the propulsion system required for spacecraft manoeuvring."
+    },
+
+    mechanics: {
+        label: "MECHANICS & STRUCTURE",
+        title: "Mechanical design and subsystem integration",
+        text: "Mechanical & Structural Engineering is responsible for the mechanical design of the spacecraft, including the primary and secondary structures, as well as for the integration of all subsystems into the spacecraft structure."
+    },
+
+    aocs: {
+        label: "AOCS / GNC",
+        title: "Attitude and orbit control",
+        text: "AOCS/GNC is responsible for the attitude and orbit control functions required throughout the mission, including maintaining the target orbits and performing the operations required to approach and service the client satellite."
+    },
+
+    power: {
+        label: "POWER MANAGEMENT",
+        title: "Electrical power generation and distribution",
+        text: "Power Management is responsible for the generation, storage and distribution of electrical power throughout the spacecraft."
+    },
+
+    thermal: {
+        label: "THERMAL MANAGEMENT",
+        title: "Thermal design and analysis",
+        text: "Thermal Management is responsible for ensuring that spacecraft components and subsystems remain within their specified operating temperature ranges."
+    },
+
+    comms: {
+        label: "COMMUNICATIONS & DATA HANDLING",
+        title: "Communications and onboard data",
+        text: "Communications & Data Handling is responsible for spacecraft communication functions, onboard data handling and data transmission."
+    },
+
+    payload: {
+        label: "PAYLOAD",
+        title: "Xenon storage, handling and servicing",
+        text: "Payload coordinates the design and development of the equipment required to store and handle Xenon and to perform servicing and refuelling of client satellites."
+    }
+
+};
+
+
+document.querySelectorAll(
+    ".org-team"
+).forEach(button => {
+
+    button.addEventListener(
+        "click",
+        () => {
+
+            document.querySelectorAll(
+                ".org-team"
+            ).forEach(
+                item =>
+                    item.classList.remove(
+                        "active"
+                    )
+            );
+
+            button.classList.add(
+                "active"
+            );
+
+            const info =
+                organizationData[
+                    button.dataset.org
+                ];
+
+            document.getElementById(
+                "orgDetailLabel"
+            ).textContent =
+                info.label;
+
+            document.getElementById(
+                "orgDetailTitle"
+            ).textContent =
+                info.title;
+
+            document.getElementById(
+                "orgDetailText"
+            ).textContent =
+                info.text;
+
+        }
+    );
+
+});
+
+
+
+/* ============================================================
+   TREE RENDERER
+   ============================================================ */
+
+function treeNodeHTML(node) {
+
+    const code =
+        node.code
+            ? `<span class="tree-code">${node.code}</span>`
+            : "";
+
+    const phase =
+        node.phase
+            ? `<span class="tree-phase">${node.phase}</span>`
+            : "";
+
+    if (
+        !node.children ||
+        node.children.length === 0
+    ) {
+
+        return `
+
+            <div class="tree-node">
+
+                <div class="tree-leaf">
+
+                    ${code}
+
+                    <span>
+                        ${node.name}
+                    </span>
+
+                    ${phase}
+
+                </div>
+
+            </div>
+
+        `;
+
+    }
+
+
+    return `
+
+        <div class="tree-node">
+
+            <details>
+
+                <summary>
+
+                    ${code}
+
+                    <span>
+                        ${node.name}
+                    </span>
+
+                    ${phase}
+
+                </summary>
+
+                <div class="tree-children">
+
+                    ${
+                        node.children
+                            .map(treeNodeHTML)
+                            .join("")
+                    }
+
+                </div>
+
+            </details>
+
+        </div>
+
+    `;
+
+}
+
+
+function renderTree(
+    elementId,
+    title,
+    code,
+    nodes
+) {
+
+    document.getElementById(
+        elementId
+    ).innerHTML = `
+
+        <div class="tree-root-label">
+
+            ${
+                code
+                    ? `${code} · `
+                    : ""
+            }
+
+            ${title}
+
+        </div>
+
+        ${
+            nodes
+                .map(treeNodeHTML)
+                .join("")
+        }
+
+    `;
+
+}
+
+
+
+/* ============================================================
+   PBS
+   ============================================================ */
+
+const pbsPreliminary = [
+
+    {
+        code: "PBS-1000",
+        name: "Space Segment",
+        children: [
+
+            {
+                code: "PBS-1100",
+                name: "Spacecraft Bus (Platform)",
+                children: [
+
+                    {code:"PBS-1110",name:"Structures & Mechanical Hardware"},
+                    {code:"PBS-1120",name:"AOCS/GNC & Proximity Hardware"},
+                    {code:"PBS-1130",name:"Propulsion System Hardware"},
+                    {code:"PBS-1140",name:"OBDH & Flight Software"},
+                    {code:"PBS-1150",name:"Power System Hardware"},
+                    {code:"PBS-1160",name:"Thermal Control System"}
+
+                ]
+            },
+
+            {
+                code: "PBS-1200",
+                name: "Payload (Refuelling & RVD)",
+                children: [
+
+                    {code:"PBS-1210",name:"Docking Mechanism"},
+                    {code:"PBS-1220",name:"Fluid Transfer System & Tanks"},
+                    {code:"PBS-1230",name:"Proximity Sensors Hardware"}
+
+                ]
+            },
+
+            {
+                code: "PBS-1300",
+                name: "Operations Deliverables",
+                children: [
+
+                    {code:"PBS-1310",name:"Integration & Test"},
+                    {code:"PBS-1320",name:"Nominal Orbit"},
+                    {code:"PBS-1330",name:"Rendezvous & Docking"},
+                    {code:"PBS-1340",name:"Refueling Operations"},
+                    {code:"PBS-1350",name:"Disposal Plan"}
+
+                ]
+            }
+
+        ]
+    },
+
+    {
+        code: "PBS-3000",
+        name: "Launch Segment",
+        children: [
+
+            {
+                code: "PBS-3000",
+                name: "Launch Interfaces",
+                children: [
+
+                    {code:"PBS-3100",name:"Payload Adapter PLA"},
+                    {code:"PBS-3200",name:"Separation System"},
+                    {code:"PBS-3300",name:"Umbilical I/F"}
+
+                ]
+            }
+
+        ]
+    }
+
+];
+
+
+const pbsComplete = [
+
+    {
+        code: "PBS-1000",
+        name: "Space Segment",
+        children: [
+
+            {
+                code: "PBS-1100",
+                name: "Spacecraft Bus (Platform)",
+                children: [
+
+                    {code:"PBS-1110",name:"Structures & Mechanical Hardware"},
+                    {code:"PBS-1120",name:"AOCS/GNC & Proximity Hardware"},
+                    {code:"PBS-1130",name:"Propulsion System Hardware"},
+                    {code:"PBS-1140",name:"OBDH & Flight Software"},
+                    {code:"PBS-1150",name:"Power System Hardware"},
+                    {code:"PBS-1160",name:"Thermal Control System"}
+
+                ]
+            },
+
+            {
+                code: "PBS-1200",
+                name: "Payload (Refuelling & RVD)",
+                children: [
+
+                    {code:"PBS-1210",name:"Docking Mechanism"},
+                    {code:"PBS-1220",name:"Fluid Transfer System & Tanks"},
+                    {code:"PBS-1230",name:"Proximity Sensors Hardware"}
+
+                ]
+            },
+
+            {
+                code: "PBS-1300",
+                name: "Operations Deliverables",
+                children: [
+
+                    {code:"PBS-1310",name:"Integration & Test"},
+                    {code:"PBS-1320",name:"Nominal Orbit"},
+                    {code:"PBS-1330",name:"Rendezvous & Docking"},
+                    {code:"PBS-1340",name:"Refueling Operations"},
+                    {code:"PBS-1350",name:"Disposal Plan"}
+
+                ]
+            }
+
+        ]
+    },
+
+    {
+        code: "PBS-2000",
+        name: "Ground Segment",
+        children: [
+
+            {code:"PBS-2100",name:"Ground Stations & Equipment"},
+            {code:"PBS-2200",name:"Mission Control & Software"}
+
+        ]
+    },
+
+    {
+        code: "PBS-3000",
+        name: "Launch Segment",
+        children: [
+
+            {code:"PBS-3100",name:"Payload Adapter PLA"},
+            {code:"PBS-3200",name:"Separation System"},
+            {code:"PBS-3300",name:"Umbilical I/F"}
+
+        ]
+    }
+
+];
+
+
+renderTree(
+    "pbsPreliminaryTree",
+    "LAZARUS SPACE SYSTEM",
+    "PBS-0000",
+    pbsPreliminary
+);
+
+
+renderTree(
+    "pbsCompleteTree",
+    "LAZARUS SPACE SYSTEM",
+    "PBS-0000",
+    pbsComplete
+);
+
+
+
+/* ============================================================
+   PHASING
+   ============================================================ */
+
+const phaseData = {
+
+    "0": {
+
+        title:
+            "Mission Analysis",
+
+        description:
+            "During this phase, the mission objectives and concept of operations are defined.",
+
+        activities: [
+            "Mission objectives",
+            "Mission requirements",
+            "Orbital scenarios",
+            "Target satellites",
+            "Concept of operations"
+        ],
+
+        milestone:
+            "Mission Concept Defined"
+
+    },
+
+
+    "A": {
+
+        title:
+            "Feasibility & Conceptual Design",
+
+        description:
+            "The feasibility of LAZARUS is assessed and different system architectures and technical solutions are analysed.",
+
+        activities: [
+            "System architectures",
+            "Technical trade-offs",
+            "Preliminary performance",
+            "Mass and power estimates",
+            "Baseline concept selection"
+        ],
+
+        milestone:
+            "Baseline Concept Selected"
+
+    },
+
+
+    "B": {
+
+        title:
+            "Preliminary Design",
+
+        description:
+            "The selected mission concept is developed into a preliminary spacecraft design.",
+
+        activities: [
+            "Spacecraft architecture",
+            "Subsystem definition",
+            "Interface definition",
+            "System budgets",
+            "Preliminary analyses"
+        ],
+
+        milestone:
+            "Preliminary Design Review (PDR)"
+
+    },
+
+
+    "C": {
+
+        title:
+            "Detailed Design",
+
+        description:
+            "The preliminary design is developed into a detailed design suitable for manufacturing, assembly, integration and testing.",
+
+        activities: [
+            "Detailed subsystem design",
+            "Component selection",
+            "Manufacturing definition",
+            "Procurement",
+            "Final analyses"
+        ],
+
+        milestone:
+            "Critical Design Review (CDR)"
+
+    },
+
+
+    "D": {
+
+        title:
+            "Manufacturing, Assembly, Integration & Testing",
+
+        description:
+            "The spacecraft components are manufactured or procured, assembled and integrated.",
+
+        activities: [
+            "Component manufacturing",
+            "Procurement",
+            "Assembly and integration",
+            "Verification and qualification",
+            "Flight readiness"
+        ],
+
+        milestone:
+            "Flight Readiness Review (FRR)"
+
+    },
+
+
+    "E": {
+
+        title:
+            "Launch & Operations",
+
+        description:
+            "The spacecraft is launched and commissioned in orbit before the planned mission operations are conducted.",
+
+        activities: [
+            "Launch campaign",
+            "Orbit injection",
+            "Commissioning",
+            "Rendezvous operations",
+            "Satellite refuelling"
+        ],
+
+        milestone:
+            "Technological Demonstration"
+
+    },
+
+
+    "F": {
+
+        title:
+            "End of Life",
+
+        description:
+            "At the end of its operational lifetime, the spacecraft is removed from active service and disposal procedures are implemented.",
+
+        activities: [
+            "End of operations",
+            "Spacecraft passivation",
+            "Disposal procedures",
+            "Regulatory compliance",
+            "Mission closure"
+        ],
+
+        milestone:
+            "Mission Closure"
+
+    }
+
+};
+
+
+function setPhase(phase) {
+
+    document.querySelectorAll(
+        ".phase-button"
+    ).forEach(button => {
+
+        button.classList.toggle(
+            "active",
+            button.dataset.phase === phase
+        );
+
+    });
+
+
+    const data =
+        phaseData[phase];
+
+
+    document.getElementById(
+        "phaseCode"
+    ).textContent =
+        `PHASE ${phase}`;
+
+
+    document.getElementById(
+        "phaseTitle"
+    ).textContent =
+        data.title;
+
+
+    document.getElementById(
+        "phaseDescription"
+    ).textContent =
+        data.description;
+
+
+    document.getElementById(
+        "phaseMilestone"
+    ).textContent =
+        data.milestone;
+
+
+    const list =
+        document.getElementById(
+            "phaseActivities"
+        );
+
+
+    list.innerHTML = "";
+
+
+    data.activities.forEach(
+        activity => {
+
+            const li =
+                document.createElement(
+                    "li"
+                );
+
+            li.textContent =
+                activity;
+
+            list.appendChild(
+                li
+            );
+
+        }
+    );
+
+}
+
+
+document.querySelectorAll(
+    ".phase-button"
+).forEach(button => {
+
+    button.addEventListener(
+        "click",
+        () =>
+            setPhase(
+                button.dataset.phase
+            )
+    );
+
+});
+
+
+setPhase("0");
+
+
+
+/* ============================================================
+   TABS
+   ============================================================ */
+
+document.querySelectorAll(
+    ".tab-button[data-tab-group]"
+).forEach(button => {
+
+    button.addEventListener(
+        "click",
+        () => {
+
+            const group =
+                button.dataset.tabGroup;
+
+            const target =
+                button.dataset.tabTarget;
+
+
+            document.querySelectorAll(
+                `.tab-button[data-tab-group="${group}"]`
+            ).forEach(item => {
+
+                item.classList.remove(
+                    "active"
+                );
+
+            });
+
+
+            button.classList.add(
+                "active"
+            );
+
+
+            const panels =
+                group === "pbs"
+                    ? ["pbsPreliminary","pbsComplete"]
+                    : ["wbsPreliminary","wbsComplete"];
+
+
+            panels.forEach(id => {
+
+                document
+                    .getElementById(id)
+                    .classList.remove(
+                        "active"
+                    );
+
+            });
+
+
+            document
+                .getElementById(target)
+                .classList.add(
+                    "active"
+                );
+
+        }
+    );
+
+});
+
+
+
+/* ============================================================
+   PLANNING
+   ============================================================ */
+
+document.querySelectorAll(
+    ".planning-button"
+).forEach(button => {
+
+    button.addEventListener(
+        "click",
+        () => {
+
+            document.querySelectorAll(
+                ".planning-button"
+            ).forEach(item => {
+
+                item.classList.remove(
+                    "active"
+                );
+
+            });
+
+
+            button.classList.add(
+                "active"
+            );
+
+
+            document.querySelectorAll(
+                ".planning-panel"
+            ).forEach(panel => {
+
+                panel.classList.remove(
+                    "active"
+                );
+
+            });
+
+
+            document.getElementById(
+                `planning-${button.dataset.planning}`
+            ).classList.add(
+                "active"
+            );
+
+        }
+    );
+
+});
+
+
+
+/* ============================================================
+   RAM
+   ============================================================ */
+
+const ramColumns = [
+    "PM",
+    "MA",
+    "MS",
+    "Prop",
+    "AOCS",
+    "Pwr",
+    "Thrm",
+    "CD",
+    "Pay"
+];
+
+
+const ramRows = [
+
+    ["WP-1000",{PM:"R"}],
+    ["WP-1100",{PM:"R"}],
+    ["WP-1110",{PM:"S",MS:"R"}],
+    ["WP-1120",{PM:"S",AOCS:"R"}],
+    ["WP-1130",{PM:"S",Prop:"R"}],
+    ["WP-1140",{PM:"S",CD:"R"}],
+    ["WP-1150",{PM:"S",Pwr:"R"}],
+    ["WP-1160",{PM:"S",Thrm:"R"}],
+    ["WP-1200",{PM:"S",Pay:"R"}],
+    ["WP-1210",{PM:"S",Pay:"R"}],
+    ["WP-1220",{PM:"S",Pay:"R"}],
+    ["WP-1230",{PM:"S",Pay:"R"}],
+    ["WP-1300",{PM:"R",MA:"S"}],
+    ["WP-1320",{PM:"R",MA:"S"}],
+    ["WP-1330",{PM:"R",MA:"S"}],
+    ["WP-1340",{PM:"R",MA:"S"}],
+    ["WP-1350",{PM:"R",MA:"S"}],
+    ["WP-3000",{PM:"R",MA:"S",MS:"S"}],
+    ["WP-3100",{PM:"R",MA:"S",MS:"S"}],
+    ["WP-3300",{PM:"R",MA:"S"}]
+
+];
+
+
+function renderRAM(filter = "all") {
+
+    const body =
+        document.getElementById(
+            "ramBody"
+        );
+
+
+    body.innerHTML = "";
+
+
+    ramRows.forEach(
+        ([wp,assignments]) => {
+
+
+            if (
+                filter !== "all" &&
+                !assignments[filter]
+            ) {
+                return;
+            }
+
+
+            const tr =
+                document.createElement(
+                    "tr"
+                );
+
+
+            const wpCell =
+                document.createElement(
+                    "td"
+                );
+
+
+            wpCell.textContent =
+                wp;
+
+
+            tr.appendChild(
+                wpCell
+            );
+
+
+            ramColumns.forEach(
+                column => {
+
+                    const td =
+                        document.createElement(
+                            "td"
+                        );
+
+
+                    const value =
+                        assignments[column] || "";
+
+
+                    td.textContent =
+                        value;
+
+
+                    if (value === "R") {
+                        td.classList.add(
+                            "ram-R"
+                        );
+                    }
+
+
+                    if (value === "S") {
+                        td.classList.add(
+                            "ram-S"
+                        );
+                    }
+
+
+                    tr.appendChild(
+                        td
+                    );
+
+                }
+            );
+
+
+            body.appendChild(
+                tr
+            );
+
+        }
+    );
+
+}
+
+
+renderRAM();
+
+
+document.querySelectorAll(
+    ".ram-filter"
+).forEach(button => {
+
+    button.addEventListener(
+        "click",
+        () => {
+
+            document.querySelectorAll(
+                ".ram-filter"
+            ).forEach(item => {
+
+                item.classList.remove(
+                    "active"
+                );
+
+            });
+
+
+            button.classList.add(
+                "active"
+            );
+
+
+            renderRAM(
+                button.dataset.ramCol
+            );
+
+        }
+    );
+
+});
+
+
+
+/* ============================================================
+   RISKS
+   ============================================================ */
+
+const riskData = {
+
+    "1": {
+
+        title:
+            "Not accurate docking maneuver",
+
+        type:
+            "Tech / Cost",
+
+        impact:
+            "0.95",
+
+        probability:
+            "0.05",
+
+        level:
+            "Medium-High",
+
+        text:
+            "LAZARUS must perform accurate rendezvous and docking operations with the client satellite. An error during proximity operations could interfere with the client mission or, in the worst case, cause a collision and generate new space debris.",
+
+        mitigation:
+            "Redundant proximity sensors, extensive testing and autonomous collision-avoidance software able to execute an immediate abort sequence when tolerances are exceeded."
+
+    },
+
+
+    "2": {
+
+        title:
+            "Malfunctioning during the refueling",
+
+        type:
+            "Tech",
+
+        impact:
+            "0.8",
+
+        probability:
+            "0.20",
+
+        level:
+            "High",
+
+        text:
+            "During the transfer phase, pumps, valves, seals, the pressurization system and the refuelling interface must operate correctly. A leak or malfunction could compromise the Xenon transfer and the ability to serve later clients.",
+
+        mitigation:
+            "Ground testing of the pumping and transfer system under representative vacuum and thermal conditions, together with redundancy in isolation valves."
+
+    },
+
+
+    "3": {
+
+        title:
+            "Fuel waste and Delta-V management",
+
+        type:
+            "Cost",
+
+        impact:
+            "0.2",
+
+        probability:
+            "0.40",
+
+        level:
+            "Low",
+
+        text:
+            "Unexpected orbital manoeuvres or higher Delta-V requirements may consume more propellant than expected and reduce the number of clients that LAZARUS can service during its lifetime.",
+
+        mitigation:
+            "Proactive trajectory analysis and a dedicated propellant margin for unexpected manoeuvres."
+
+    },
+
+
+    "4": {
+
+        title:
+            "Component performance and lack of flight heritage",
+
+        type:
+            "Tech",
+
+        impact:
+            "0.5",
+
+        probability:
+            "0.4",
+
+        level:
+            "Low",
+
+        text:
+            "Critical mechanisms and payload equipment developed specifically for LAZARUS may not perform in the space environment exactly as they did during ground testing.",
+
+        mitigation:
+            "Technology maturation, early environmental testing, lessons learned from previous missions and early involvement of manufacturing teams during prototyping."
+
+    },
+
+
+    "5": {
+
+        title:
+            "Schedule Risks",
+
+        type:
+            "Sched",
+
+        impact:
+            "0.4",
+
+        probability:
+            "0.2",
+
+        level:
+            "Very Low",
+
+        text:
+            "Significant delays during development or launch could prevent LAZARUS from reaching contracted clients within the required time and may lead to contractual or economic consequences.",
+
+        mitigation:
+            "Adequate schedule margins and parallel development paths for the most critical payload components."
+
+    },
+
+
+    "6": {
+
+        title:
+            "Market and economics risks",
+
+        type:
+            "Cost",
+
+        impact:
+            "0.6",
+
+        probability:
+            "0.2",
+
+        level:
+            "Low",
+
+        text:
+            "The project is exposed to Xenon price fluctuations, supply limitations and the possible loss of a pre-contracted client before the refuelling service can be performed.",
+
+        mitigation:
+            "Long-term Xenon supply contracts and a prioritized list of alternative GEO clients supported by flexible trajectory optimization models."
+
+    }
+
+};
+
+
+function setRisk(number) {
+
+    document.querySelectorAll(
+        ".risk-button"
+    ).forEach(button => {
+
+        button.classList.toggle(
+            "active",
+            button.dataset.risk === number
+        );
+
+    });
+
+
+    const data =
+        riskData[number];
+
+
+    document.getElementById(
+        "riskNumber"
+    ).textContent =
+        `RISK ${number.padStart(2,"0")}`;
+
+
+    document.getElementById(
+        "riskTitle"
+    ).textContent =
+        data.title;
+
+
+    document.getElementById(
+        "riskText"
+    ).textContent =
+        data.text;
+
+
+    document.getElementById(
+        "riskMitigation"
+    ).textContent =
+        data.mitigation;
+
+
+    document.getElementById(
+        "riskType"
+    ).textContent =
+        data.type;
+
+
+    document.getElementById(
+        "riskImpact"
+    ).textContent =
+        data.impact;
+
+
+    document.getElementById(
+        "riskProbability"
+    ).textContent =
+        data.probability;
+
+
+    document.getElementById(
+        "riskLevel"
+    ).textContent =
+        data.level;
+
+}
+
+
+document.querySelectorAll(
+    ".risk-button"
+).forEach(button => {
+
+    button.addEventListener(
+        "click",
+        () =>
+            setRisk(
+                button.dataset.risk
+            )
+    );
+
+});
+
+
+setRisk("1");
+
+
+
+/* ============================================================
+   WBS
+   ============================================================ */
+
+const wbsPreliminary = [
+
+    {
+        code:"WP-1000",
+        name:"Space Segment",
+        children:[
+
+            {
+                code:"WP-1100",
+                name:"Subsystems",
+                children:[
+
+                    {code:"WP-1110",name:"Structures & Mechanics"},
+                    {code:"WP-1120",name:"AOCS/GNC & Proximity"},
+                    {code:"WP-1130",name:"Propulsion System"},
+                    {code:"WP-1140",name:"OBDH & Software"},
+                    {code:"WP-1150",name:"Power System"},
+                    {code:"WP-1160",name:"Thermal Control"}
+
+                ]
+            },
+
+            {
+                code:"WP-1200",
+                name:"Payloads (Refueling)",
+                children:[
+
+                    {code:"WP-1210",name:"Docking Mechanism"},
+                    {code:"WP-1220",name:"Fluid Transfer System"},
+                    {code:"WP-1230",name:"Proximity Sensors"}
+
+                ]
+            },
+
+            {
+                code:"WP-1300",
+                name:"Operations",
+                children:[
+
+                    {code:"WP-1320",name:"Nominal Orbit"},
+                    {code:"WP-1330",name:"Rendezvous & Docking"},
+                    {code:"WP-1340",name:"Refueling Operations"},
+                    {code:"WP-1350",name:"Disposal Plan"}
+
+                ]
+            }
+
+        ]
+    },
+
+    {
+        code:"WP-3000",
+        name:"Launcher",
+        children:[
+
+            {code:"WP-3100",name:"Launcher Selection"},
+            {code:"WP-3300",name:"Injection Orbit"}
+
+        ]
+    }
+
+];
+
+
+const wbsComplete = [
+
+    {
+        code:"WP-0000",
+        name:"Management",
+        children:[
+
+            {
+                code:"WP-0100",
+                name:"Planning",
+                children:[
+
+                    {code:"WP-0110",name:"Project Management Plan",phase:"0+A–B"},
+                    {code:"WP-0120",name:"Phasing and milestones",phase:"0+A–B"},
+                    {code:"WP-0130",name:"Project Work Plan",phase:"0+A–F"},
+                    {code:"WP-0140",name:"PBS and WBS",phase:"0+A–B"}
+
+                ]
+            },
+
+            {
+                code:"WP-0200",
+                name:"Risk Management",
+                children:[
+
+                    {code:"WP-0210",name:"Risk identification",phase:"0+A–B"},
+                    {code:"WP-0220",name:"Risk assessment",phase:"0+A–F"},
+                    {code:"WP-0230",name:"Mitigation actions",phase:"0+A–F"},
+                    {code:"WP-0240",name:"Risk register",phase:"0+A–F"}
+
+                ]
+            },
+
+            {
+                code:"WP-0300",
+                name:"Cost & Schedule",
+                children:[
+
+                    {code:"WP-0310",name:"Manpower and Cost Plan",phase:"0+A–B"},
+                    {code:"WP-0320",name:"Monitoring vs baseline",phase:"0+A–F"},
+                    {code:"WP-0330",name:"Cost at completion",phase:"0+A–F"}
+
+                ]
+            },
+
+            {
+                code:"WP-0400",
+                name:"Documentation & Reviews",
+                children:[
+
+                    {code:"WP-0410",name:"Documents and configuration",phase:"0+A–F"},
+                    {code:"WP-0420",name:"MDR",phase:"0+A"},
+                    {code:"WP-0430",name:"PRR",phase:"A"},
+                    {code:"WP-0440",name:"SRR",phase:"B"},
+                    {code:"WP-0450",name:"PDR",phase:"B"},
+                    {code:"WP-0460",name:"CDR",phase:"C"},
+                    {code:"WP-0470",name:"QR",phase:"D"},
+                    {code:"WP-0480",name:"FAR",phase:"D"}
+
+                ]
+            }
+
+        ]
+    },
+
+    {
+        code:"WP-1000",
+        name:"Space Segment",
+        children:[
+
+            {
+                code:"WP-1100",
+                name:"Subsystems",
+                children:[
+
+                    {
+                        code:"WP-1110",
+                        name:"Structures",
+                        children:[
+
+                            {code:"WP-1111",name:"Requirements and trade-offs",phase:"A–B"},
+                            {code:"WP-1112",name:"Detailed design and FEM",phase:"B–C"},
+                            {code:"WP-1113",name:"Manufacturing",phase:"C–D"},
+                            {code:"WP-1114",name:"AIT",phase:"D"}
+
+                        ]
+                    },
+
+                    {
+                        code:"WP-1120",
+                        name:"AOCS/GNC & Proximity",
+                        children:[
+
+                            {code:"WP-1121",name:"Sensors and actuators",phase:"A–B"},
+                            {code:"WP-1122",name:"GNC algorithms",phase:"B–C"},
+                            {code:"WP-1123",name:"Proximity vision system",phase:"C–D"},
+                            {code:"WP-1124",name:"HWIL testing",phase:"D"}
+
+                        ]
+                    },
+
+                    {
+                        code:"WP-1130",
+                        name:"Propulsion",
+                        children:[
+
+                            {code:"WP-1131",name:"Thrusters and tanks sizing",phase:"A–C"},
+                            {code:"WP-1132",name:"Feed system and valves",phase:"B–C"},
+                            {code:"WP-1133",name:"Pressurization integration",phase:"C–D"},
+                            {code:"WP-1134",name:"Firing and qualification tests",phase:"D"}
+
+                        ]
+                    },
+
+                    {
+                        code:"WP-1140",
+                        name:"OBDH & Software",
+                        children:[
+
+                            {code:"WP-1141",name:"OBC architecture",phase:"A–C"},
+                            {code:"WP-1142",name:"Data buses",phase:"B–C"},
+                            {code:"WP-1143",name:"Flight Software",phase:"B–D"},
+                            {code:"WP-1144",name:"Software validation",phase:"D"}
+
+                        ]
+                    },
+
+                    {
+                        code:"WP-1150",
+                        name:"Power",
+                        children:[
+
+                            {code:"WP-1151",name:"Solar arrays",phase:"A–C"},
+                            {code:"WP-1152",name:"Battery and PCDU",phase:"B–C"},
+                            {code:"WP-1153",name:"Power distribution",phase:"C–D"},
+                            {code:"WP-1154",name:"Electrical integration",phase:"D"}
+
+                        ]
+                    },
+
+                    {
+                        code:"WP-1160",
+                        name:"Thermal",
+                        children:[
+
+                            {code:"WP-1161",name:"MLI and coatings",phase:"B–C"},
+                            {code:"WP-1162",name:"Heaters and thermistors",phase:"B–C"},
+                            {code:"WP-1163",name:"Thermal analysis",phase:"B–C"},
+                            {code:"WP-1164",name:"TVAC",phase:"D"}
+
+                        ]
+                    }
+
+                ]
+            },
+
+            {
+                code:"WP-1200",
+                name:"Payload",
+                children:[
+
+                    {
+                        code:"WP-1210",
+                        name:"Docking Mechanism",
+                        children:[
+
+                            {code:"WP-1211",name:"Mechanical design",phase:"A–C"},
+                            {code:"WP-1212",name:"Actuators and latches",phase:"C–D"},
+                            {code:"WP-1213",name:"Validation testing",phase:"D"}
+
+                        ]
+                    },
+
+                    {
+                        code:"WP-1220",
+                        name:"Fluid Transfer",
+                        children:[
+
+                            {code:"WP-1221",name:"Pumps and valves",phase:"A–C"},
+                            {code:"WP-1222",name:"Storage tanks",phase:"B–D"},
+                            {code:"WP-1223",name:"Flow control and leak testing",phase:"D"}
+
+                        ]
+                    },
+
+                    {
+                        code:"WP-1230",
+                        name:"Proximity Sensors",
+                        children:[
+
+                            {code:"WP-1231",name:"LiDAR / Cameras",phase:"B–C"},
+                            {code:"WP-1232",name:"Radar systems",phase:"B–C"},
+                            {code:"WP-1233",name:"Data Processing Unit",phase:"C–D"}
+
+                        ]
+                    }
+
+                ]
+            },
+
+            {
+                code:"WP-1300",
+                name:"Operations",
+                children:[
+
+                    {code:"WP-1310",name:"Integration & Test"},
+                    {code:"WP-1320",name:"Nominal Orbit"},
+                    {code:"WP-1330",name:"Rendezvous"},
+                    {code:"WP-1340",name:"Refueling Operations"},
+                    {code:"WP-1350",name:"Disposal Plan"}
+
+                ]
+            }
+
+        ]
+    },
+
+    {
+        code:"WP-2000",
+        name:"Ground Segment",
+        children:[
+
+            {code:"WP-2100",name:"Ground Segment Development"},
+            {code:"WP-2200",name:"Mission Control & Software"}
+
+        ]
+    },
+
+    {
+        code:"WP-3000",
+        name:"Launcher",
+        children:[
+
+            {code:"WP-3100",name:"Launcher Selection"},
+            {code:"WP-3200",name:"Launch Campaign"},
+            {code:"WP-3300",name:"Launch Operations"}
+
+        ]
+    }
+
+];
+
+
+renderTree(
+    "wbsPreliminaryTree",
+    "LAZARUS · PRELIMINARY DESIGN",
+    "",
+    wbsPreliminary
+);
+
+
+renderTree(
+    "wbsCompleteTree",
+    "LAZARUS · COMPLETE PROJECT",
+    "",
+    wbsComplete
+);
+
+
+
+/* ============================================================
+   WBS EXPAND / COLLAPSE
+   ============================================================ */
+
+function activeWBSPanel() {
+
+    return document.querySelector(
+        "#wbs .tab-panel.active"
+    );
+
+}
+
+
+document.getElementById(
+    "wbsExpand"
+).addEventListener(
+    "click",
+    () => {
+
+        activeWBSPanel()
+            .querySelectorAll(
+                "details"
+            )
+            .forEach(detail => {
+
+                detail.open = true;
+
+            });
+
+    }
+);
+
+
+document.getElementById(
+    "wbsCollapse"
+).addEventListener(
+    "click",
+    () => {
+
+        activeWBSPanel()
+            .querySelectorAll(
+                "details"
+            )
+            .forEach(detail => {
+
+                detail.open = false;
+
+            });
+
+    }
+);
+
+
+
+/* ============================================================
+   ACTIVE SECTION
+   ============================================================ */
+
+const mpSections =
+    [
+        ...document.querySelectorAll(
+            ".mp-section"
+        )
+    ];
+
+
+const navLinks =
+    [
+        ...document.querySelectorAll(
+            ".document-nav a"
+        )
+    ];
+
+
+const observer =
+    new IntersectionObserver(
+
+        entries => {
+
+            entries.forEach(entry => {
+
+                if (!entry.isIntersecting) {
+                    return;
+                }
+
+
+                navLinks.forEach(link => {
+
+                    link.classList.remove(
+                        "active"
+                    );
+
+                });
+
+
+                const current =
+                    document.querySelector(
+                        `.document-nav a[href="#${entry.target.id}"]`
+                    );
+
+
+                if (current) {
+
+                    current.classList.add(
+                        "active"
+                    );
+
+                }
+
+            });
+
+        },
+
+        {
+            threshold: .38
+        }
+
+    );
+
+
+mpSections.forEach(
+    section =>
+        observer.observe(
+            section
+        )
+);
+
+
+
+/* ============================================================
+   PRESENTATION MODE
+   ============================================================ */
+
+const presentationNames = [
+
+    "01 / INTRODUCTION",
+    "02 / ORGANIZATION",
+    "03 / PBS",
+    "04 / PHASING",
+    "05 / PLANNING",
+    "06 / RISKS",
+    "07 / WBS"
+
+];
+
+
+let presentationIndex = 0;
+
+
+function showPresentationSection() {
+
+    mpSections.forEach(
+        section =>
+            section.classList.remove(
+                "presentation-current"
+            )
+    );
+
+
+    mpSections[
+        presentationIndex
+    ].classList.add(
+        "presentation-current"
+    );
+
+
+    document.getElementById(
+        "presentationLabel"
+    ).textContent =
+        presentationNames[
+            presentationIndex
+        ];
+
+
+    window.scrollTo(
+        0,
+        0
+    );
+
+}
+
+
+function startPresentation() {
+
+    document.body.classList.add(
+        "presentation-mode"
+    );
+
+    presentationIndex = 0;
+
+    showPresentationSection();
+
+}
+
+
+function exitPresentation() {
+
+    document.body.classList.remove(
+        "presentation-mode"
+    );
+
+    mpSections.forEach(
+        section =>
+            section.classList.remove(
+                "presentation-current"
+            )
+    );
+
+}
+
+
+document.getElementById(
+    "startPresentation"
+).addEventListener(
+    "click",
+    startPresentation
+);
+
+
+document.getElementById(
+    "headerPresent"
+).addEventListener(
+    "click",
+    startPresentation
+);
+
+
+document.getElementById(
+    "presentationNext"
+).addEventListener(
+    "click",
+    () => {
+
+        presentationIndex =
+            Math.min(
+                mpSections.length - 1,
+                presentationIndex + 1
+            );
+
+        showPresentationSection();
+
+    }
+);
+
+
+document.getElementById(
+    "presentationPrevious"
+).addEventListener(
+    "click",
+    () => {
+
+        presentationIndex =
+            Math.max(
+                0,
+                presentationIndex - 1
+            );
+
+        showPresentationSection();
+
+    }
+);
+
+
+document.getElementById(
+    "presentationExit"
+).addEventListener(
+    "click",
+    exitPresentation
+);
+
+
+document.addEventListener(
+    "keydown",
+    event => {
+
+        if (
+            !document.body.classList.contains(
+                "presentation-mode"
+            )
+        ) {
+            return;
+        }
+
+
+        if (
+            event.key === "ArrowRight"
+        ) {
+
+            presentationIndex =
+                Math.min(
+                    mpSections.length - 1,
+                    presentationIndex + 1
+                );
+
+            showPresentationSection();
+
+        }
+
+
+        if (
+            event.key === "ArrowLeft"
+        ) {
+
+            presentationIndex =
+                Math.max(
+                    0,
+                    presentationIndex - 1
+                );
+
+            showPresentationSection();
+
+        }
+
+
+        if (
+            event.key === "Escape"
+        ) {
+
+            exitPresentation();
+
+        }
+
+    }
+);
+
+
+</script>
+
+
+</body>
+
+</html>
