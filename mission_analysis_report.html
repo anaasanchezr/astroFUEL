@@ -1,0 +1,849 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Lazarous · Mission Analysis Report | astroFUEL</title>
+<style>
+:root{
+  --navy:#0B1628;
+  --navy2:#142C4D;
+  --navy3:#1B3658;
+  --blue:#2E6FAF;
+  --gold:#C9A764;
+  --gold2:#E0C48E;
+  --white:#F5F7FA;
+  --text:#142C4D;
+  --muted:#61758A;
+  --line:#DCE4ED;
+  --red:#D52B2B;
+  --green:#2D8C73;
+  --panel:#FFFFFF;
+  --shadow:0 18px 55px rgba(11,22,40,.10);
+  --header:64px;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth;scroll-snap-type:y proximity}
+body{
+  margin:0;
+  font-family:Arial,Helvetica,sans-serif;
+  color:var(--text);
+  background:#EEF2F6;
+}
+a{color:inherit;text-decoration:none}
+button{font:inherit}
+img{display:block;max-width:100%}
+
+.site-header{
+  height:var(--header);
+  position:fixed;top:0;left:0;right:0;z-index:1000;
+  display:flex;align-items:center;justify-content:space-between;
+  padding:0 clamp(18px,4vw,68px);
+  background:rgba(255,255,255,.94);
+  border-bottom:1px solid #E5EAF0;
+  backdrop-filter:blur(14px);
+}
+.brand{display:flex;align-items:center;gap:14px;font-weight:900;letter-spacing:.06em}
+.brand img{width:142px;height:auto}
+.brand .doc{font-size:11px;color:#66798D;letter-spacing:1.4px;text-transform:uppercase}
+.header-actions{display:flex;gap:18px;align-items:center}
+.header-actions a,.header-actions button{
+  border:0;background:transparent;color:var(--navy2);
+  font-size:11px;font-weight:800;letter-spacing:1px;cursor:pointer;
+}
+.header-actions a:hover,.header-actions button:hover{color:var(--gold)}
+
+.chapter-rail{
+  position:fixed;right:18px;top:50%;transform:translateY(-50%);
+  z-index:800;display:flex;flex-direction:column;gap:8px;
+}
+.chapter-rail a{
+  width:8px;height:8px;border-radius:50%;
+  background:#B8C3D0;border:1px solid white;
+  box-shadow:0 1px 5px rgba(0,0,0,.15);
+  transition:.2s;
+}
+.chapter-rail a:hover{transform:scale(1.6);background:var(--gold)}
+
+.slide{
+  min-height:100svh;
+  padding:calc(var(--header) + 46px) clamp(22px,5vw,78px) 52px;
+  display:flex;align-items:center;
+  scroll-snap-align:start;
+  position:relative;overflow:hidden;
+}
+.slide.dark{
+  color:white;
+  background:
+    radial-gradient(circle at 15% 15%,rgba(46,111,175,.24),transparent 28%),
+    radial-gradient(circle at 85% 80%,rgba(201,167,100,.12),transparent 25%),
+    linear-gradient(145deg,#081426,#0D213D 56%,#102A4C);
+}
+.slide.light{background:#F5F7FA}
+.slide.soft{background:#EAF0F6}
+.wrap{width:min(1240px,100%);margin:auto}
+
+.kicker{
+  display:inline-flex;align-items:center;gap:9px;
+  font-size:11px;font-weight:900;letter-spacing:2.2px;text-transform:uppercase;
+  color:var(--gold);margin-bottom:14px;
+}
+.kicker::before{content:"";width:28px;height:2px;background:currentColor}
+.slide.light .kicker,.slide.soft .kicker{color:#A5844D}
+
+h1,h2,h3{margin:0;line-height:1.05}
+h1{font-size:clamp(45px,7vw,86px);max-width:9.7ch}
+h2{font-size:clamp(34px,4.8vw,64px);max-width:15ch}
+h3{font-size:clamp(19px,2vw,27px)}
+.lead{
+  font-size:clamp(17px,1.7vw,22px);line-height:1.55;
+  max-width:780px;margin:20px 0 0;color:#B8C7DA;
+}
+.light .lead,.soft .lead{color:var(--muted)}
+.small{font-size:13px;line-height:1.55;color:#708297}
+.dark .small{color:#AFC0D4}
+
+.hero-grid{display:grid;grid-template-columns:1.05fr .95fr;gap:56px;align-items:center}
+.actions{display:flex;flex-wrap:wrap;gap:11px;margin-top:28px}
+.btn{
+  display:inline-flex;align-items:center;justify-content:center;
+  padding:13px 18px;border-radius:7px;border:1px solid rgba(255,255,255,.24);
+  font-size:11px;font-weight:900;letter-spacing:1.2px;text-transform:uppercase;
+}
+.btn.primary{background:var(--gold);color:var(--navy);border-color:var(--gold)}
+.btn.light{background:white;color:var(--navy);border-color:#D7DEE6}
+.btn:hover{transform:translateY(-1px)}
+.hero-orbit{
+  aspect-ratio:1/1;border-radius:50%;position:relative;
+  display:grid;place-items:center;
+}
+.orbit-ring{position:absolute;border:1px solid rgba(255,255,255,.18);border-radius:50%}
+.orbit-ring.r1{inset:17%}
+.orbit-ring.r2{inset:7%;border-style:dashed}
+.earth{
+  width:31%;aspect-ratio:1;border-radius:50%;
+  background:radial-gradient(circle at 35% 30%,#5CB7E8,#2C6C9E 42%,#183C68 70%);
+  box-shadow:inset -18px -13px 30px rgba(0,0,0,.35),0 0 50px rgba(62,143,208,.25);
+}
+.hero-sat{
+  position:absolute;right:4%;top:41%;
+  width:12px;height:12px;border-radius:50%;background:var(--gold);
+  box-shadow:0 0 20px var(--gold);
+}
+.hero-sat::after{
+  content:"GEO-P";position:absolute;left:18px;top:-3px;
+  color:#D9E6F5;font-size:10px;font-weight:800;letter-spacing:1px
+}
+
+.metric-row{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-top:28px}
+.metric{
+  border:1px solid rgba(255,255,255,.14);
+  background:rgba(255,255,255,.055);border-radius:12px;padding:17px;
+}
+.light .metric,.soft .metric{background:white;border-color:var(--line);box-shadow:0 8px 30px rgba(11,22,40,.04)}
+.metric span{display:block;font-size:10px;font-weight:900;letter-spacing:1.3px;text-transform:uppercase;color:#93A8BF}
+.metric strong{display:block;font-size:clamp(22px,2.5vw,35px);margin-top:6px}
+.metric small{display:block;margin-top:6px;color:#AFC0D4;line-height:1.4}
+.light .metric small,.soft .metric small{color:#718398}
+
+.slide-head{display:flex;justify-content:space-between;align-items:end;gap:30px;margin-bottom:28px}
+.slide-head h2{max-width:18ch}
+.slide-head .intro{max-width:590px;margin:0;color:var(--muted);font-size:16px;line-height:1.6}
+.dark .slide-head .intro{color:#B8C7DA}
+
+.grid-2{display:grid;grid-template-columns:1fr 1fr;gap:20px}
+.grid-3{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+.grid-4{display:grid;grid-template-columns:repeat(4,1fr);gap:14px}
+
+.card{
+  background:white;border:1px solid var(--line);border-radius:14px;
+  padding:20px;box-shadow:0 9px 28px rgba(11,22,40,.04)
+}
+.dark .card{background:rgba(255,255,255,.06);border-color:rgba(255,255,255,.14);box-shadow:none}
+.card .label{font-size:10px;font-weight:900;letter-spacing:1.4px;text-transform:uppercase;color:#A5844D;margin-bottom:9px}
+.dark .card .label{color:var(--gold)}
+.card p{margin:9px 0 0;color:var(--muted);line-height:1.55;font-size:14px}
+.dark .card p{color:#B8C7DA}
+.card strong.big{display:block;font-size:30px;margin-top:5px}
+
+.revision-card{border-top:4px solid var(--red)}
+.revision-card .label{color:var(--red)}
+.revision-red{color:var(--red)}
+
+.arch-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:11px}
+.arch{
+  padding:17px;border-radius:12px;background:white;border:1px solid var(--line);
+  min-height:125px;display:flex;flex-direction:column;justify-content:space-between
+}
+.arch .n{font-size:10px;font-weight:900;color:#8798A9;letter-spacing:1.3px}
+.arch strong{font-size:17px;line-height:1.25}
+.arch em{font-size:12px;color:#A5844D;font-style:normal;font-weight:800}
+
+.client-line{display:grid;grid-template-columns:repeat(5,1fr);gap:0;margin-top:28px;position:relative}
+.client-line::before{
+  content:"";position:absolute;left:8%;right:8%;top:38px;height:2px;background:#B7C6D5
+}
+.client{
+  position:relative;text-align:center;padding-top:0
+}
+.client .dot{
+  width:18px;height:18px;margin:29px auto 13px;border-radius:50%;
+  background:var(--gold);border:4px solid #F5F7FA;box-shadow:0 0 0 1px var(--gold);
+  position:relative;z-index:2
+}
+.client strong{font-size:24px}
+.client span{display:block;margin-top:5px;font-size:12px;color:#61758A}
+
+.launcher-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-top:20px}
+.launcher{background:white;border:1px solid var(--line);border-radius:12px;padding:17px}
+.launcher.selected{border:2px solid var(--gold);box-shadow:0 8px 28px rgba(201,167,100,.16)}
+.launcher .top{display:flex;justify-content:space-between;gap:8px;align-items:center}
+.launcher .top span{font-size:9px;font-weight:900;letter-spacing:1px;color:#A5844D}
+.launcher strong{font-size:18px}
+.launcher dl{display:grid;grid-template-columns:1fr auto;gap:7px 12px;margin:15px 0 0;font-size:12px}
+.launcher dt{color:#708297}.launcher dd{margin:0;font-weight:800}
+
+.approach{
+  display:grid;grid-template-columns:1fr;gap:13px;margin-top:28px;
+  position:relative;padding:36px 24px 28px;background:white;border:1px solid var(--line);border-radius:16px;
+}
+.approach-track{
+  display:grid;grid-template-columns:repeat(6,1fr);align-items:center;position:relative;
+}
+.approach-track::before{
+  content:"";position:absolute;left:5%;right:5%;top:50%;height:3px;background:linear-gradient(90deg,#5E88B2,#C9A764);
+  transform:translateY(-50%)
+}
+.hold{position:relative;text-align:center;z-index:2}
+.hold .node{
+  width:34px;height:34px;border-radius:50%;background:var(--navy2);color:white;
+  display:grid;place-items:center;margin:auto;border:5px solid white;box-shadow:0 0 0 1px #B9C6D3;
+  font-size:10px;font-weight:900
+}
+.hold.client-node .node{width:48px;height:48px;background:var(--gold);color:var(--navy)}
+.hold span{display:block;margin-top:10px;font-size:12px;font-weight:800}
+.velocities{display:grid;grid-template-columns:repeat(5,1fr);gap:8px}
+.velocity{text-align:center;padding:10px 6px;background:#EFF4F8;border-radius:8px;font-size:11px}
+.velocity b{display:block;color:var(--navy2);font-size:14px}
+
+.figure{
+  background:white;border:1px solid var(--line);border-radius:14px;padding:12px;
+  box-shadow:var(--shadow);overflow:hidden
+}
+.figure img{width:100%;height:auto;object-fit:contain;cursor:zoom-in}
+.figure figcaption{font-size:12px;line-height:1.45;color:#61758A;padding:11px 5px 3px}
+.dark .figure{box-shadow:0 14px 50px rgba(0,0,0,.25)}
+
+.figure-pair{display:grid;grid-template-columns:1fr 1fr;gap:18px}
+.figure-feature{display:grid;grid-template-columns:1.35fr .65fr;gap:24px;align-items:center}
+.figure-feature.reverse{grid-template-columns:.65fr 1.35fr}
+
+.callout{
+  border-left:4px solid var(--gold);padding:14px 0 14px 17px;margin-top:18px;
+  font-size:15px;line-height:1.55;color:var(--muted)
+}
+.dark .callout{color:#C3D0DF}
+
+.result-list{display:grid;gap:9px;margin-top:18px}
+.result{
+  display:flex;justify-content:space-between;gap:20px;padding:12px 0;
+  border-bottom:1px solid var(--line);font-size:14px
+}
+.dark .result{border-color:rgba(255,255,255,.13)}
+.result span{color:var(--muted)}.dark .result span{color:#B8C7DA}
+.result b{white-space:nowrap}
+
+.tabs{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:15px}
+.tab{
+  padding:9px 12px;border-radius:999px;border:1px solid var(--line);background:white;
+  font-size:10px;font-weight:900;letter-spacing:1px;cursor:pointer;color:var(--navy2)
+}
+.tab.active{background:var(--navy2);color:white;border-color:var(--navy2)}
+.tabview{display:none}.tabview.active{display:block}
+
+.service-cards{display:grid;grid-template-columns:repeat(5,1fr);gap:10px}
+.service{
+  border-radius:12px;padding:16px;background:white;border:1px solid var(--line)
+}
+.service h3{font-size:24px;color:var(--gold)}
+.service .date{font-size:11px;font-weight:900;margin:7px 0 13px}
+.service .kv{display:flex;justify-content:space-between;gap:8px;font-size:11px;padding:5px 0;border-top:1px solid #EDF1F5}
+.service .kv span{color:#75879A}
+
+.band-grid{display:grid;grid-template-columns:1fr 1fr;gap:18px}
+.station-tags{display:flex;flex-wrap:wrap;gap:7px;margin-top:12px}
+.station-tags span{padding:7px 10px;background:#EDF3F8;border-radius:999px;font-size:11px;font-weight:800}
+
+.budget{
+  display:grid;grid-template-columns:1fr 1fr;gap:28px;align-items:center
+}
+.budget-bar{display:grid;gap:15px}
+.bar-row{display:grid;grid-template-columns:160px 1fr 90px;gap:12px;align-items:center;font-size:12px}
+.bar-row span{color:#61758A}
+.bar{height:12px;background:#E2E8EE;border-radius:999px;overflow:hidden}
+.bar > i{height:100%;display:block;border-radius:inherit;background:linear-gradient(90deg,#2E6FAF,#7DB5DC)}
+.bar-row.transfer .bar > i{background:linear-gradient(90deg,#A5844D,#E0C48E)}
+
+.mass-stack{display:flex;height:52px;border-radius:8px;overflow:hidden;margin-top:18px}
+.mass-stack div{display:grid;place-items:center;font-size:11px;font-weight:900;color:white}
+.mass-dry{background:#142C4D}
+.mass-prop{background:#2E6FAF}
+.mass-pay{background:#C9A764;color:#0B1628!important}
+
+.cg-layout{display:grid;grid-template-columns:1.4fr .6fr;gap:22px;align-items:center}
+.cg-stats{display:grid;gap:11px}
+.cg-stat{padding:15px;border-radius:11px;background:white;border:1px solid var(--line)}
+.cg-stat span{display:block;font-size:10px;color:#718398;font-weight:900;letter-spacing:1px;text-transform:uppercase}
+.cg-stat strong{display:block;font-size:25px;margin-top:5px}
+
+.presentation-controls{
+  position:fixed;left:50%;bottom:15px;transform:translateX(-50%);
+  z-index:900;display:none;align-items:center;gap:9px;
+  padding:8px 10px;border-radius:999px;background:rgba(11,22,40,.9);color:white;
+  box-shadow:0 8px 30px rgba(0,0,0,.25)
+}
+body.presenting .presentation-controls{display:flex}
+.presentation-controls button{
+  width:34px;height:34px;border-radius:50%;border:1px solid rgba(255,255,255,.2);
+  background:transparent;color:white;cursor:pointer;font-weight:900
+}
+.presentation-controls span{min-width:70px;text-align:center;font-size:11px;font-weight:800}
+body.presenting .site-header{opacity:.12}
+body.presenting .site-header:hover{opacity:1}
+body.presenting .chapter-rail{display:none}
+
+.modal{
+  position:fixed;inset:0;z-index:2000;background:rgba(4,10,20,.92);
+  display:none;place-items:center;padding:24px;cursor:zoom-out
+}
+.modal.open{display:grid}
+.modal img{max-width:96vw;max-height:92vh;object-fit:contain;background:white;border-radius:8px}
+
+.source-note{
+  position:absolute;bottom:16px;right:clamp(22px,5vw,78px);
+  font-size:9px;letter-spacing:.8px;text-transform:uppercase;color:#95A5B5
+}
+.dark .source-note{color:#7890AA}
+
+@media(max-width:1000px){
+  .hero-grid,.figure-feature,.figure-feature.reverse,.budget,.cg-layout{grid-template-columns:1fr}
+  .grid-4,.arch-grid,.launcher-grid,.metric-row{grid-template-columns:repeat(2,1fr)}
+  .grid-3{grid-template-columns:1fr 1fr}
+  .service-cards{grid-template-columns:repeat(2,1fr)}
+}
+@media(max-width:700px){
+  :root{--header:58px}
+  html{scroll-snap-type:none}
+  .site-header{padding:0 16px}.brand .doc,.header-actions a:first-child{display:none}
+  .chapter-rail{display:none}
+  .slide{min-height:auto;padding:calc(var(--header) + 34px) 17px 48px}
+  .slide-head{align-items:flex-start;flex-direction:column}
+  .grid-2,.grid-3,.grid-4,.arch-grid,.launcher-grid,.metric-row,.figure-pair,.band-grid,.service-cards{grid-template-columns:1fr}
+  .client-line{grid-template-columns:repeat(5,110px);overflow-x:auto;padding-bottom:12px}
+  .approach{overflow-x:auto}.approach-track,.velocities{min-width:720px}
+  .bar-row{grid-template-columns:110px 1fr 72px}
+  h1{max-width:11ch}
+}
+</style>
+</head>
+<body>
+
+<header class="site-header">
+  <a class="brand" href="index.html#top">
+    <img src="astrofuel-wordmark.png" alt="astroFUEL">
+    <span class="doc">Mission Analysis Report</span>
+  </a>
+  <div class="header-actions">
+    <a href="Lazarous_Mission_Analysis_Report.pdf" target="_blank" rel="noopener">OPEN PDF ↗</a>
+    <button id="presentBtn">PRESENT</button>
+    <a href="index.html#top">← HOME</a>
+  </div>
+</header>
+
+<nav class="chapter-rail" aria-label="Presentation sections">
+  <a href="#cover" title="Cover"></a><a href="#requirements" title="Requirements"></a>
+  <a href="#architecture" title="Architecture"></a><a href="#baseline" title="Baseline"></a>
+  <a href="#rpo" title="RPO"></a><a href="#launch-window" title="Launch window"></a>
+  <a href="#transfer" title="Transfer"></a><a href="#elements" title="Orbital elements"></a>
+  <a href="#eclipses" title="Eclipses"></a><a href="#service-geometry" title="Service geometry"></a>
+  <a href="#services" title="Five services"></a><a href="#coverage" title="Coverage"></a>
+  <a href="#budget" title="Delta-V"></a><a href="#configuration" title="Configuration"></a>
+  <a href="#tanks" title="Tanks"></a><a href="#cg6" title="CG 6°"></a>
+  <a href="#cg27" title="CG 27°"></a><a href="#close" title="Summary"></a>
+</nav>
+
+<main>
+
+<section class="slide dark" id="cover">
+  <div class="wrap hero-grid">
+    <div>
+      <div class="kicker">astroFUEL · Mission Lazarous</div>
+      <h1>Mission Analysis Report</h1>
+      <p class="lead">A visual presentation of the mission architecture, orbital analysis, operations and preliminary spacecraft sizing developed in the MAR.</p>
+      <div class="actions">
+        <a class="btn primary" href="#architecture">START PRESENTATION</a>
+        <a class="btn" href="Lazarous_Mission_Analysis_Report.pdf" target="_blank" rel="noopener">FULL REPORT ↗</a>
+      </div>
+      <div class="metric-row">
+        <div class="metric"><span>Clients</span><strong>5</strong><small>Successive GEO refuelling services.</small></div>
+        <div class="metric"><span>Payload</span><strong>500 kg</strong><small>Xenon available for client refuelling.</small></div>
+        <div class="metric"><span>Parking orbit</span><strong>GEO + 50 km</strong><small>GEO-P drift orbit.</small></div>
+        <div class="metric"><span>Propulsion</span><strong>100% EP</strong><small>Xenon-based electric architecture.</small></div>
+      </div>
+    </div>
+    <div class="hero-orbit" aria-hidden="true">
+      <div class="orbit-ring r2"></div><div class="orbit-ring r1"></div>
+      <div class="earth"></div><div class="hero-sat"></div>
+    </div>
+  </div>
+  <div class="source-note">MAR · October 2026</div>
+</section>
+
+<section class="slide light" id="requirements">
+  <div class="wrap">
+    <div class="slide-head">
+      <div><div class="kicker">Requirements revision · v2 · 23/10/2026</div><h2>What changed before the MAR?</h2></div>
+      <p class="intro">Only the major revised mission drivers are shown here. The requirements webpage preserves the complete statements and the red revision convention.</p>
+    </div>
+    <div class="grid-4">
+      <div class="card revision-card"><div class="label">MIS_020</div><h3>RAFTI</h3><p>OrbitFab standard refuelling port RAFTI is defined as the mechanical interface.</p></div>
+      <div class="card revision-card"><div class="label">MIS_040</div><h3>8 years</h3><p>Minimum operational lifetime, followed by transfer to a GEO + 300 km graveyard orbit.</p></div>
+      <div class="card revision-card"><div class="label">MIS_060 / 065</div><h3>4,500 kg</h3><p>Maximum wet mass; dimensions limited to 5.2 m diameter and 11.8 m height.</p></div>
+      <div class="card revision-card"><div class="label">MIS_070</div><h3>500 kg Xe</h3><p>Minimum xenon payload capacity for servicing client satellites.</p></div>
+    </div>
+    <div class="grid-3" style="margin-top:16px">
+      <div class="card revision-card"><div class="label">MIS_091–093</div><h3>Autonomous RPO</h3><p>Rendezvous and proximity operations are autonomous, with nominal ground/client coordination and a safe RPO state after communication loss.</p></div>
+      <div class="card revision-card"><div class="label">MIS_100 / 101</div><h3>Approach corridor</h3><p>Keep-out-zone compliance and a nominal hold point at approximately 500 m before continuing the approach.</p></div>
+      <div class="card revision-card"><div class="label">MIS_110</div><h3>Autonomous safety</h3><p>Unsafe conditions trigger hold, retreat or abort without requiring ground intervention.</p></div>
+    </div>
+  </div>
+  <div class="source-note">Mission Requirements Revision · pages iv–vi</div>
+</section>
+
+<section class="slide soft" id="architecture">
+  <div class="wrap">
+    <div class="slide-head">
+      <div><div class="kicker">Chapter 3 · Mission Concepts</div><h2>The selected architecture.</h2></div>
+      <p class="intro">Twelve mission-level decisions close the concept trade space and define the baseline analysed in the rest of the MAR.</p>
+    </div>
+    <div class="arch-grid">
+      <div class="arch"><span class="n">01 · INITIAL INJECTION</span><strong>GTO + autonomous electric transfer</strong><em>Selected</em></div>
+      <div class="arch"><span class="n">02 · PARKING ORBIT</span><strong>GEO + 50 km drift orbit</strong><em>GEO-P</em></div>
+      <div class="arch"><span class="n">03 · PROPULSION</span><strong>100% electric</strong><em>Xenon</em></div>
+      <div class="arch"><span class="n">04 · CLIENT</span><strong>Passive but cooperative</strong><em>Known interface</em></div>
+      <div class="arch"><span class="n">05 · RENDEZVOUS</span><strong>Hold-point approach</strong><em>Progressive closing</em></div>
+      <div class="arch"><span class="n">06 · RELATIVE NAV</span><strong>2 cameras + LiDAR + laser rangefinder</strong><em>Multi-sensor</em></div>
+      <div class="arch"><span class="n">07 · RW DESATURATION</span><strong>Distributed electric propulsion</strong><em>12 auxiliary thrusters</em></div>
+      <div class="arch"><span class="n">08 · GROUND</span><strong>Coordinated independent control centres</strong><em>Joint operations</em></div>
+      <div class="arch"><span class="n">09 · AUTONOMY</span><strong>Ground-supervised, onboard-executed</strong><em>RPO</em></div>
+      <div class="arch"><span class="n">10 · FDIR</span><strong>Proximity-operations-specific FDIR</strong><em>Safety logic</em></div>
+      <div class="arch"><span class="n">11 · DEMONSTRATOR</span><strong>1 astroFUEL vehicle</strong><em>Initial mission</em></div>
+      <div class="arch"><span class="n">12 · COMMERCIAL</span><strong>≥ 2 astroFUEL vehicles</strong><em>Future architecture</em></div>
+    </div>
+  </div>
+  <div class="source-note">Table 3.14 · Selected mission architecture</div>
+</section>
+
+<section class="slide light" id="baseline">
+  <div class="wrap">
+    <div class="slide-head">
+      <div><div class="kicker">Chapter 4 · Mission Overview</div><h2>Five clients. One servicing sequence.</h2></div>
+      <p class="intro">All five clients are on circular equatorial GEO at 36,000 km altitude. Their expected propellant exhaustion dates define the servicing campaign.</p>
+    </div>
+    <div class="client-line">
+      <div class="client"><strong>A</strong><div class="dot"></div><span>19.0° E</span><span>Jun 2035</span></div>
+      <div class="client"><strong>B</strong><div class="dot"></div><span>−43.6° E</span><span>Jul 2036</span></div>
+      <div class="client"><strong>C</strong><div class="dot"></div><span>170.6° E</span><span>Nov 2037</span></div>
+      <div class="client"><strong>D</strong><div class="dot"></div><span>113.6° E</span><span>Sep 2038</span></div>
+      <div class="client"><strong>E</strong><div class="dot"></div><span>129.3° E</span><span>Feb 2040</span></div>
+    </div>
+    <div class="launcher-grid">
+      <div class="launcher selected"><div class="top"><strong>Ariane 62</strong><span>NOMINAL BASELINE</span></div><dl><dt>Short fairing volume</dt><dd>196.104 m³</dd><dt>GTO mass</dt><dd>4,500 kg</dd><dt>Price</dt><dd>$77 M</dd></dl></div>
+      <div class="launcher"><div class="top"><strong>Ariane 62</strong><span>LONG FAIRING</span></div><dl><dt>Volume</dt><dd>299.142 m³</dd><dt>GTO mass</dt><dd>4,500 kg</dd><dt>Price</dt><dd>$77 M</dd></dl></div>
+      <div class="launcher"><div class="top"><strong>Ariane 64</strong><span>ALTERNATIVE</span></div><dl><dt>Volume</dt><dd>299.142 m³</dd><dt>GTO mass</dt><dd>11,500 kg</dd><dt>Price</dt><dd>$126 M</dd></dl></div>
+      <div class="launcher"><div class="top"><strong>Falcon 9</strong><span>OPTION</span></div><dl><dt>Volume</dt><dd>280.3306 m³</dd><dt>GTO mass</dt><dd>4,800 kg</dd><dt>Price</dt><dd>$61 M</dd></dl></div>
+    </div>
+  </div>
+  <div class="source-note">Tables 4.1 and 4.2</div>
+</section>
+
+<section class="slide soft" id="rpo">
+  <div class="wrap">
+    <div class="slide-head">
+      <div><div class="kicker">Chapter 4 · Operational Phase</div><h2>Approach slows as distance closes.</h2></div>
+      <p class="intro">The MAR defines a hold-point strategy compatible with the low acceleration of the electric auxiliary thrusters.</p>
+    </div>
+    <div class="approach">
+      <div class="approach-track">
+        <div class="hold"><div class="node">500</div><span>500 m</span></div>
+        <div class="hold"><div class="node">200</div><span>200 m</span></div>
+        <div class="hold"><div class="node">100</div><span>100 m</span></div>
+        <div class="hold"><div class="node">20</div><span>20 m</span></div>
+        <div class="hold"><div class="node">5</div><span>5 m</span></div>
+        <div class="hold client-node"><div class="node">C</div><span>Dock</span></div>
+      </div>
+      <div class="velocities">
+        <div class="velocity"><b>0.22 m/s</b>500 → 200 m</div>
+        <div class="velocity"><b>0.089 m/s</b>200 → 100 m</div>
+        <div class="velocity"><b>0.010 m/s</b>100 → 20 m</div>
+        <div class="velocity"><b>0.005 m/s</b>20 → 5 m</div>
+        <div class="velocity"><b>&lt; 0.005 m/s</b>5 m → dock</div>
+      </div>
+    </div>
+    <div class="grid-3" style="margin-top:16px">
+      <div class="card"><div class="label">Navigation</div><h3>Known cooperative geometry</h3><p>Relative pose estimation uses cameras, 3D LiDAR, laser ranging and cooperative features.</p></div>
+      <div class="card"><div class="label">FDIR</div><h3>Hold · Retreat · Abort</h3><p>Unsafe navigation or control conditions can autonomously interrupt the approach.</p></div>
+      <div class="card"><div class="label">Control</div><h3>Electric proximity propulsion</h3><p>Twelve auxiliary HT400 thrusters provide RPO forces and torques.</p></div>
+    </div>
+  </div>
+  <div class="source-note">Table 4.7 · Velocities between hold points</div>
+</section>
+
+<section class="slide dark" id="launch-window">
+  <div class="wrap">
+    <div class="slide-head">
+      <div><div class="kicker">Chapter 5 · Launch Window Analysis</div><h2>The launch date is driven by eclipse exposure.</h2></div>
+      <p class="intro">The annual GTO eclipse maps are used to select reference launch epochs whose transfer eclipses remain below the 72-minute EPS sizing case.</p>
+    </div>
+    <div class="figure-pair">
+      <figure class="figure"><img class="zoomable" src="mar_assets/fig_5_1_ariane.png" alt="Ariane 6 annual GTO eclipse duration contour map"><figcaption><b>Ariane 6 · Kourou.</b> Reference launch: 29 May 2033 at 23:00 UTC.</figcaption></figure>
+      <figure class="figure"><img class="zoomable" src="mar_assets/fig_5_1_falcon.png" alt="Falcon 9 annual GTO eclipse duration contour map"><figcaption><b>Falcon 9 · Cape Canaveral.</b> Reference launch: 2 June 2033 at 11:00 UTC.</figcaption></figure>
+    </div>
+    <div class="metric-row">
+      <div class="metric"><span>Ariane 6 arrival</span><strong>3 Jun 2034</strong><small>370-day electric transfer.</small></div>
+      <div class="metric"><span>Falcon 9 arrival</span><strong>20 Oct 2034</strong><small>505-day electric transfer.</small></div>
+      <div class="metric"><span>Longest transfer eclipse</span><strong>67.5 / 71.0 min</strong><small>Ariane / Falcon.</small></div>
+      <div class="metric"><span>Sizing eclipse</span><strong>72.0 min</strong><small>GEO-P equinox eclipse.</small></div>
+    </div>
+  </div>
+  <div class="source-note">Figure 5.1 · Table 5.3</div>
+</section>
+
+<section class="slide light" id="transfer">
+  <div class="wrap">
+    <div class="slide-head">
+      <div><div class="kicker">Chapters 6–7 · GTO → GEO-P</div><h2>Low-thrust orbit raising does the heavy lifting.</h2></div>
+      <p class="intro">The higher Falcon 9 injection inclination requires a much larger plane change, increasing duration and xenon consumption.</p>
+    </div>
+    <div class="figure-feature">
+      <div class="figure-pair">
+        <figure class="figure"><img class="zoomable" src="mar_assets/fig_7_1_6deg.png" alt="Low-thrust transfer from 6 degree GTO"><figcaption>i₀ = 6° · Ariane 6 case.</figcaption></figure>
+        <figure class="figure"><img class="zoomable" src="mar_assets/fig_7_1_27deg.png" alt="Low-thrust transfer from 27 degree GTO"><figcaption>i₀ = 27° · Falcon 9 case.</figcaption></figure>
+      </div>
+      <div>
+        <div class="result-list">
+          <div class="result"><span>Flight time</span><b>370.0 / 505.1 d</b></div>
+          <div class="result"><span>Revolutions</span><b>568 / 821</b></div>
+          <div class="result"><span>Engine on</span><b>51.6 / 45.6 %</b></div>
+          <div class="result"><span>Total Δv</span><b>1.724 / 2.099 km/s</b></div>
+          <div class="result"><span>Propellant</span><b>252.4 / 304.4 kg</b></div>
+        </div>
+        <div class="callout">The MAR comparison shows that the electric transfer uses more Δv than an impulsive chemical reference, but about four times less propellant.</div>
+      </div>
+    </div>
+  </div>
+  <div class="source-note">Figure 7.1 · Table 7.3</div>
+</section>
+
+<section class="slide soft" id="elements">
+  <div class="wrap">
+    <div class="slide-head">
+      <div><div class="kicker">Chapter 7 · Orbital Elements</div><h2>Raise the orbit. Remove eccentricity. Flatten inclination.</h2></div>
+      <p class="intro">The transfer is simultaneous orbit raising and plane correction. The residual eccentricity at arrival is removed by the first station-keeping manoeuvre.</p>
+    </div>
+    <div class="tabs" data-tabs="elements">
+      <button class="tab active" data-target="elem6">ARIANE 6 · 6°</button>
+      <button class="tab" data-target="elem27">FALCON 9 · 27°</button>
+    </div>
+    <div class="tabview active" id="elem6"><figure class="figure"><img class="zoomable" src="mar_assets/fig_7_3_6deg.png" alt="Orbital elements during 6 degree transfer"><figcaption>Figure 7.3(a) · Orbital element evolution for i₀ = 6°.</figcaption></figure></div>
+    <div class="tabview" id="elem27"><figure class="figure"><img class="zoomable" src="mar_assets/fig_7_3_27deg.png" alt="Orbital elements during 27 degree transfer"><figcaption>Figure 7.3(b) · Orbital element evolution for i₀ = 27°.</figcaption></figure></div>
+  </div>
+  <div class="source-note">Figure 7.3</div>
+</section>
+
+<section class="slide dark" id="eclipses">
+  <div class="wrap">
+    <div class="slide-head">
+      <div><div class="kicker">Chapter 7 · Eclipse Analysis</div><h2>Eclipse seasons structure the operational calendar.</h2></div>
+      <p class="intro">GEO-P Earth eclipses occur around the equinoxes. The first demonstration service is explicitly placed outside an eclipse season.</p>
+    </div>
+    <div class="tabs" data-tabs="eclipse">
+      <button class="tab active" data-target="eclA">MISSION ECLIPSES</button>
+      <button class="tab" data-target="eclB">REFUELLING WINDOWS</button>
+    </div>
+    <div class="tabview active" id="eclA">
+      <div class="figure-pair">
+        <figure class="figure"><img class="zoomable" src="mar_assets/fig_7_5_ariane.png" alt="Mission eclipses Ariane 6"><figcaption>Figure 7.5(a) · Ariane 6 mission eclipses.</figcaption></figure>
+        <figure class="figure"><img class="zoomable" src="mar_assets/fig_7_5_falcon.png" alt="Mission eclipses Falcon 9"><figcaption>Figure 7.5(b) · Falcon 9 mission eclipses.</figcaption></figure>
+      </div>
+    </div>
+    <div class="tabview" id="eclB">
+      <div class="figure-pair">
+        <figure class="figure"><img class="zoomable" src="mar_assets/fig_7_6_ariane.png" alt="Ariane refuelling windows and eclipses"><figcaption>Figure 7.6(a) · GEO-P eclipse seasons, refuelling windows and docking dates.</figcaption></figure>
+        <figure class="figure"><img class="zoomable" src="mar_assets/fig_7_6_falcon.png" alt="Falcon refuelling windows and eclipses"><figcaption>Figure 7.6(b) · GEO-P eclipse seasons, refuelling windows and docking dates.</figcaption></figure>
+      </div>
+    </div>
+  </div>
+  <div class="source-note">Figures 7.5 and 7.6</div>
+</section>
+
+<section class="slide light" id="service-geometry">
+  <div class="wrap">
+    <div class="slide-head">
+      <div><div class="kicker">Chapter 7 · Service Manoeuvres</div><h2>GEO-P drift is used before phasing is spent.</h2></div>
+      <p class="intro">Each client is served when the relative angle is favourable. Natural drift is preferred; phasing is added only when the servicing window requires it.</p>
+    </div>
+    <div class="figure-feature reverse">
+      <div>
+        <div class="card"><div class="label">Outbound transfer</div><h3>11 h selected solution</h3><p>Figure 7.10 maps Δv against departure relative angle and transfer time. The dashed Hohmann time shown in the MAR is only a reference, not the mission baseline.</p></div>
+        <div class="card" style="margin-top:12px"><div class="label">Complete service</div><h3>Outbound · service · return</h3><p>Figure 7.11 shows the complete service geometry in the orbital plane, with radial distance exaggerated 150 times for visibility.</p></div>
+      </div>
+      <div class="figure-pair">
+        <figure class="figure"><img class="zoomable" src="mar_assets/fig_7_10.png" alt="Outbound transfer delta-v porkchop"><figcaption>Figure 7.10 · Outbound transfer trade space.</figcaption></figure>
+        <figure class="figure"><img class="zoomable" src="mar_assets/fig_7_11.png" alt="Complete service in orbital plane"><figcaption>Figure 7.11 · Complete client service in the orbital plane.</figcaption></figure>
+      </div>
+    </div>
+  </div>
+  <div class="source-note">Figures 7.10 and 7.11</div>
+</section>
+
+<section class="slide soft" id="services">
+  <div class="wrap">
+    <div class="slide-head">
+      <div><div class="kicker">Chapter 7 · Five Services</div><h2>One sequence, five docking dates.</h2></div>
+      <p class="intro">From client B onward both launcher campaigns are identical. Only the first service depends on the different GEO-P arrival geometry.</p>
+    </div>
+    <div class="service-cards">
+      <div class="service"><h3>A</h3><div class="date">24 JAN 2035</div><div class="kv"><span>Δv total · 6°</span><b>12.88 m/s</b></div><div class="kv"><span>Δv total · 27°</span><b>4.94 m/s</b></div><div class="kv"><span>Phasing</span><b>99.1 / 95.7 d</b></div></div>
+      <div class="service"><h3>B</h3><div class="date">16 MAR 2036</div><div class="kv"><span>Δv total</span><b>9.85 m/s</b></div><div class="kv"><span>Phasing</span><b>99.9 d</b></div><div class="kv"><span>Wait GEO-P</span><b>316.0 d</b></div></div>
+      <div class="service"><h3>C</h3><div class="date">25 JUN 2037</div><div class="kv"><span>Δv total</span><b>4.15 m/s</b></div><div class="kv"><span>Phasing</span><b>0</b></div><div class="kv"><span>Natural wait</span><b>464.4 d</b></div></div>
+      <div class="service"><h3>D</h3><div class="date">5 MAY 2038</div><div class="kv"><span>Δv total</span><b>9.84 m/s</b></div><div class="kv"><span>Phasing</span><b>99.9 d</b></div><div class="kv"><span>Wait GEO-P</span><b>213.5 d</b></div></div>
+      <div class="service"><h3>E</h3><div class="date">12 OCT 2039</div><div class="kv"><span>Δv total</span><b>4.15 m/s</b></div><div class="kv"><span>Phasing</span><b>0</b></div><div class="kv"><span>Natural wait</span><b>523.5 d</b></div></div>
+    </div>
+    <div class="tabs" data-tabs="services" style="margin-top:18px">
+      <button class="tab active" data-target="serv6">RELATIVE ANGLE · 6°</button>
+      <button class="tab" data-target="serv27">RELATIVE ANGLE · 27°</button>
+    </div>
+    <div class="tabview active" id="serv6"><figure class="figure"><img class="zoomable" src="mar_assets/fig_7_12_6deg.png" alt="Relative angle services 6 degrees"><figcaption>Figure 7.12(a) · Natural drift, phasing and departure for each client.</figcaption></figure></div>
+    <div class="tabview" id="serv27"><figure class="figure"><img class="zoomable" src="mar_assets/fig_7_12_27deg.png" alt="Relative angle services 27 degrees"><figcaption>Figure 7.12(b) · Falcon 9 first-service geometry differs; later services converge to the same campaign.</figcaption></figure></div>
+  </div>
+  <div class="source-note">Table 7.14 · Figure 7.12</div>
+</section>
+
+<section class="slide light" id="coverage">
+  <div class="wrap">
+    <div class="slide-head">
+      <div><div class="kicker">Chapter 8 · Earth, Sky & Sun Coverage</div><h2>Two networks, two communication roles.</h2></div>
+      <p class="intro">S-band provides robust telemetry and telecommand coverage; K-band supports the high-gain link and requires active antenna pointing.</p>
+    </div>
+    <div class="band-grid">
+      <div>
+        <figure class="figure"><img class="zoomable" src="mar_assets/fig_8_1.png" alt="S-band global coverage map"><figcaption>Figure 8.1 · Global coverage map for the low-gain S-band network.</figcaption></figure>
+        <div class="station-tags"><span>Malindi</span><span>Kourou</span><span>South Point</span><span>Dongara</span></div>
+      </div>
+      <div>
+        <figure class="figure"><img class="zoomable" src="mar_assets/fig_8_2.png" alt="K-band global coverage map"><figcaption>Figure 8.2 · Global coverage map for the high-gain K-band network.</figcaption></figure>
+        <div class="station-tags"><span>New Norcia</span><span>Cebreros</span><span>Malargüe</span><span>Goldstone</span></div>
+      </div>
+    </div>
+    <div class="callout">During high-gain pointing limitations, critical telemetry and telecommands remain available through S-band. The MAR also considers Sun outages, structural blockage, eclipse energy constraints and atmospheric attenuation.</div>
+  </div>
+  <div class="source-note">Chapter 8 · Figures 8.1–8.3</div>
+</section>
+
+<section class="slide soft" id="budget">
+  <div class="wrap">
+    <div class="slide-head">
+      <div><div class="kicker">Chapter 9 · Delta-V Budget</div><h2>The transfer dominates propellant use.</h2></div>
+      <p class="intro">The phase-by-phase simulation budget is lower than the conservative worst-case estimate. The GTO→GEO-P transfer accounts for 86–89% of the xenon used in the mission.</p>
+    </div>
+    <div class="budget">
+      <div>
+        <div class="grid-2">
+          <div class="card"><div class="label">ARIANE 6 · 6°</div><strong class="big">2025.8 m/s</strong><p>Total Δv · 294.30 kg propulsion xenon · final mass 2705.70 kg.</p></div>
+          <div class="card"><div class="label">FALCON 9 · 27°</div><strong class="big">2375.6 m/s</strong><p>Total Δv · 342.12 kg propulsion xenon · final mass 2657.88 kg.</p></div>
+        </div>
+        <div class="callout">Station keeping during the operational phase costs six to seven times more xenon than the five refuelling service manoeuvres together.</div>
+      </div>
+      <div class="budget-bar">
+        <div class="bar-row transfer"><span>GTO → GEO-P · 6°</span><div class="bar"><i style="width:85.7%"></i></div><b>252.41 kg</b></div>
+        <div class="bar-row"><span>Other mission use · 6°</span><div class="bar"><i style="width:14.3%"></i></div><b>41.89 kg</b></div>
+        <div class="bar-row transfer"><span>GTO → GEO-P · 27°</span><div class="bar"><i style="width:89%"></i></div><b>304.41 kg</b></div>
+        <div class="bar-row"><span>Other mission use · 27°</span><div class="bar"><i style="width:11%"></i></div><b>37.71 kg</b></div>
+      </div>
+    </div>
+  </div>
+  <div class="source-note">Table 9.1</div>
+</section>
+
+<section class="slide dark" id="configuration">
+  <div class="wrap">
+    <div class="slide-head">
+      <div><div class="kicker">Chapter 10 · Preliminary S/C Sizing</div><h2>Preliminary spacecraft configuration.</h2></div>
+      <p class="intro">The MAR moves from mission analysis into an initial accommodation of the major subsystems, structures, solar arrays, docking equipment and xenon storage.</p>
+    </div>
+    <div class="figure-pair">
+      <figure class="figure"><img class="zoomable" src="mar_assets/fig_10_2.png" alt="Preliminary spacecraft external arrangement"><figcaption>Figure 10.2 · Preliminary spacecraft configuration showing the main subsystems.</figcaption></figure>
+      <figure class="figure"><img class="zoomable" src="mar_assets/fig_10_3.png" alt="Preliminary spacecraft configuration with solar arrays"><figcaption>Figure 10.3 · Preliminary external layout with deployable solar arrays and antennas.</figcaption></figure>
+    </div>
+    <div class="metric-row">
+      <div class="metric"><span>Main body</span><strong>2.9 × 2.9 × 5.0 m</strong><small>Preliminary rectangular body.</small></div>
+      <div class="metric"><span>Stowed envelope</span><strong>3.4 × 2.9 × 5.0 m</strong><small>With folded solar arrays.</small></div>
+      <div class="metric"><span>Central tube</span><strong>Ø 1.2 × 5.0 m</strong><small>CFRP primary load path.</small></div>
+      <div class="metric"><span>Solar array area</span><strong>30 m²</strong><small>10 panels in two deployable wings.</small></div>
+    </div>
+  </div>
+  <div class="source-note">Figures 10.2–10.3 · Table 10.8</div>
+</section>
+
+<section class="slide light" id="tanks">
+  <div class="wrap">
+    <div class="slide-head">
+      <div><div class="kicker">Chapter 10 · Structure & Mass</div><h2>Xenon storage drives the internal architecture.</h2></div>
+      <p class="intro">The tank accommodation study places three tanks in a triangular arrangement inside the central structural tube, with approximately 122 mm theoretical radial clearance.</p>
+    </div>
+    <div class="figure-feature">
+      <figure class="figure"><img class="zoomable" src="mar_assets/fig_10_1.png" alt="Preliminary xenon tank accommodation"><figcaption>Figure 10.1 · Preliminary three-tank cross-sectional accommodation.</figcaption></figure>
+      <div>
+        <div class="card"><div class="label">Identified dry mass</div><strong class="big">1400.690 kg</strong><p>Current preliminary equipment + structure mass identified in Table 10.10.</p></div>
+        <div class="mass-stack">
+          <div class="mass-dry" style="width:58.34%">Dry<br>1400.69</div>
+          <div class="mass-prop" style="width:20.83%">Propulsion Xe<br>500</div>
+          <div class="mass-pay" style="width:20.83%">Payload Xe<br>500</div>
+        </div>
+        <div class="card" style="margin-top:12px"><div class="label">Identified wet mass</div><strong class="big">2400.690 kg</strong><p>The MAR also uses a 3000 kg reference initial mass for the orbital simulations, leaving design margin against the 4500 kg launch requirement.</p></div>
+      </div>
+    </div>
+  </div>
+  <div class="source-note">Figure 10.1 · Tables 10.10–10.11</div>
+</section>
+
+<section class="slide soft" id="cg6">
+  <div class="wrap">
+    <div class="slide-head">
+      <div><div class="kicker">Chapter 10 · Centre of Gravity</div><h2>CG evolution · 6° reference case.</h2></div>
+      <p class="intro">The symmetric tank layout keeps lateral motion approximately zero. Propulsion xenon consumption first shifts the CG upward; payload transfers then pull it downward.</p>
+    </div>
+    <div class="cg-layout">
+      <figure class="figure"><img class="zoomable" src="mar_assets/fig_10_4.png" alt="CG evolution 6 degree reference scenario"><figcaption>Figure 10.4 · CG displacement, xenon mass per tank and total spacecraft mass for the 6° reference scenario.</figcaption></figure>
+      <div class="cg-stats">
+        <div class="cg-stat"><span>Maximum upward shift</span><strong>≈ +48 mm</strong></div>
+        <div class="cg-stat"><span>End-of-mission shift</span><strong>≈ −31 mm</strong></div>
+        <div class="cg-stat"><span>Total vertical excursion</span><strong>≈ 79 mm</strong></div>
+        <div class="cg-stat"><span>End mass in CG model</span><strong>≈ 2206 kg</strong></div>
+      </div>
+    </div>
+  </div>
+  <div class="source-note">Figure 10.4</div>
+</section>
+
+<section class="slide light" id="cg27">
+  <div class="wrap">
+    <div class="slide-head">
+      <div><div class="kicker">Chapter 10 · Centre of Gravity</div><h2>CG evolution · 27° reference case.</h2></div>
+      <p class="intro">The longer, higher-inclination transfer consumes more propulsion xenon before reaching GEO-P and therefore produces the larger initial upward shift.</p>
+    </div>
+    <div class="cg-layout">
+      <figure class="figure"><img class="zoomable" src="mar_assets/fig_10_5.png" alt="CG evolution 27 degree reference scenario"><figcaption>Figure 10.5 · CG displacement, xenon mass per tank and total spacecraft mass for the 27° reference scenario.</figcaption></figure>
+      <div class="cg-stats">
+        <div class="cg-stat"><span>Maximum upward shift</span><strong>≈ +58 mm</strong></div>
+        <div class="cg-stat"><span>End-of-mission shift</span><strong>≈ −20 mm</strong></div>
+        <div class="cg-stat"><span>Total vertical excursion</span><strong>≈ 78 mm</strong></div>
+        <div class="cg-stat"><span>Propulsion Xe during transfer</span><strong>≈ 304.41 kg</strong></div>
+      </div>
+    </div>
+  </div>
+  <div class="source-note">Figure 10.5</div>
+</section>
+
+<section class="slide dark" id="close">
+  <div class="wrap">
+    <div class="hero-grid">
+      <div>
+        <div class="kicker">Mission Analysis · Baseline</div>
+        <h2>One coherent mission architecture.</h2>
+        <p class="lead">The MAR connects launcher selection, electric orbit raising, GEO-P operations, five servicing windows, autonomous RPO, communications coverage, propellant budget and spacecraft accommodation into one preliminary engineering baseline.</p>
+        <div class="actions">
+          <a class="btn primary" href="Lazarous_Mission_Analysis_Report.pdf" target="_blank" rel="noopener">OPEN FULL MAR ↗</a>
+          <a class="btn" href="requirements.html">REQUIREMENTS</a>
+          <a class="btn" href="index.html#top">BACK TO HOME</a>
+        </div>
+      </div>
+      <div class="grid-2">
+        <div class="metric"><span>Nominal launcher</span><strong>Ariane 6</strong><small>6° reference GTO case.</small></div>
+        <div class="metric"><span>Transfer</span><strong>370 d</strong><small>Reference electric orbit raising.</small></div>
+        <div class="metric"><span>Operational campaign</span><strong>5 clients</strong><small>A through E.</small></div>
+        <div class="metric"><span>Identified wet mass</span><strong>2400.69 kg</strong><small>Preliminary current breakdown.</small></div>
+      </div>
+    </div>
+  </div>
+  <div class="source-note">Full technical detail remains in the downloadable MAR</div>
+</section>
+
+</main>
+
+<div class="presentation-controls" id="controls">
+  <button id="prevBtn" aria-label="Previous slide">←</button>
+  <span id="slideCounter">1 / 18</span>
+  <button id="nextBtn" aria-label="Next slide">→</button>
+  <button id="exitBtn" aria-label="Exit presentation">×</button>
+</div>
+
+<div class="modal" id="imageModal"><img id="modalImage" alt=""></div>
+
+<script>
+const slides=[...document.querySelectorAll('.slide')];
+let current=0;
+const counter=document.getElementById('slideCounter');
+
+function setCurrent(i,scroll=true){
+  current=Math.max(0,Math.min(slides.length-1,i));
+  counter.textContent=(current+1)+' / '+slides.length;
+  if(scroll) slides[current].scrollIntoView({behavior:'smooth',block:'start'});
+}
+function nearestSlide(){
+  let best=0,bestDist=Infinity;
+  slides.forEach((s,i)=>{
+    const d=Math.abs(s.getBoundingClientRect().top-document.querySelector('.site-header').offsetHeight);
+    if(d<bestDist){bestDist=d;best=i;}
+  });
+  current=best;counter.textContent=(current+1)+' / '+slides.length;
+}
+window.addEventListener('scroll',()=>requestAnimationFrame(nearestSlide),{passive:true});
+
+document.getElementById('presentBtn').addEventListener('click',()=>{
+  document.body.classList.add('presenting');
+  nearestSlide(); setCurrent(current);
+});
+document.getElementById('exitBtn').addEventListener('click',()=>document.body.classList.remove('presenting'));
+document.getElementById('prevBtn').addEventListener('click',()=>setCurrent(current-1));
+document.getElementById('nextBtn').addEventListener('click',()=>setCurrent(current+1));
+
+document.addEventListener('keydown',e=>{
+  if(!document.body.classList.contains('presenting')) return;
+  if(['ArrowRight','ArrowDown','PageDown',' '].includes(e.key)){e.preventDefault();setCurrent(current+1)}
+  if(['ArrowLeft','ArrowUp','PageUp'].includes(e.key)){e.preventDefault();setCurrent(current-1)}
+  if(e.key==='Escape') document.body.classList.remove('presenting');
+});
+
+document.querySelectorAll('[data-tabs]').forEach(group=>{
+  group.querySelectorAll('.tab').forEach(btn=>{
+    btn.addEventListener('click',()=>{
+      const target=btn.dataset.target;
+      group.querySelectorAll('.tab').forEach(b=>b.classList.remove('active'));
+      btn.classList.add('active');
+      const parent=group.parentElement;
+      parent.querySelectorAll(':scope > .tabview').forEach(v=>v.classList.remove('active'));
+      document.getElementById(target).classList.add('active');
+    });
+  });
+});
+
+const modal=document.getElementById('imageModal'), modalImage=document.getElementById('modalImage');
+document.querySelectorAll('.zoomable').forEach(img=>{
+  img.addEventListener('click',()=>{modalImage.src=img.src;modalImage.alt=img.alt;modal.classList.add('open')});
+});
+modal.addEventListener('click',()=>modal.classList.remove('open'));
+</script>
+</body>
+</html>
